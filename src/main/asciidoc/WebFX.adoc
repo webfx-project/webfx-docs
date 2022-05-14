@@ -1,0 +1,36 @@
+= WebFX Documentation
+Bruno Salmon <maintainer@webfx.dev>
+2022-05-14
+:toc: left
+:toclevels: 2
+
+== Introduction
+
+== Getting started
+
+=== Prerequisite
+
+ mvn -version
+
+=== Installing the CLI tool
+
+ webfx -version
+
+=== Initializing your repository
+
+ webfx init
+
+=== Creating your application modules
+
+ webfx create application
+
+=== Updating your modules
+
+ webfx update
+
+ifdef::backend-html5[]
+== PDF version
+You can also download this
+link:WebFX.pdf[PDF version,float="right"]
+of the documentation.
+endif::[]
