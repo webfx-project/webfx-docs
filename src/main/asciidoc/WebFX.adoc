@@ -41,27 +41,27 @@ NOTE: We will distribute the WebFX CLI in a better way later, when we will publi
 [source,shell,indent=0,role="primary"]
 .HTTPS
 ----
-$ git clone https://github.com/webfx-project/webfx-cli.git
+git clone https://github.com/webfx-project/webfx-cli.git
 ----
 
 [source,shell,indent=0,role="secondary"]
 .SSH
 ----
-$ git clone git@github.com:webfx-project/webfx-cli.git
+git clone git@github.com:webfx-project/webfx-cli.git
 ----
 
 ==== Building webfx-cli with Maven
 
 This is achieved by running the Maven _package_ goal under the webfx-cli directory:
 
- $ cd webfx-cli
- $ mvn package
+ cd webfx-cli
+ mvn package
 
 IMPORTANT: As previously mentioned, WebFX CLI requires JDK 13 or above (you will get a build error with lower versions).
 
 This generates an executable fat jar in the target folder that we can execute with java:
 
- $ java -jar target/webfx-cli-0.1.0-SNAPSHOT-fat.jar --help
+ java -jar target/webfx-cli-0.1.0-SNAPSHOT-fat.jar --help
 
 ==== Creating a permanent _webfx_ alias
 
@@ -70,8 +70,9 @@ To easily invoke the WebFX CLI from a terminal, we need to create a permanent _w
 [source,shell,indent=0,role="primary"]
 .Linux
 ----
-$ echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.bashrc <1>
-$ source ~/.bashrc <2>
+echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.bashrc <1>
+
+source ~/.bashrc <2>
 ----
 <1> Adding the alias to the shell profile
 <2> Applying it to the current session
@@ -79,8 +80,9 @@ $ source ~/.bashrc <2>
 [source,shell,indent=0,role="secondary"]
 .macOS >= Catalina
 ----
-$ echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.zshrc <1>
-$ source ~/.zshrc <2>
+echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.zshrc <1>
+
+source ~/.zshrc <2>
 ----
 <1> Adding the alias to the shell profile
 <2> Applying it to the current session
@@ -88,8 +90,9 @@ $ source ~/.zshrc <2>
 [source,shell,indent=0,role="secondary"]
 .macOS < Catalina
 ----
-$ echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.bash_profile <1>
-$ source ~/.bash_profile <2>
+echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.bash_profile <1>
+
+source ~/.bash_profile <2>
 ----
 <1> Adding the alias to the shell profile
 <2> Applying it to the current session
@@ -97,11 +100,13 @@ $ source ~/.bash_profile <2>
 [source,shell,indent=0,role="secondary"]
 .Windows PowerShell
 ----
-$ If (!(Test-Path $profile)) { New-Item -Path $profile -Force } <1>
-$ "function webfx([String[]] [Parameter(ValueFromRemainingArguments)] `$params) { java -jar $((Get-Item .).fullName)\target\webfx-cli-0.1.0-SNAPSHOT-fat.jar `$params }" >> $profile <2>
+If (!(Test-Path $profile)) { New-Item -Path $profile -Force } <1>
 
-$ If (Get-ExecutionPolicy eq "Restricted") { Start-Process powershell -Verb runAs "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned" } <3>
-$ . $profile <4>
+"function webfx([String[]] [Parameter(ValueFromRemainingArguments)] `$params) { java -jar $((Get-Item .).fullName)\target\webfx-cli-0.1.0-SNAPSHOT-fat.jar `$params }" >> $profile <2>
+
+If (Get-ExecutionPolicy eq "Restricted") { Start-Process powershell -Verb runAs "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned" } <3>
+
+. $profile <4>
 ----
 <1> Creating a PowerShell profile if it doesn't exist
 <2> Adding the alias (implemented as a function) to it
@@ -110,14 +115,14 @@ $ . $profile <4>
 
 Then you should be able to invoke the CLI tool from the terminal:
 
- $ webfx --help
+ webfx --help
 
 ==== Updating the WebFX CLI to the latest version
 
 If later you want to update the WebFX CLI to the latest SNAPSHOT version, you just need to update your local repository and rebuild it with Maven. This is done through the following commands (under your webfx-cli local folder):
 
- $ git pull
- $ mvn package
+ git pull
+ mvn package
 
 === Creating your first WebFX app
 
@@ -125,13 +130,13 @@ If later you want to update the WebFX CLI to the latest SNAPSHOT version, you ju
 
 Let's create our first WebFX application. We need to create the repository folder and ask the WebFX CLI to initialize it, passing it the groupId, artifactId and version of our application.
 
- $ mkdir mywebfxapp
- $ cd mywebfxapp
- $ webfx init org.example mywebfxapp 1.0.0-SNAPSHOT
+ mkdir mywebfxapp
+ cd mywebfxapp
+ webfx init org.example mywebfxapp 1.0.0-SNAPSHOT
 
 ==== Creating your application modules
 
- $ webfx create application --class org.example.mywebfxapp.MyWebFxApplication --helloWorld
+ webfx create application --class org.example.mywebfxapp.MyWebFxApplication --helloWorld
 
 ==== Updating your modules
 
