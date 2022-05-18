@@ -10,21 +10,24 @@ Last updated: {docdate}
 
 === Prerequisite
 
- * Java version 13 or above
+You will need the following software installed on your development machine:
+
+ * JDK 13 or above
  * Maven
+ * Git
 
 === Introducing the WebFX CLI
 
-The WebFX CLI is an essential tool to help you to build WebFX apps. It will create and maintain your modules and build files, such as:
+The WebFX CLI is an essential tool to assist you developing WebFX apps. It will create and maintain your modules and build files, such as:
 
 * pom.xml (Maven module files)
 * module.gwt.xml (GWT module files)
 * module-info.java (Java module files)
 * and many other files (GWT super sources, GWT bundles, Gluon builds, GraalVM conf, ...)
 
-NOTE: The WebFX CLI is required to build a WebFX application, but it is not required for its execution.
+NOTE: The WebFX CLI is required only on your local development machine (not on your CI/CD pipeline). It is not required for the build (this is Maven job), or for the execution of WebFX apps (WebFX app testers don't need it).
 
-Your only inputs will be centralized in the WebFX module files (named webfx.xml), and the tool will automatically generate the rest of the build chain from these webfx.xml files, combined with an analysis of your source code. This includes all your dependencies. When a feature is platform-dependent (several implementations exist for different platforms), the tool will pick up the right modules in the final executable modules (the ones matching the platform targeted by the executable module).
+Your only inputs will be centralized in the WebFX module files (named webfx.xml), and the tool will automatically generate the rest of the build chain from these webfx.xml files, combined with an analysis of your source code. This includes all your dependencies. The tool also takes over the aspects of cross-platform development: when a feature is platform-dependent (a different implementations exists for each platform), the tool will pick up the right modules in the final executable modules (the ones matching the platform targeted by the executable module).
 
 === Installing the WebFX CLI
 
@@ -34,14 +37,27 @@ NOTE: We will distribute the WebFX CLI in a better way later, when we will publi
 
 ==== Cloning the webfx-cli repository
 
- $ git clone git@github.com:webfx-project/webfx-cli.git
+
+[source,shell,indent=0,role="primary"]
+.HTTPS
+----
+$ git clone https://github.com/webfx-project/webfx-cli.git
+----
+
+[source,shell,indent=0,role="secondary"]
+.SSH
+----
+$ git clone git@github.com:webfx-project/webfx-cli.git
+----
 
 ==== Building webfx-cli with Maven
+
+This is achieved by running the Maven _package_ goal under the webfx-cli directory:
 
  $ cd webfx-cli
  $ mvn package
 
-IMPORTANT: As already mentioned, WebFX CLI requires java 13 or above (you will get a compilation error if using a lower JDK version).
+IMPORTANT: As previously mentioned, WebFX CLI requires JDK 13 or above (you will get a build error with lower versions).
 
 This generates an executable fat jar in the target folder that we can execute with java:
 
@@ -49,7 +65,7 @@ This generates an executable fat jar in the target folder that we can execute wi
 
 ==== Creating a permanent alias
 
-To easily invoke the WebFX CLI from a terminal, we need to create a _webfx_ alias to it. This is done with the following command:
+To easily invoke the WebFX CLI from a terminal, we need to create a permanent _webfx_ alias to it. This is done with the following command (to run under webfx-cli directory):
 
 [source,shell,indent=0,role="primary"]
 .Linux
@@ -75,7 +91,7 @@ $ source ~/.bash_profile
 [source,shell,indent=0,role="secondary"]
 .Windows Powershell
 ----
-$ alias webfx="java -jar /absolute-path-to-target/webfx-cli-0.1.0-SNAPSHOT-fat.jar"
+$ If (!(Test-Path $profile)) { New-Item -Path $profile -Force }; "function webfx([String[]] [Parameter(ValueFromRemainingArguments)] `$params) { java -jar $((Get-Item .).fullName)\target\webfx-cli-0.1.0-SNAPSHOT-fat.jar `$params }" >> $profile; If (Get-ExecutionPolicy eq "Restricted") { Start-Process powershell -Verb runAs "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned" }; . $profile
 ----
 
 Then you should be able to invoke the CLI tool from the terminal:
@@ -84,7 +100,7 @@ Then you should be able to invoke the CLI tool from the terminal:
 
 ==== Updating the WebFX CLI to the latest version
 
-If later you want to update the WebFX CLI to the latest version, you just need to update your local repository and rebuild it with Maven. This is done through the following commands (from your webfx-cli local folder):
+If later you want to update the WebFX CLI to the latest SNAPSHOT version, you just need to update your local repository and rebuild it with Maven. This is done through the following commands (under your webfx-cli local folder):
 
  $ git pull
  $ mvn package
@@ -95,13 +111,13 @@ If later you want to update the WebFX CLI to the latest version, you just need t
 
 Let's create our first WebFX application. We need to create the repository folder and ask the WebFX CLI to initialize it, passing it the groupId, artifactId and version of our application.
 
- $ mkdir my-webfxapp
- $ cd my-webfxapp
- $ webfx init org.example my-webfxapp 1.0.0-SNAPSHOT
+ $ mkdir mywebfxapp
+ $ cd mywebfxapp
+ $ webfx init org.example mywebfxapp 1.0.0-SNAPSHOT
 
 ==== Creating your application modules
 
- $ webfx create application -c org.example.mywebfxapp.MyWebFxApplication -w
+ $ webfx create application --class org.example.mywebfxapp.MyWebFxApplication --helloWorld
 
 ==== Updating your modules
 
