@@ -41,21 +41,46 @@ NOTE: We will distribute the WebFX CLI in a better way later, when we will publi
  $ cd webfx-cli
  $ mvn package
 
+IMPORTANT: As already mentioned, WebFX CLI requires java 13 or above (you will get a compilation error if using a lower JDK version).
+
 This generates an executable fat jar in the target folder that we can execute with java:
 
- $ java -jar target/webfx-cli-0.1.0-SNAPSHOT-fat.jar
+ $ java -jar target/webfx-cli-0.1.0-SNAPSHOT-fat.jar --help
 
-IMPORTANT: As already mentioned, WebFX CLI requires java 13 or above.
+==== Creating a permanent alias
 
-==== Creating an alias
+To easily invoke the WebFX CLI from a terminal, we need to create a _webfx_ alias to it. This is done with the following command:
 
-To easily invoke the WebFX CLI from a terminal, we need to create a _webfx_ alias to it. This is done with the following command (replace `absolute-path-to-target` with the actual path to the target folder on your machine):
+[source,shell,indent=0,role="primary"]
+.Linux
+----
+$ echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.bashrc
+$ source ~/.bashrc
+----
 
- $ alias webfx="java -jar /absolute-path-to-target/webfx-cli-0.1.0-SNAPSHOT-fat.jar"
+[source,shell,indent=0,role="secondary"]
+.macOS >= Catalina
+----
+$ echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.zshrc
+$ source ~/.zshrc
+----
+
+[source,shell,indent=0,role="secondary"]
+.macOS < Catalina
+----
+$ echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.bash_profile
+$ source ~/.bash_profile
+----
+
+[source,shell,indent=0,role="secondary"]
+.Windows Powershell
+----
+$ alias webfx="java -jar /absolute-path-to-target/webfx-cli-0.1.0-SNAPSHOT-fat.jar"
+----
 
 Then you should be able to invoke the CLI tool from the terminal:
 
- $ webfx -version
+ $ webfx --help
 
 ==== Updating the WebFX CLI to the latest version
 
