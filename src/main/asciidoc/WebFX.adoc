@@ -63,36 +63,50 @@ This generates an executable fat jar in the target folder that we can execute wi
 
  $ java -jar target/webfx-cli-0.1.0-SNAPSHOT-fat.jar --help
 
-==== Creating a permanent alias
+==== Creating a permanent _webfx_ alias
 
 To easily invoke the WebFX CLI from a terminal, we need to create a permanent _webfx_ alias to it. This is done with the following command (to run under webfx-cli directory):
 
 [source,shell,indent=0,role="primary"]
 .Linux
 ----
-$ echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.bashrc
-$ source ~/.bashrc
+$ echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.bashrc <1>
+$ source ~/.bashrc <2>
 ----
+<1> Adding the alias to the shell profile
+<2> Applying it to the current session
 
 [source,shell,indent=0,role="secondary"]
 .macOS >= Catalina
 ----
-$ echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.zshrc
-$ source ~/.zshrc
+$ echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.zshrc <1>
+$ source ~/.zshrc <2>
 ----
+<1> Adding the alias to the shell profile
+<2> Applying it to the current session
 
 [source,shell,indent=0,role="secondary"]
 .macOS < Catalina
 ----
-$ echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.bash_profile
-$ source ~/.bash_profile
+$ echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.bash_profile <1>
+$ source ~/.bash_profile <2>
 ----
+<1> Adding the alias to the shell profile
+<2> Applying it to the current session
 
 [source,shell,indent=0,role="secondary"]
-.Windows Powershell
+.Windows PowerShell
 ----
-$ If (!(Test-Path $profile)) { New-Item -Path $profile -Force }; "function webfx([String[]] [Parameter(ValueFromRemainingArguments)] `$params) { java -jar $((Get-Item .).fullName)\target\webfx-cli-0.1.0-SNAPSHOT-fat.jar `$params }" >> $profile; If (Get-ExecutionPolicy eq "Restricted") { Start-Process powershell -Verb runAs "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned" }; . $profile
+$ If (!(Test-Path $profile)) { New-Item -Path $profile -Force } <1>
+$ "function webfx([String[]] [Parameter(ValueFromRemainingArguments)] `$params) { java -jar $((Get-Item .).fullName)\target\webfx-cli-0.1.0-SNAPSHOT-fat.jar `$params }" >> $profile <2>
+
+$ If (Get-ExecutionPolicy eq "Restricted") { Start-Process powershell -Verb runAs "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned" } <3>
+$ . $profile <4>
 ----
+<1> Creating a PowerShell profile if it doesn't exist
+<2> Adding the alias (implemented as a function) to it
+<3> Raising the execution policy if necessary to execute the profile
+<4> Applying it to the current session
 
 Then you should be able to invoke the CLI tool from the terminal:
 
