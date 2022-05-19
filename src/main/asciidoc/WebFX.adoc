@@ -10,7 +10,7 @@ Last updated: {docdate}
 
 === Prerequisite
 
-You will need the following software installed on your development machine:
+To develop WebFX apps, you will need the following software installed on your development machine:
 
  * JDK 13 or above
  * Maven
@@ -25,7 +25,7 @@ The WebFX CLI is an essential tool to assist you developing WebFX apps. It will 
 * module-info.java (Java module files)
 * and many other files (GWT super sources, GWT bundles, Gluon builds, GraalVM conf, ...)
 
-NOTE: The WebFX CLI is required only on your local development machine (not on your CI/CD pipeline). It is not required for the build (this is Maven job), or for the execution of WebFX apps (WebFX app testers don't need it).
+NOTE: The WebFX CLI is required only on your local development machine (not on your CI/CD pipeline). And it is not required for the build, or the execution of WebFX apps.
 
 Your only inputs will be centralized in the WebFX module files (named webfx.xml), and the tool will automatically generate the rest of the build chain from these webfx.xml files, combined with an analysis of your source code. This includes all your dependencies. The tool also takes over the aspects of cross-platform development: when a feature is platform-dependent (a different implementations exists for each platform), the tool will pick up the right modules in the final executable modules (the ones matching the platform targeted by the executable module).
 
@@ -65,7 +65,7 @@ This generates an executable fat jar in the target folder that we can execute wi
 
 ==== Creating a permanent _webfx_ alias
 
-To easily invoke the WebFX CLI from a terminal, we need to create a permanent _webfx_ alias to it. This is done with the following command (to run under webfx-cli directory):
+To easily invoke the WebFX CLI from a terminal, we need to create a permanent _webfx_ alias to it. This is done with the following command (to run under the webfx-cli directory):
 
 [source,shell,indent=0,role="primary"]
 .Linux
