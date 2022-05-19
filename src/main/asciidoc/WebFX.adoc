@@ -107,7 +107,7 @@ If (!(Test-Path $profile)) { New-Item -Path $profile -Force } <1>
 
 "`r`nfunction webfx([String[]] [Parameter(ValueFromRemainingArguments)] `$params) { java -jar $((Get-Item .).fullName)\target\webfx-cli-0.1.0-SNAPSHOT-fat.jar `$params }`r`n" >> $profile <2>
 
-If ($(Get-ExecutionPolicy) -eq "Restricted") { Start-Process powershell -Verb runAs "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned" -NoNewWindow -Wait } <3>
+If ($(Get-ExecutionPolicy) -eq "Restricted") { Start-Process powershell -Verb runAs "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned" -Wait } <3>
 
 . $profile <4>
 ----
