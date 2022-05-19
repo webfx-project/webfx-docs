@@ -107,13 +107,13 @@ If (!(Test-Path $profile)) { New-Item -Path $profile -Force } <1>
 
 "`r`nfunction webfx([String[]] [Parameter(ValueFromRemainingArguments)] `$params) { java -jar $((Get-Item .).fullName)\target\webfx-cli-0.1.0-SNAPSHOT-fat.jar `$params }`r`n" >> $profile <2>
 
-If ($(Get-ExecutionPolicy) -eq "Restricted") { Start-Process powershell -Verb runAs "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned" } <3>
+If ($(Get-ExecutionPolicy) -eq "Restricted") { Start-Process powershell -Verb runAs "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned" -NoNewWindow -Wait } <3>
 
 . $profile <4>
 ----
 <1> Creating a PowerShell profile if it doesn't exist
 <2> Adding the alias (implemented as a function) to it
-<3> Raising the execution policy if necessary to execute the profile
+<3> Lowering the execution policy if necessary to execute the profile
 <4> Applying it to the current session
 
 Then you should be able to invoke the CLI tool from the terminal:
