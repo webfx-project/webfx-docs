@@ -33,7 +33,20 @@
                         <artifactId>spring-asciidoctor-extensions-block-switch</artifactId>
                         <version>0.6.0</version>
                     </dependency>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj-diagram</artifactId>
+                        <version>2.2.1</version>
+                    </dependency>
                 </dependencies>
+                <configuration>
+                    <attributes>
+                        <data-uri/>
+                    </attributes>
+                    <requires>
+                        <require>asciidoctor-diagram</require>
+                    </requires>
+                </configuration>
                 <executions>
                     <execution>
                         <id>output-html</id>

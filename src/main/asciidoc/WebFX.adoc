@@ -24,11 +24,23 @@ IMPORTANT: Be sure that you can invoke `java`, `mvn` and `git` directly from the
 The WebFX CLI is an essential tool to assist you developing WebFX applications. It will create and maintain your modules and build files, such as:
 
 * pom.xml (Maven module files)
-* module.gwt.xml (GWT module files)
 * module-info.java (Java module files)
-* and many other files (GWT super sources, GWT bundles, Gluon builds, GraalVM conf, ...)
+* module.gwt.xml (GWT module files)
+* and some other files required for a successful compilation
 
-NOTE: The WebFX CLI is required only on your local development machine (not on your CI/CD pipeline). It is not required for the build, or the execution of WebFX apps.
+[graphviz, webfx-cli, svg]
+----
+digraph g {
+    "webfx.xml" -> "webfx-cli"
+    "Your Java source" -> "webfx-cli"
+    "webfx-cli" -> "pom.xml"
+    "webfx-cli" -> "module-info.java"
+    "webfx-cli" -> "GWT module.gwt.xml
+super sources, bundles, etc..."
+    "webfx-cli" -> "GraalVM conf"
+}
+----
+
 
 Your only inputs will be centralized in the WebFX module files (named webfx.xml), and the tool will automatically generate the rest of the build chain from these webfx.xml files, combined with an analysis of your source code. This includes all your dependencies. The tool also takes over the aspects of cross-platform development: when a feature is platform-dependent (a different implementations exists for each platform), the tool will pick up the right modules in the final executable modules (the ones matching the platform targeted by the executable module).
 
