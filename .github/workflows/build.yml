@@ -32,6 +32,9 @@ jobs:
           distribution: 'zulu'
           java-version: ${{ env.jdk-version }}
 
+      - name: Install graphviz
+        run: sudo apt update; sudo install graphviz
+
       # Checkout this repository
       - name: Checkout this repository
         uses: actions/checkout@v2
