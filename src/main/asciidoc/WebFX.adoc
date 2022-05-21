@@ -10,7 +10,7 @@ Last updated: {docdate}
 
 === Prerequisite
 
-To develop WebFX applications, you will need the following software installed on your development machine:
+To develop WebFX applications, you will need the following software already installed on your development machine:
 
  * JDK 13 or above
  * Maven
@@ -21,18 +21,41 @@ IMPORTANT: Be sure that you can invoke `java`, `mvn` and `git` directly from the
 
 === Introducing the WebFX CLI
 
-The WebFX CLI is an essential tool to assist you developing WebFX applications. It will create and maintain your modules and build files, such as:
+The WebFX CLI is the Command Line Interface for WebFX. It's an essential tool to assist you developing WebFX applications. It will create your application modules, and organize them as follows:
+
+[plantuml, format=svg, opts="inline"]
+----
+skinparam Legend {
+	BackgroundColor transparent
+	BorderColor transparent
+    FontSize 18
+    FontColor #444
+}
+legend
+|_ xxx-application (1)
+|_ xxx-application-gluon (2)
+|_ xxx-application-gwt (3)
+|_ xxx-application-openjfx (4)
+end legend
+----
+<1> This module contains the JavaFX code of your application. It is not directly executable as it is not yet bound to a specific platform.
+<2> This module targets the mobile platforms. It will call the Gluon toolchain to produce the Android / iOS executables.
+<3> This module targets the web platform. It will call GWT to produce the HTML and JS code.
+<4> This module targets the desktop platform. It will create an executable Java artifact with the OpenJFX runtime. You can also use this module to directly run and debug your application in your IDE.
+
+You can create several WebFX applications in the same repository (a front office and a back office for example). Of course, if your application code grows, you can split your code into additional modules. The WebFX CLI will help you to create and maintain all your modules. For each module, it will create and maintain your build files, such as (when applicable):
 
 * pom.xml (Maven module files)
 * module-info.java (Java module files)
 * module.gwt.xml (GWT module files)
 * and some other files required for a successful compilation
 
-[graphviz, webfx-cli, svg]
+[graphviz, format=svg, opts="inline"]
 ----
-digraph g {
+digraph {
+    "webfx-cli" [shape=rectangle];
     "webfx.xml" -> "webfx-cli"
-    "Your Java source" -> "webfx-cli"
+    "Your module source code" -> "webfx-cli"
     "webfx-cli" -> "pom.xml"
     "webfx-cli" -> "module-info.java"
     "webfx-cli" -> "GWT module.gwt.xml
@@ -41,12 +64,19 @@ super sources, bundles, etc..."
 }
 ----
 
+Your inputs will be centralized in the WebFX module files named webfx.xml, and the WebFX CLI will generate the rest of the build chain from these webfx.xml files. For example, a typical directive in webfx.xml will be:
 
-Your only inputs will be centralized in the WebFX module files (named webfx.xml), and the tool will automatically generate the rest of the build chain from these webfx.xml files, combined with an analysis of your source code. This includes all your dependencies. The tool also takes over the aspects of cross-platform development: when a feature is platform-dependent (a different implementations exists for each platform), the tool will pick up the right modules in the final executable modules (the ones matching the platform targeted by the executable module).
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+This directive is asking the WebFX CLI to automatically generate the list of your dependencies from an analysis of your source code.
+
+The tool also takes over the aspects of cross-platform development: when a feature is platform-dependent (a different implementations exists for each platform), the tool will pick up the right modules in the final executable modules (the ones matching the platform targeted by the module).
 
 === Installing the WebFX CLI
 
-As we haven't published any release at this stage yet, the way to install the WebFX CLI for now is to clone the https://github.com/webfx-project/webfx-cli[webfx-cli] repository, and build it with Maven.
+We haven't published any release at this stage yet, so the way to install the WebFX CLI for now is to clone the https://github.com/webfx-project/webfx-cli[webfx-cli] repository, and build it with Maven.
 
 NOTE: We will distribute the WebFX CLI in a better way later, when we will publish the first official release.
 
@@ -153,6 +183,21 @@ Let's create our first WebFX application. We need to create the repository folde
 
  webfx create application --class org.example.webfxexample.WebFxExampleApplication --helloWorld
 
+[plantuml, format=svg, opts="inline"]
+----
+skinparam Legend {
+	BackgroundColor transparent
+	BorderColor transparent
+    FontSize 18
+    FontColor #444
+}
+legend
+|_ webfx-example-application
+|_ webfx-example-application-gluon
+|_ webfx-example-application-gwt
+|_ webfx-example-application-openjfx
+end legend
+----
 ==== Building your application
 
  webfx build
