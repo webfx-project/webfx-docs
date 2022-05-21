@@ -33,7 +33,7 @@ jobs:
           java-version: ${{ env.jdk-version }}
 
       - name: Install graphviz
-        run: sudo apt update; sudo install graphviz
+        run: sudo apt update; sudo apt install graphviz
 
       # Checkout this repository
       - name: Checkout this repository
