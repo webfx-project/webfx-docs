@@ -6,7 +6,7 @@ Last updated: {docdate}
 
 == Introduction
 
-WebFX is a JavaFX application transpiler that produces a pure JS web app (no plugin, no server). It works as follows:
+WebFX is a JavaFX application transpiler powered by link:https://www.gwtproject.org[GWT^] that produces a pure JS web app (no plugin, no server). It works as follows:
 
 [plantuml, format=svg, opts="inline"]
 ----
@@ -16,15 +16,15 @@ skinparam nodesep 5
 node "Your JavaFX app" as app
 
 rectangle "OpenJFX" {
-node "     High level\nImplementation" as o1
-node "  Low level\nImplentation" as o2
+node "Higher layer" as o1
+node "Lower layer" as o2
 }
 o1 --[hidden]> o2
 
 usecase "Patching\nprocess" as pp
 usecase "Replaced\nby" as rb
 
-rectangle "WebFX Kit" {
+rectangle "WebFX kit" {
 node "GWT compatible\n        version" as w1
 node "  Scene graph -> DOM\n            mapper" as w2
 }
@@ -50,6 +50,15 @@ gwt -d-> wa
 
 gwt --[hidden]> w2
 ----
+
+The link:https://github.com/webfx-project/webfx/tree/main/webfx-kit[webfx-kit^] module is the heart of WebFX. It's a modified version of OpenJFX that can be transpiled. This is achieved by patching the higher layer of OpenJFX (which contains the main JavaFX features and API) to make it GWT compatible, and by replacing the lower layer (the graphic rendering pipeline) by a scene graph -> DOM mapper (the DOM being finally rendered by the browser).
+
+The WebFX kit coverage is for now limited to the essential features of JavaFX. So to successfully compile to the web, your JavaFX app needs to meet 2 requirements:
+
+* use only the features covered by the WebFX kit
+* be compatible with GWT
+
+A JavaFX application that meet these 2 requirements is called a WebFX application.
 
 == Getting started
 
@@ -88,12 +97,7 @@ end legend
 <3> This module targets the web platform. It will call GWT to produce the HTML and JS code.
 <4> This module targets the desktop platform. It will create an executable Java artifact with the OpenJFX runtime. You can also use this module to directly run and debug your application in your IDE.
 
-You can create several WebFX applications in the same repository, such as a front office and a back office for example. Of course, if your application code grows, you can split your code into additional modules. The WebFX CLI will help you to create and maintain all your modules. For each module, it will create and maintain your build files, such as (when applicable):
-
-* pom.xml (Maven module files)
-* module-info.java (Java module files)
-* module.gwt.xml (GWT module files)
-* and some other files required for a successful compilation
+You can create several WebFX applications in the same repository, such as a front office and a back office for example. Of course, if your application code grows, you can split your code into more modules. The WebFX CLI will help you to create and maintain all your modules. For each module, it will create and maintain your build files as follows (when applicable):
 
 [graphviz, format=svg, opts="inline"]
 ----
