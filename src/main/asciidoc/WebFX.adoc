@@ -87,7 +87,7 @@ To develop WebFX applications, you will need the following software already inst
  * Git
  * Your preferred Java IDE
 
-IMPORTANT: Be sure that you can invoke `java`, `mvn` and `git` directly from the terminal. The WebFX CLI will invoke `mvn` and `java` without specifying their full path.
+IMPORTANT: Be sure that you can invoke `java`, `mvn` and `git` directly from the terminal. The WebFX CLI will invoke these commands without specifying their full path.
 
 === Introducing the WebFX CLI
 
@@ -231,10 +231,11 @@ Then you should be able to invoke the CLI tool from the terminal:
 
 ==== Updating the WebFX CLI to the latest version
 
-If later you want to update the WebFX CLI to the latest SNAPSHOT version, you just need to update your local repository and rebuild it with Maven. This is done through the following commands (under your webfx-cli local folder):
+You can check for update at anytime by running:
 
- git pull
- mvn package
+ webfx bump cli
+
+If an update is available, it will download it and build it.
 
 === Creating your first WebFX app
 
