@@ -13,29 +13,27 @@ WebFX is a JavaFX application transpiler powered by link:https://www.gwtproject.
 skinparam ranksep 5
 skinparam nodesep 5
 
-node "Your JavaFX app" as app
-
 rectangle "OpenJFX" {
-node "Higher layer" as o1
-node "Lower layer" as o2
+    node "Higher layer" as o1
+    node "Lower layer" as o2
 }
 o1 --[hidden]> o2
 
 usecase "Patching\nprocess" as pp
 usecase "Replaced\nby" as rb
+pp --[hidden]> rb
 
 rectangle "WebFX kit" {
-node "GWT compatible\n        version" as w1
-node "  Scene graph -> DOM\n            mapper" as w2
+    node "GWT compatible\n        version" as w1
+    node "  Scene graph -> DOM\n            mapper" as w2
 }
 w1 --[hidden]> w2
 
-pp --[hidden]> rb
-
-usecase "GWT" as gwt
-
-node "Web app" as wa
-
+rectangle "Your repository" {
+    node "Your JavaFX app" as app
+    usecase "GWT" as gwt
+    node "Web app" as wa
+}
 
 o1 -r-> pp
 pp -r-> w1
@@ -43,23 +41,41 @@ pp -r-> w1
 o2 -r-> rb
 rb -r-> w2
 
+app -[dotted]> o1: uses JavaFX API
+
 app -d-> gwt
 w1 -r-> gwt
 w2 -r-> gwt
 gwt -d-> wa
 
-gwt --[hidden]> w2
+' Adding more hidden arrows to force vartical alignment of elements in the "Your repository" rectangle
+app -[hidden]> gwt
+app -[hidden]> gwt
+gwt -[hidden]> wa
 ----
 
 The link:https://github.com/webfx-project/webfx/tree/main/webfx-kit[webfx-kit^] module is the heart of WebFX. It's a modified version of OpenJFX that can be transpiled. This is achieved by patching the higher layer of OpenJFX (which contains the main JavaFX features and API) to make it GWT compatible, and by replacing the lower layer (the graphic rendering pipeline) by a scene graph -> DOM mapper (the DOM being finally rendered by the browser).
 
-The WebFX kit coverage is for now limited to the essential features of JavaFX. So to successfully compile to the web, your JavaFX app needs to meet 2 requirements:
+The WebFX kit coverage is for now limited to the essential features of JavaFX. So to successfully compile to the web, your JavaFX app needs to meet these 2 requirements:
 
-* use only the features covered by the WebFX kit
-* be compatible with GWT
+* use only the features covered by the WebFX kit (this coverage will increase over the time)
+* be compatible with GWT (no reflection, no multi-threading, etc...)
 
-A JavaFX application that meet these 2 requirements is called a WebFX application.
+A JavaFX application that meets these 2 requirements is called a WebFX application. To transpile it, WebFX simply asks GWT to compile it together with the WebFX kit.
 
+You don't need to run a GWT compilation on each development cycle, you can simply develop, run and debug your WebFX application as usual in your IDE with the OpenJFX runtime.
+
+WebFX allows you to do a full cross-platform development from a single source code base. In addition to the web platform, your WebFX application can indeed be compiled also for the desktop, mobiles & embed thanks to the JavaFX & Gluon toolchains.
+
+[.text-center]
+[graphviz, format=svg, opts="inline"]
+----
+digraph {
+    "Your WebFX application" -> "Web\nAll major browsers" [headlabel="WebFX" labeldistance=4.5 labelangle=20];
+    "Your WebFX application" -> "Desktop\nWindows, macOS & Linux" [headlabel="JavaFX or Gluon" labeldistance=2.7 labelangle=-7];
+    "Your WebFX application" -> "Mobiles & embed\nAndroid, iOS & Raspberry Pi" [label="Gluon"];
+}
+----
 == Getting started
 
 === Prerequisite
@@ -86,6 +102,7 @@ skinparam Legend {
     FontColor #444
 }
 legend
+Your repository
 |_ xxx-application (1)
 |_ xxx-application-gluon (2)
 |_ xxx-application-gwt (3)
@@ -99,6 +116,7 @@ end legend
 
 You can create several WebFX applications in the same repository, such as a front office and a back office for example. Of course, if your application code grows, you can split your code into more modules. The WebFX CLI will help you to create and maintain all your modules. For each module, it will create and maintain your build files as follows (when applicable):
 
+[.text-center]
 [graphviz, format=svg, opts="inline"]
 ----
 digraph {
@@ -121,7 +139,7 @@ Your inputs will be centralized in the WebFX module files named webfx.xml, and t
 
 This directive is asking the WebFX CLI to automatically generate the list of your dependencies from an analysis of your source code.
 
-The tool takes over the aspects of cross-platform development: when a feature is platform-dependent (a different implementations exists for each platform), the tool will pick up the right modules in the final executable modules (the ones matching the platform targeted by the module).
+The WebFX CLI takes over the aspects of cross-platform development: when a feature is platform-dependent (a different implementations exists for each platform), the tool will pick up the right modules in the final executable modules (the ones matching the platform targeted by the module).
 
 === Installing the WebFX CLI
 
@@ -241,6 +259,7 @@ skinparam Legend {
     FontColor #444
 }
 legend
+webfx-example
 |_ webfx-example-application
 |_ webfx-example-application-gluon
 |_ webfx-example-application-gwt
