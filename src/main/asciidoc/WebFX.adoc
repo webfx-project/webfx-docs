@@ -71,7 +71,7 @@ WebFX allows you to do a full cross-platform development from a single source co
 [graphviz, format=svg, opts="inline"]
 ----
 digraph {
-    size="10,10!";
+    size="10,3!"; ratio="compress";
     "Your WebFX application" -> "Web\nAll major browsers" [headlabel="WebFX" labeldistance=4.5 labelangle=20];
     "Your WebFX application" -> "Desktop\nWindows, macOS & Linux" [headlabel="JavaFX or Gluon" labeldistance=2.7 labelangle=-7];
     "Your WebFX application" -> "Mobiles & embed\nAndroid, iOS & Raspberry Pi" [label="Gluon"];
