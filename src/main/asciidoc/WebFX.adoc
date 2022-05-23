@@ -6,9 +6,15 @@ Last updated: {docdate}
 
 == Introduction
 
-WebFX is a JavaFX application transpiler powered by link:https://www.gwtproject.org[GWT^] that produces a pure JS web app (no plugin, no server). It works as follows:
 
-[plantuml, format=svg, opts="inline"]
+=== What is WebFX?
+
+WebFX is a JavaFX application transpiler powered by link:https://www.gwtproject.org[GWT^]. It can transpile a JavaFX application into a self-contained JavaScript web app that requires no plugin or server to run.
+
+=== How it works
+
+[.text-center]
+[plantuml, webfx-how-it-works, format=svg]
 ----
 skinparam ranksep 5
 skinparam nodesep 5
@@ -56,19 +62,23 @@ gwt -[hidden]> wa
 
 The link:https://github.com/webfx-project/webfx/tree/main/webfx-kit[webfx-kit^] module is the heart of WebFX. It's a modified version of OpenJFX that can be transpiled. This is achieved by patching the higher layer of OpenJFX (which contains the main JavaFX features and API) to make it GWT compatible, and by replacing the lower layer (the graphic rendering pipeline) by a scene graph -> DOM mapper (the DOM being finally rendered by the browser).
 
+=== Limitations
+
 The WebFX kit coverage is for now limited to the essential features of JavaFX. So to successfully compile to the web, your JavaFX app needs to meet these 2 requirements:
 
 * use only the features covered by the WebFX kit (this coverage will increase over the time)
 * be compatible with GWT (no reflection, no multi-threading, etc...)
 
-A JavaFX application that meets these 2 requirements is called a WebFX application. To transpile it, WebFX simply asks GWT to compile it together with the WebFX kit.
+We will call a _WebFX application_ any JavaFX application that meets these 2 requirements. A WebFX application can be transpiled to the web simply by running a GWT compilation of it together with the WebFX kit.
 
-You don't need to run a GWT compilation on each development cycle, you can simply develop, run and debug your WebFX application as usual in your IDE with the OpenJFX runtime.
+=== Fast development cycles
 
-WebFX allows you to do a full cross-platform development from a single source code base. In addition to the web platform, your WebFX application can indeed be compiled also for the desktop, mobiles & embed thanks to the JavaFX & Gluon toolchains.
+You don't need to run a GWT compilation on each development cycle, you can simply develop, run, and debug your WebFX application like a standard JavaFX application with the OpenJFX runtime in your preferred Java IDE. Occasionally you can transpile it to test the web app.
+
+=== Cross-platform
 
 [.text-center]
-[graphviz, format=svg, opts="inline"]
+[graphviz, webfx-cross-platform, format=svg]
 ----
 digraph {
     "Your WebFX application" -> "Web\nAll major browsers" [headlabel="WebFX" labeldistance=4.5 labelangle=20];
@@ -76,6 +86,9 @@ digraph {
     "Your WebFX application" -> "Mobiles\nAndroid & iOS" [label="Gluon"];
 }
 ----
+
+WebFX allows you to do a full cross-platform development from a single source code base. In addition to the web platform, your WebFX application can indeed be compiled also for the desktop & mobiles to the JavaFX & Gluon toolchains.
+
 == Getting started
 
 === Prerequisite
@@ -93,7 +106,7 @@ IMPORTANT: Be sure that you can invoke `java`, `mvn` and `git` directly from the
 
 The WebFX CLI is the Command Line Interface for WebFX. It's an essential tool to assist you developing WebFX applications. It will create your application modules as follows:
 
-[plantuml, format=svg, opts="inline"]
+[plantuml, webfx-app-structure, format=svg]
 ----
 skinparam Legend {
 	BackgroundColor transparent
@@ -116,8 +129,7 @@ end legend
 
 You can create several WebFX applications in the same repository, such as a front office and a back office for example. Of course, if your application code grows, you can split your code into more modules. The WebFX CLI will help you to create and maintain all your modules. For each module, it will create and maintain your build files as follows (when applicable):
 
-[.text-center]
-[graphviz, format=svg, opts="inline"]
+[graphviz, wbfx-cli, format=svg]
 ----
 digraph {
     "webfx-cli" [shape=rectangle];
@@ -251,7 +263,7 @@ Let's create our first WebFX application. We need to create the repository folde
 
  webfx create application --class org.example.webfxexample.WebFxExampleApplication --helloWorld
 
-[plantuml, format=svg, opts="inline"]
+[plantuml, webfx-example-structure, format=svg]
 ----
 skinparam Legend {
 	BackgroundColor transparent
