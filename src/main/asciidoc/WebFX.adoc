@@ -1,4 +1,3 @@
-[.text-justify]
 = WebFX Documentation
 :icons: font
 :toc: left
@@ -10,7 +9,7 @@ Last updated: {docdate}
 
 === What is WebFX?
 
-WebFX is a JavaFX application transpiler powered by link:https://www.gwtproject.org[GWT^]. It can transpile a JavaFX application into a traditional self-contained pure JavaScript web app (no plugin or server is required for its execution in the browser).
+WebFX is a JavaFX application transpiler powered by link:https://www.gwtproject.org[GWT^]. It can transpile a JavaFX application into a traditional self-contained pure JavaScript web app (with no plugin or server required for its execution in the browser).
 
 === How it works
 
@@ -67,10 +66,12 @@ The link:https://github.com/webfx-project/webfx/tree/main/webfx-kit[webfx-kit^] 
 
 The WebFX kit coverage is for now limited to the essential features of JavaFX. So to successfully compile to the web, your JavaFX app needs to meet these 2 requirements:
 
-* use only the features covered by the WebFX kit (this coverage will increase over the time)
-* be compatible with GWT (no reflection, no multi-threading, etc...)
+* use only the features covered by the WebFX kit (you can check out the link:https://javadoc.webfx.dev[JavaDoc^] to get an idea of this coverage)
+* be compatible with GWT (no reflection, no multi-threading, no blocking code, etc...)
 
-A JavaFX application that meets these 2 requirements is called a _WebFX application_, and it can be transpiled to the web. WebFX achieves this simply by running a GWT compilation of it together with the WebFX kit.
+A JavaFX application that meets these 2 requirements is called a _WebFX application_, and it can be transpiled to the web simply by running a GWT compilation of it together with the WebFX kit.
+
+NOTE: Note for the impatient: OpenJFX is a very rich and big library (about 10MB) compared to standard JS frameworks (typically 100KB). It will take time to complete its coverage (some parts may not be possible). Thanks for your patience. But compared to some frameworks, you can already do a lot with the current coverage.
 
 === Fast development cycles
 
@@ -101,11 +102,11 @@ To develop WebFX applications, you will need the following software already inst
  * Git
  * Your preferred Java IDE
 
-IMPORTANT: Be sure that `java`, `mvn` and `git` are in the execution path of your terminal. The WebFX CLI will invoke these commands without specifying their full path.
+IMPORTANT: Be sure that `java`, `mvn` and `git` are in the path of your terminal. The WebFX CLI will invoke these commands without specifying their full path.
 
 === Introducing the WebFX CLI
 
-The WebFX CLI is a Command Line Interface for WebFX. It's an essential tool that will assist you developing WebFX applications. It will create your application modules as follows:
+The WebFX CLI is a Command Line Interface tool that will assist you developing WebFX applications. It will create your application modules as follows:
 
 [plantuml, webfx-app-structure, format=svg]
 ----
@@ -125,7 +126,7 @@ end legend
 ----
 <1> This module contains the JavaFX code of your application. It is cross-platform (not yet bound to a specific platform) and therefore not executable.
 <2> This module targets the native desktop & mobile platforms. It binds your application with the OpenJFX runtime, and can call the Gluon toolchain to produce the Windows, macOS, Linux, Android & iOS native executables (depending on your OS).
-<3> This module targets the web platform. It binds your application with the WebFX kit and can call GWT to produce the web app.
+<3> This module targets the web platform. It binds your application with the WebFX kit, and can call GWT to produce the web app.
 <4> This module targets the standard desktop platform. It binds your application with the OpenJFX runtime. It is directly executable in your IDE. It can also call the standard JavaFX toolchain to produce the desktop executables (Windows, macOS or Linux) with an embed JVM.
 
 You can create several WebFX applications in the same repository. If your application code grows, you can split your code into more modules. The WebFX CLI will help you to create and maintain all your modules. For each module, it will create and maintain your build files as follows (when applicable to the module):
@@ -150,7 +151,7 @@ Your inputs will be centralized in the WebFX module files named webfx.xml (same 
         <used-by-source-modules/>
     </dependencies>
 
-This directive is asking the WebFX CLI to generate the list of your dependencies from an analysis of your source code. It will therefore automatically populate the dependencies in pom.xml.
+This directive is asking the WebFX CLI to generate the list of your dependencies from an analysis of your source code, and automatically populate the dependencies in pom.xml.
 
 In that process, the WebFX CLI takes over the aspects of cross-platform development: when a feature is platform-dependent (a different implementation exists for different platforms), the tool will pick up the right modules in the final executable modules (the ones matching the platform targeted by the module).
 
