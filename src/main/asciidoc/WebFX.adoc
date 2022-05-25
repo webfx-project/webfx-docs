@@ -75,7 +75,7 @@ NOTE: Note for the impatient: OpenJFX is a very rich and big library (about 10MB
 
 === Fast development cycles
 
-You don't need to run a GWT compilation on each development cycle like you would do with a traditional GWT development. Instead, you mainly develop, run, and debug your WebFX application directly in your preferred Java IDE with the OpenJFX runtime (like a standard JavaFX development). You transpile it only from time to time to test the web app.
+You don't need to run a regular GWT compilations like you would do with a traditional GWT development. Instead, you mainly develop, run, and debug your WebFX application directly in your preferred Java IDE with the OpenJFX runtime (like a standard JavaFX development). You transpile it only from time to time to test the web app.
 
 === Cross-platform
 
@@ -153,13 +153,13 @@ Your inputs will be centralized in the WebFX module files named webfx.xml (same 
 
 This directive is asking the WebFX CLI to generate the list of your dependencies from an analysis of your source code, and automatically populate the dependencies in pom.xml.
 
-In that process, the WebFX CLI takes over the aspects of cross-platform development: when a feature is platform-dependent (a different implementation exists for different platforms), the tool will pick up the right modules in the final executable modules (the ones matching the platform targeted by the module).
+In that process, the WebFX CLI takes over the cross-platform aspects: when a feature is platform-dependent (a different implementation exists for different platforms), the tool will pick up the right modules for the executable modules (the ones matching the platform targeted by the executable module).
 
 === Installing the WebFX CLI
 
 Since we haven't published any release at this stage yet, the way to install the WebFX CLI for now is to clone the https://github.com/webfx-project/webfx-cli[webfx-cli] repository, and build it with Maven.
 
-NOTE: We will distribute the WebFX CLI in a better way on the first official release.
+NOTE: We will distribute the WebFX CLI in a better way with the first official release.
 
 ==== Cloning the webfx-cli repository
 
@@ -190,7 +190,7 @@ This generates an executable fat jar in the target folder that we can execute wi
 
 ==== Creating a permanent _webfx_ alias
 
-To easily invoke the WebFX CLI from a terminal, we need to create a permanent _webfx_ alias to it. This is done with the following command (to run under the webfx-cli directory):
+To easily invoke the WebFX CLI from a terminal, we need to create a permanent _webfx_ alias. This is done with the following command (to run under the webfx-cli directory):
 
 [source,shell,indent=0,role="primary"]
 .Linux
@@ -250,6 +250,8 @@ You can check for update at anytime by running:
 
 If a new version is available, it will download it and build it.
 
+NOTE: This is the only command so far that uses `git`, and it's just a `git pull` of the webfx-cli repository. The tool will never call `git` on your own repositories.
+
 === Creating your first WebFX app
 
 ==== Creating and initializing your repository
@@ -258,7 +260,7 @@ Let's create our first WebFX application. We need to create the repository folde
 
  mkdir webfx-example
  cd webfx-example
- webfx init org.example webfx-example 1.0.0-SNAPSHOT
+ webfx init org.example:webfx-example:1.0.0-SNAPSHOT
 
 ==== Creating your application modules
 
@@ -310,7 +312,7 @@ We will give the instructions for IntelliJ IDEA, but you should be able to easil
 
 ifdef::backend-html5[]
 == PDF version
-You can also download this
+Here is the
 link:WebFX.pdf[PDF version,float="right"]
-of the documentation.
+of this documentation.
 endif::[]
