@@ -77,7 +77,7 @@ NOTE: Note for the impatient: OpenJFX is a very rich and big library (about 10MB
 
 ==== Java full-stack
 
-Modern web development now requires client-side technologies. WebFX should please Java developers who are looking for a Java full-stack solution. Writing your whole stack in Java is a big advantage. Not only you don't need to master other complex ecosystems such as JavaScript or TypeScript, but you can also share your common code between your backend and frontends with the Java module system, a great advantage compared to heterogeneous developments. All your stack in your familiar Java environment. This is what WebFX offers you, with an already well-known and documented UI technology: JavaFX!
+Modern web development now requires client-side technologies. WebFX should please Java developers who are looking for a Java full-stack solution. Writing your whole stack in Java is a big advantage. Not only you don't need to master other complex ecosystems such as JavaScript or TypeScript, but you can also share your common code between your backend and frontends with the Java module system, a great advantage compared to heterogeneous developments. All your stack in your familiar Java environment, with an already well known and documented UI technology: JavaFX. You will feel at home with WebFX!
 
 ==== Performance
 
