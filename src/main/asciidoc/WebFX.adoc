@@ -75,7 +75,9 @@ NOTE: Note for the impatient: OpenJFX is a very rich and big library (about 10MB
 
 === Benefits
 
-==== Full-stack Java
+==== Java full-stack
+
+Modern web development now requires client-side technologies. WebFX should please Java developers who are looking for a Java full-stack solution. Writing your whole stack in Java is a big advantage. Not only you don't need to master other complex ecosystems such as JavaScript or TypeScript, but you can also share your common code between your backend and frontends with the Java module system, a great advantage compared to heterogeneous developments. All your stack in your familiar Java environment. This is what WebFX offers you, with an already well-known and documented UI technology: JavaFX!
 
 ==== Performance
 
@@ -312,9 +314,9 @@ We will give the instructions for IntelliJ IDEA, but you should be able to easil
 
 ==== Configuring the OpenJFX application
 
-GWT has a different entry point than standard Java applications, but WebFX hides the hassle with a single cross-platform entry point. So the main class of a WebFX application will always be `dev.webfx.platform.shared.services.boot.ApplicationBooter` which will correctly bootstrap your application whatever the target platform. It will find your JavaFX application because it has been automatically declared as a Java service by the WebFX CLI.
+A few explanation before going further: GWT has a different entry point than standard Java applications, but WebFX hides the hassle with a single cross-platform entry point that will correctly bootstrap your application. So the main class of a WebFX application will always be `dev.webfx.platform.shared.services.boot.ApplicationBooter` whatever the platform. It will find your JavaFX application because it has been automatically declared as a Java service by the WebFX CLI.
 
-NOTE: GWT normally doesn't support the Java service API, but WebFX does, because the CLI emulates it by generating a GWT super source. You can rely on this feature to declare and implement your own services. Your services can even be platform-dependent, and you can write a specific implementation for each platform. This can be a UI API, with an OpenJFX implementation, and then a GWT implementation using the JS library you want for your web app.
+NOTE: GWT normally doesn't support the Java service API, but WebFX does, because the CLI emulates it by generating a GWT super source. You can rely on this feature to declare and implement your own services. Your services can even be platform-dependent, and you can write a specific implementation for each platform. This can be a UI API, with an OpenJFX implementation, and then a GWT implementation using an alternative JS library for your web app.
 
 ==== Building and running the GWT application
 
