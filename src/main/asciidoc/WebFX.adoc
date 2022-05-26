@@ -75,7 +75,7 @@ NOTE: Note for the impatient: OpenJFX is a very rich and big library (about 10MB
 
 === Fast development cycles
 
-You don't need to run a regular GWT compilations like you would do with a traditional GWT development. Instead, you mainly develop, run, and debug your WebFX application directly in your preferred Java IDE with the OpenJFX runtime (like a standard JavaFX development). You transpile it only from time to time to test the web app.
+You don't need to run regular GWT compilations like you would do with a traditional GWT development. Instead, you mainly develop, run, and debug your WebFX application directly in your preferred Java IDE with the OpenJFX runtime (like a standard JavaFX development). You transpile it only from time to time to test the web app.
 
 === Cross-platform
 
@@ -153,7 +153,7 @@ Your inputs will be centralized in the WebFX module files named webfx.xml (same 
 
 This directive is asking the WebFX CLI to generate the list of your dependencies from an analysis of your source code, and automatically populate the dependencies in pom.xml.
 
-In that process, the WebFX CLI takes over the cross-platform aspects: when a feature is platform-dependent (a different implementation exists for different platforms), the tool will pick up the right modules for the executable modules (the ones matching the platform targeted by the executable module).
+In that process, the WebFX CLI takes over the cross-platform aspects: when a feature is platform-dependent (a different implementation exists for different platforms), the tool will pick up the right modules (the implementations matching the platform targeted by the executable modules).
 
 === Installing the WebFX CLI
 
@@ -250,7 +250,7 @@ You can check for update at anytime by running:
 
 If a new version is available, it will download it and build it.
 
-NOTE: This is the only command so far that uses `git`, and it's just a `git pull` of the webfx-cli repository. The tool will never call `git` on your own repositories.
+NOTE: This is the only command that uses `git`, and it's just a `git pull` of the webfx-cli repository. The tool will not call `git` on your own repositories.
 
 === Creating your first WebFX app
 
@@ -261,6 +261,8 @@ Let's create our first WebFX application. We need to create the repository folde
  mkdir webfx-example
  cd webfx-example
  webfx init org.example:webfx-example:1.0.0-SNAPSHOT
+
+TIP: `webfx init org.example:1.0.0-SNAPSHOT` will also work as the tool takes the repository directory name as the artifactId if omitted in the command.
 
 ==== Creating your application modules
 
@@ -298,11 +300,13 @@ You can run the GWT version of your application with the following command:
 
 === Developing in your IDE
 
-We will give the instructions for IntelliJ IDEA, but you should be able to easily transpose them to other Java IDEs such as NetBeans or Eclipse.
+We will give the instructions for IntelliJ IDEA, but you should be able to easily transpose them to other Java IDEs.
 
 ==== Opening the project
 
 ==== Configuring the OpenJFX application
+
+WebFX offers a cross-platform way to start applications (as the entry point differs with GWT). The main class of a WebFX application is always `dev.webfx.platform.shared.services.boot.ApplicationBooter` which will correctly bootstrap your application whatever the targeted platform. It will find your JavaFX application (which has been automatically declared as a Java service by the WebFX CLI). The only difference between WebFX applications will be the module to execute.
 
 ==== Building and running the GWT application
 
