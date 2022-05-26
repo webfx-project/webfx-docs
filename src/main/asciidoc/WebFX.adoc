@@ -71,13 +71,19 @@ The WebFX kit coverage is for now limited to the essential features of JavaFX. S
 
 A JavaFX application that meets these 2 requirements is called a _WebFX application_, and it can be transpiled to the web simply by running a GWT compilation of it together with the WebFX kit.
 
-NOTE: Note for the impatient: OpenJFX is a very rich and big library (about 10MB) compared to standard JS frameworks (typically 100KB). It will take time to complete its coverage (some parts may not be possible). Thanks for your patience. But compared to some frameworks, you can already do a lot with the current coverage.
+NOTE: Note for the impatient: OpenJFX is a very rich and big library (about 10MB) compared to standard JS frameworks (typically 100KB). It will take time to complete its coverage (some parts may not be possible). Thanks for your understanding. But compared to some frameworks, you can already do a lot with the current coverage.
 
-=== Fast development cycles
+=== Benefits
+
+==== Full-stack Java
+
+==== Performance
+
+==== Fast development cycles
 
 You don't need to run regular GWT compilations like you would do with a traditional GWT development. Instead, you mainly develop, run, and debug your WebFX application directly in your preferred Java IDE with the OpenJFX runtime (like a standard JavaFX development). You transpile it only from time to time to test the web app.
 
-=== Cross-platform
+==== Cross-platform
 
 [.text-center]
 [graphviz, webfx-cross-platform, format=svg]
@@ -153,7 +159,7 @@ Your inputs will be centralized in the WebFX module files named webfx.xml (same 
 
 This directive is asking the WebFX CLI to generate the list of your dependencies from an analysis of your source code, and automatically populate the dependencies in pom.xml.
 
-In that process, the WebFX CLI takes over the cross-platform aspects: when a feature is platform-dependent (a different implementation exists for different platforms), the tool will pick up the right modules (the implementations matching the platform targeted by the executable modules).
+In that process, the WebFX CLI takes care of the cross-platform aspects: when a feature is platform-dependent (a different implementation exists for different platforms), the tool will pick up the right modules (those whose implementation matches the target platform). In particular, it will replace the OpenJFX modules with the WebFX kit ones when targeting the web.
 
 === Installing the WebFX CLI
 
@@ -306,7 +312,9 @@ We will give the instructions for IntelliJ IDEA, but you should be able to easil
 
 ==== Configuring the OpenJFX application
 
-WebFX offers a cross-platform way to start applications (as the entry point differs with GWT). The main class of a WebFX application is always `dev.webfx.platform.shared.services.boot.ApplicationBooter` which will correctly bootstrap your application whatever the targeted platform. It will find your JavaFX application (which has been automatically declared as a Java service by the WebFX CLI). The only difference between WebFX applications will be the module to execute.
+GWT has a different entry point than standard Java applications, but WebFX hides the hassle with a single cross-platform entry point. So the main class of a WebFX application will always be `dev.webfx.platform.shared.services.boot.ApplicationBooter` which will correctly bootstrap your application whatever the target platform. It will find your JavaFX application because it has been automatically declared as a Java service by the WebFX CLI.
+
+NOTE: GWT normally doesn't support the Java service API, but WebFX does, because the CLI emulates it by generating a GWT super source. You can rely on this feature to declare and implement your own services. Your services can even be platform-dependent, and you can write a specific implementation for each platform. This can be a UI API, with an OpenJFX implementation, and then a GWT implementation using the JS library you want for your web app.
 
 ==== Building and running the GWT application
 
