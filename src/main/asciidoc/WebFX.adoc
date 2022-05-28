@@ -71,9 +71,13 @@ The WebFX kit coverage is for now limited to the essential features of JavaFX. S
 
 A JavaFX application that meets these 2 requirements is called a _WebFX application_, and it can be transpiled to the web simply by running a GWT compilation of it together with the WebFX kit.
 
-NOTE: Note for the impatient: OpenJFX is a very rich and big library (about 10MB) compared to standard JS frameworks (typically 100KB). It will take time to complete its coverage (some parts may not be possible). Thanks for your understanding. But compared to some frameworks, you can already do a lot with the current coverage.
+NOTE: Note for the impatient: OpenJFX is a huge library (about 10MB) compared to standard JS frameworks (typically 100KB). It will take time to complete its coverage (some parts may not be possible). Thanks for your understanding. But compared to some frameworks, you can already do a lot with the current coverage.
 
 === Benefits
+
+==== No server
+
+There are already great solutions to run Swing or JavaFX applications in the browser without plugins by actually running them on a server. And these solutions don't have the limitations WebFX has on the API. However, a traditional self-contained web app packaging is a much more simple, scalable and reliable execution model. This is precisely the reason why you would prefer WebFX.
 
 ==== Performance
 
@@ -107,11 +111,13 @@ Despite the big size of OpenJFX, WebFX can produce lightweight web apps, as demo
 
 [small]#* compressed JS size transiting over the network, without eventual images or other resources#
 
-Here are the 3 secrets of this magic:
+The secret? Here are the 3 main ingredients that make the magic:
 
-* The scene graph -> DOM mapper is much thinner than the original OpenJFX lower layer
+* The scene graph -> DOM mapper is much thinner than the original OpenJFX lower layer which has to reimplement many features a browser already has
 * GWT runs a dead code elimination, which removes the JavaFX classes you don't use
 * GWT produces an amazingly compaq and optimized JS code
+
+The later point also confers an excellent execution speed to your web app.
 
 ==== Cross-platform
 
@@ -129,19 +135,15 @@ In addition to the web platform, WebFX will help you to compile your application
 
 ==== Java full-stack
 
-WebFX should please Java developers who are looking for a Java full-stack solution. Writing your whole stack in Java is a big advantage, keeping your development homogenous and simple, with all your code in your preferred Java IDE. Not only you don't need to master other complex ecosystems such as JavaScript or TypeScript, but you can also share the common code between your backend and frontends with the Java module system, a great advantage compared to heterogeneous systems.
+WebFX should please Java developers who are looking for a Java full-stack solution. Writing your whole stack in Java is a big advantage, keeping your development homogenous and simple, in your preferred Java IDE. Not only you don't need to master other complex ecosystems such as JavaScript or TypeScript, but you can also share the common code between your backend and frontends with the Java module system, a great advantage compared to heterogeneous systems.
 
 ==== Low learning curve
 
 WebFX is not yet another UI toolkit to learn, but nothing else than an already well known and well documented API: JavaFX. All the features you love like JavaFX bindings available for your web app. You will just feel at home with WebFX!
 
-==== No server
-
-There are already great solutions to run Swing or JavaFX applications in the browser without plugins by actually running them on a server. And these solutions don't have the limitations WebFX has on the API. However, a traditional self-contained web app packaging is a much more simple, scalable and reliable execution model. This is where WebFX has a role to play.
-
 ==== Fast development cycles
 
-You don't need to run regular GWT compilations like you would do with a traditional GWT development, because you can run and debug your WebFX application directly in your Java IDE with the OpenJFX runtime (like a standard JavaFX development). So you first develop your features in a traditional way, and only at the end of a development cycle, transpile your app to test the web version.
+You don't need to run regular GWT compilations like you would do with a traditional GWT development, because you can run and debug your WebFX application directly in your Java IDE instead with the OpenJFX runtime (like a standard JavaFX development). You typically transpile your app only at the end of a development cycle, once you have finished developing a feature in this traditional manner, and want to check the web version.
 
 ==== Free and open source
 
@@ -187,10 +189,12 @@ end legend
 
 You can create several WebFX applications in the same repository. If your application code grows, you can split your code into more modules. The WebFX CLI will help you to create and maintain all your modules. For each module, it will create and maintain your build files as follows (when applicable to the module):
 
+[.text-center]
 [graphviz, wbfx-cli, format=svg]
 ----
 digraph {
-    "webfx-cli" [shape=rectangle];
+    node [ shape=rectangle ];
+    "webfx-cli" [shape=ellipse];
     "webfx.xml" -> "webfx-cli"
     "Your module source code" -> "webfx-cli"
     "webfx-cli" -> "pom.xml"
