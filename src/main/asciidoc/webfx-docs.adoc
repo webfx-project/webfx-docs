@@ -77,7 +77,7 @@ NOTE: Note for the impatient: OpenJFX is a huge library (about 10MB) compared to
 
 ==== No server
 
-There are already great solutions to run Swing or JavaFX applications in the browser without plugins by actually running them on a server. And these solutions don't have the limitations WebFX currently has. However, a standard self-contained JS packaging is a much more simple, scalable and reliable execution model. This is precisely that benefit that makes WebFX different, and probably the main reason why you would prefer it over the other existing solutions.
+There are already great solutions to run Swing or JavaFX applications in the browser without plugins by actually running them on a server. And these solutions don't have the limitations WebFX currently has. However, a standard self-contained JS packaging is a much more simple, scalable and reliable execution model. This is precisely that benefit that WebFX offers, and probably the main reason why you would prefer it over the other existing solutions.
 
 ==== Performance
 
@@ -111,7 +111,7 @@ Despite the big size of OpenJFX, WebFX can produce lightweight web apps, as demo
 
 [small]#* compressed JS size transiting over the network, without eventual images or other resources#
 
-The secret? Here are the 3 main ingredients that make the magic:
+The secret? Here are the 3 main ingredients for this magic:
 
 * The scene graph -> DOM mapper is much thinner than the original OpenJFX lower layer which has to reimplement many features a browser already has.
 * GWT runs a dead code elimination, which removes the JavaFX classes not used by the WebFX application.
@@ -324,7 +324,7 @@ Let's create our first WebFX application. We need to create the repository direc
 
 TIP: `webfx init org.example:1.0.0-SNAPSHOT` will also work as the CLI takes the repository directory name as the artifactId when omitted in the command.
 
-The init command just creates 2 files (webfx.xml and pom.xml) at the root level of your repository. If this is the first time you use it, it will also download some webfx.xml files from the Maven repository to get the meta info about the essential WebFX modules, before completing the job.
+The init command just creates a webfx.xml and a pom.xml file at the root level of your repository. If this is the first time you use the CLI, it will also download some webfx.xml files from the Maven repository to get some meta info about the essential WebFX modules, in order to complete this job.
 
 ==== Creating your application modules
 
@@ -366,11 +366,11 @@ NOTE: The screenshots will be taken from IntelliJ IDEA, but you can easily trans
 
 ==== Opening the project
 
-You can simply open the webfx-example directory from your Java IDE. It will recognize it as a Maven project, and import it.
+Open the webfx-example directory from your Java IDE. It will recognize it as a Maven project, and import it.
 
-==== Configuring the OpenJFX application
+==== Building and running the OpenJFX application
 
-Here is how to create the configuration:
+Create an application configuration as follows:
 
 [.text-center]
 image::idea-config-webfx-example.png[]
@@ -379,10 +379,11 @@ image::idea-config-webfx-example.png[]
 
 TIP: You can just type `AB` and your IDE should quickly find and suggest the WebFX ApplicationBooter class.
 
-Explanation: GWT has a different entry point than standard Java applications, but WebFX hides the hassle with a single cross-platform entry point that will correctly bootstrap your application. So the main class of a WebFX application will always be `dev.webfx.platform.shared.services.boot.ApplicationBooter` whatever the platform. It will find your JavaFX application because it has been automatically declared as a Java service by the CLI.
+Explanation: GWT has a different entry point than standard Java applications, but WebFX offers a single cross-platform entry point that will correctly bootstrap your application. #The main class of a WebFX application will always be [red monospace]+dev.webfx.platform.shared.services.boot.ApplicationBooter+ whatever the platform#. It will find your JavaFX application because it has been automatically declared as a Java service by the CLI.
 
-NOTE: GWT normally doesn't support the Java service API, but WebFX does, because the CLI emulates it by generating a GWT super source. You can rely on this feature to declare and implement your own services. Your services can even have platform-dependent implementations. A service can be a cross-platform UI API for example, with an OpenJFX implementation, and then a GWT implementation using an alternative JS library for your web app.
+NOTE: GWT normally doesn't support the Java service API, but WebFX does, because the CLI emulates it by generating a GWT super source. You can rely on this feature to declare and implement your own services. Your services can even have platform-dependent implementations. A service can be a cross-platform UI API for example, with an OpenJFX implementation, and a different GWT implementation using a JS library you want for your web app.
 
+If you run this configuration, it will build and run your WebFX application with the OpenJFX runtime. This is this configuration that you will use to develop and debug your application.
 
 ==== Building and running the GWT application
 
@@ -393,6 +394,6 @@ NOTE: GWT normally doesn't support the Java service API, but WebFX does, because
 ifdef::backend-html5[]
 == PDF version
 Here is the
-link:WebFX.pdf[PDF version,float="right"]
+link:webfx-docs.pdf[PDF version,float="right"]
 of this documentation.
 endif::[]
