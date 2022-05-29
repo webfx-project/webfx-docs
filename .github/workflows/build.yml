@@ -36,7 +36,7 @@ jobs:
         run: sudo apt update; sudo apt install graphviz
 
       - name: Install Pygments
-        run: gem install pygments.rb
+        run: sudo gem install pygments.rb
 
       # Checkout this repository
       - name: Checkout this repository
