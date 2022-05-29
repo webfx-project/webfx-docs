@@ -35,6 +35,9 @@ jobs:
       - name: Install graphviz
         run: sudo apt update; sudo apt install graphviz
 
+      - name: Install Pygments
+        run: sudo apt install ruby-rubygems; sudo gem install pygments.rb
+
       # Checkout this repository
       - name: Checkout this repository
         uses: actions/checkout@v2
