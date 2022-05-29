@@ -328,7 +328,13 @@ The init command creates only 2 files: webfx.xml and pom.xml. If this is the fir
 
 ==== Creating your application modules
 
- webfx create application --class org.example.webfxexample.WebFxExampleApplication --helloWorld
+When we create an application, we pass the fully qualified name of the JavaFX class we want to create, and the prefix to use for the application modules:
+
+ webfx create application --prefix webfx-example org.example.webfxexample.WebFxExampleApplication --helloWorld
+
+TIP: we could omit the prefix here, because the CLI takes the parent module name in that case.
+
+This command created the following modules:
 
 [plantuml, webfx-example-structure, format=svg]
 ----
@@ -346,6 +352,22 @@ webfx-example
 |_ webfx-example-application-openjfx
 end legend
 ----
+
+The JavaFX class is located in the first module. Normally its `start()` method is empty at this stage, but because we specified the `--helloWorld` option, it has been populated with this simple template:
+
+[source,java]
+----
+public class WebFxExampleApplication extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setScene(new Scene(new StackPane(new Text("Hello world!")), 800, 600));
+        primaryStage.show();
+    }
+
+}
+----
+
 ==== Building your application
 
  webfx build
