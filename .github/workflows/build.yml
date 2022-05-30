@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      web-push-repository-name:  'webfx-website-netlify'
+      web-push-repository-name:  'webfx-netlify'
       web-push-repository-owner: 'webfx-project'
       web-push-branch: 'docs'
       web-push-username: ${{ github.actor }}
