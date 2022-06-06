@@ -96,6 +96,8 @@ Despite the big size of OpenJFX, WebFX can produce lightweight web apps, as demo
 |101 kB
 |link:https://moderngauge.webfx.dev[Modern gauge demo^]
 |139 kB
+|link:https://medusaclock.webfx.dev[Medusa clock demo^]
+|180 kB
 |link:https://enzoclocks.webfx.dev[Enzo clocks demo^]
 |253 kB
 |link:https://fx2048.webfx.dev[FX2048 demo^]
@@ -416,6 +418,27 @@ If you run this configuration, it will build and run your WebFX application in y
 ==== Making changes
 
  webfx update
+
+
+=== Building the executables with OpenJFX
+
+ webfx -m webfx-example-application-openjfx build --openjfx-desktop
+
+ macos: sudo spctl --master-disable
+
+=== Building the executables with Gluon
+
+==== Installing GraalVM
+
+ webfx bump graalvm
+
+==== Building the native desktop app
+
+ webfx -m webfx-example-application-gluon build --gluon-desktop
+
+==== Building the native mobile app
+
+ webfx -m webfx-example-application-gluon build --gluon-mobile
 
 ifdef::backend-html5[]
 == PDF version
