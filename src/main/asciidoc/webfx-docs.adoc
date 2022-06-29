@@ -315,6 +315,8 @@ If a new version is available, it will download it and build it for you.
 
 NOTE: This is the only command that uses `git`, and it's just a `git pull` of the webfx-cli repository. The CLI will not call `git` on your own repositories.
 
+NOTE: The CLI can display help at different levels. For example, `webfx bump --help` will display all available bump sub-commands, and `webfx bump cli --help` the usage of that specific command.
+
 === Creating your first WebFX app
 
 ==== Creating and initializing your repository
@@ -373,7 +375,81 @@ public class WebFxExampleApplication extends Application {
 
 ==== Building your application
 
- webfx build
+You can build your application using the `webfx build` command, passing it the following build flag(s):
+
+[cols="1,^1,^1,^1,^1"]
+|===
+| Build platform | Build flag |Target platform | Bump command | Generated file(s)
+
+| Linux, macOS or Windows
+| --gwt
+| Web
+|
+| html/JS + war
+
+| Linux, macOS or Windows
+| --openjfx-fatjar
+| Any desktop with Java
+|
+| fat jar
+
+| Linux
+| --openjfx-desktop
+| Linux (embed JVM)
+|
+| executable, .rpm, .deb
+
+| macOS
+| --openjfx-desktop
+| macOS (embed JVM)
+|
+| executable, .dmg, .pkg
+
+| Windows
+| --openjfx-desktop
+| Windows (embed JVM)
+| wix*, inno*
+| executable, .msi, .exe
+
+| Linux
+| --gluon-desktop
+| Linux (native)
+| graalvm, ubuntu-devtools
+| executable
+
+| macOS
+| --gluon-desktop
+| macOS (native)
+| graalvm
+| executable, .dmg, .pkg
+
+| Windows
+| --gluon-desktop
+| Windows (native)
+| graalvm, wix*
+| executable, .msi
+
+| Linux
+| --gluon-mobile
+| Android (native)
+| graalvm, ubuntu-devtools
+| .apk, .aab
+
+| macOS
+| --gluon-mobile
+| iOS (native)
+| graalvm
+| .app, .ipa
+
+|===
+
+[small]#* these installer tools are optional#
+
+Some builds require additional pieces of software to work. You can use `webfx bump graalvm`, `webfx bump wix`, etc... to install or upgrade them on your build machine. Also on macOS, for builds other than -gwt and -openjfx-fatjar, Xcode must be installed and configured for a proper code signing (otherwise the executables will refuse to run).
+
+For now, let's just build the Web and OpenJFX desktop apps:
+
+ webfx build --gwt --openjfx-desktop
 
 ==== Running your application
 
@@ -420,13 +496,13 @@ If you run this configuration, it will build and run your WebFX application in y
  webfx update
 
 
-=== Building the executables with OpenJFX
+=== Building the standard executables (desktop)
 
- webfx -m webfx-example-application-openjfx build --openjfx-desktop
+ webfx build --openjfx-desktop
 
  macos: sudo spctl --master-disable
 
-=== Building the executables with Gluon
+=== Building the native executables (desktop & mobiles)
 
 ==== Installing GraalVM
 
