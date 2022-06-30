@@ -163,7 +163,7 @@ To develop WebFX applications, you will need the following software already inst
  * Git
  * Your preferred Java IDE
 
-IMPORTANT: Be sure that `java`, `mvn` and `git` are in the path of your terminal. The WebFX CLI will invoke these commands without specifying their full path.
+IMPORTANT: Be sure that `java`, `mvn` and `git` are referenced in the environment path. The WebFX CLI will invoke these commands without specifying their full path.
 
 === Introducing the WebFX CLI
 
@@ -251,7 +251,7 @@ This generates an executable fat jar in the target folder that we can execute wi
 
  java -jar target/webfx-cli-0.1.0-SNAPSHOT-fat.jar
 
-which can also be invoked by more simply by `webfx.sh` and `webfx.bat` script files.
+The `webfx.sh` and `webfx.bat` script files (located under the webfx-cli directory) are simply doing this call. We will use them in the next step.
 
 ==== Creating a permanent _webfx_ alias
 
@@ -303,7 +303,7 @@ If ($(Get-ExecutionPolicy) -eq "Restricted") { Start-Process powershell -Verb ru
 <3> Lowering the execution policy if necessary to execute the profile
 <4> Applying it to the current session
 
-Alternatively on Windows, you can just add the CLI repository path to the environment path.
+A simpler alternative on Windows is to just add the webfx-cli repository to the environment path, so `webfx.bat` will be directly executed when typing the `webfx` command. This is the recommended way if you are using the legacy Command Prompt.
 
 Then you should be able to invoke the CLI from the terminal:
 
@@ -319,7 +319,6 @@ If a new version is available, it will download it and build it for you.
 
 NOTE: This is the only command that uses `git`, and it's just a `git pull` of the webfx-cli repository. The CLI will not call `git` on your own repositories.
 
-NOTE: The CLI can display help at different levels. For example, `webfx bump --help` will display all available bump sub-commands, and `webfx bump cli --help` the usage of that specific command.
 
 === Creating your first WebFX app
 
@@ -451,7 +450,9 @@ You can build your application using the `webfx build` command, passing it the f
 
 Some builds require additional pieces of software to work. You can use `webfx bump graalvm`, `webfx bump wix`, etc... to install or upgrade them on your build machine. Also on macOS, for builds other than -gwt and -openjfx-fatjar, Xcode must be installed and configured for a proper code signing (otherwise the executables will refuse to run).
 
-For now, let's just build the Web and OpenJFX desktop apps:
+NOTE: The CLI can display help at different levels. For example, `webfx bump --help` will display all available bump sub-commands.
+
+For now, let's just build the Web and OpenJFX desktop apps (we will target the other platforms later in this guide):
 
  webfx build --gwt --openjfx-desktop
 
@@ -459,11 +460,11 @@ For now, let's just build the Web and OpenJFX desktop apps:
 
 You can run the OpenJFX version of your application with the following command:
 
- webfx -m webfx-example-application-openjfx run
+ webfx run --openjfx-desktop
 
 You can run the GWT version of your application with the following command:
 
- webfx -m webfx-example-application-gwt run
+ webfx run --gwt
 
 === Developing in your IDE
 
