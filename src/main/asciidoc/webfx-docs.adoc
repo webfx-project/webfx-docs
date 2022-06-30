@@ -249,7 +249,9 @@ IMPORTANT: As previously mentioned, WebFX CLI requires JDK 13 or above to succes
 
 This generates an executable fat jar in the target folder that we can execute with java:
 
- java -jar target/webfx-cli-0.1.0-SNAPSHOT-fat.jar --help
+ java -jar target/webfx-cli-0.1.0-SNAPSHOT-fat.jar
+
+which can also be invoked by more simply by `webfx.sh` and `webfx.bat` script files.
 
 ==== Creating a permanent _webfx_ alias
 
@@ -258,7 +260,7 @@ To easily invoke the CLI from a terminal, we need to create a permanent _webfx_ 
 [source,shell,indent=0,role="primary"]
 .Linux
 ----
-echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.bashrc <1>
+echo "alias webfx='sh $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/webfx.sh'" >> ~/.bashrc <1>
 
 source ~/.bashrc <2>
 ----
@@ -268,7 +270,7 @@ source ~/.bashrc <2>
 [source,shell,indent=0,role="secondary"]
 .macOS >= Catalina
 ----
-echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.zshrc <1>
+echo "alias webfx='sh $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/webfx.sh'" >> ~/.zshrc <1>
 
 source ~/.zshrc <2>
 ----
@@ -278,7 +280,7 @@ source ~/.zshrc <2>
 [source,shell,indent=0,role="secondary"]
 .macOS < Catalina
 ----
-echo "alias webfx='java -jar $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/target/webfx-cli-0.1.0-SNAPSHOT-fat.jar'" >> ~/.bash_profile <1>
+echo "alias webfx='sh $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/webfx.sh'" >> ~/.bash_profile <1>
 
 source ~/.bash_profile <2>
 ----
@@ -290,7 +292,7 @@ source ~/.bash_profile <2>
 ----
 If (!(Test-Path $profile)) { New-Item -Path $profile -Force } <1>
 
-"`r`nfunction webfx([String[]] [Parameter(ValueFromRemainingArguments)] `$params) { java -jar $((Get-Item .).fullName)\target\webfx-cli-0.1.0-SNAPSHOT-fat.jar `$params }`r`n" >> $profile <2>
+"`r`nfunction webfx([String[]] [Parameter(ValueFromRemainingArguments)] `$params) { $((Get-Item .).fullName)\webfx.bat `$params }`r`n" >> $profile <2>
 
 If ($(Get-ExecutionPolicy) -eq "Restricted") { Start-Process powershell -Verb runAs "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned" -Wait } <3>
 
@@ -300,6 +302,8 @@ If ($(Get-ExecutionPolicy) -eq "Restricted") { Start-Process powershell -Verb ru
 <2> Adding the alias (implemented as a function) to it
 <3> Lowering the execution policy if necessary to execute the profile
 <4> Applying it to the current session
+
+Alternatively on Windows, you can just add the CLI repository path to the environment path.
 
 Then you should be able to invoke the CLI from the terminal:
 
@@ -375,11 +379,11 @@ public class WebFxExampleApplication extends Application {
 
 ==== Building your application
 
-You can build your application using the `webfx build` command, passing it the following build flag(s):
+You can build your application using the `webfx build` command, passing it the following build option(s):
 
 [cols="1,^1,^1,^1,^1"]
 |===
-| Build platform | Build flag |Target platform | Bump command | Generated file(s)
+| Build platform | Build option |Target platform | Bump command | Generated file(s)
 
 | Linux, macOS or Windows
 | --gwt
@@ -443,7 +447,7 @@ You can build your application using the `webfx build` command, passing it the f
 
 |===
 
-[small]#* these installer tools are optional#
+[small]#* these tools are optional, allowing you to create a Windows installer#
 
 Some builds require additional pieces of software to work. You can use `webfx bump graalvm`, `webfx bump wix`, etc... to install or upgrade them on your build machine. Also on macOS, for builds other than -gwt and -openjfx-fatjar, Xcode must be installed and configured for a proper code signing (otherwise the executables will refuse to run).
 
