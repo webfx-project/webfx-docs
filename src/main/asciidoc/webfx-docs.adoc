@@ -129,12 +129,14 @@ The later point also confers an excellent execution speed to your web app.
 ----
 digraph {
     "Your WebFX application" -> "Web\nAll major browsers" [headlabel="WebFX" labeldistance=4.5 labelangle=20];
-    "Your WebFX application" -> "Desktop\nWindows, macOS & Linux" [headlabel="JavaFX or Gluon" labeldistance=2.7 labelangle=-7];
+    "Your WebFX application" -> "Desktop\nWindows, macOS & Linux" [headlabel="Java or Gluon" labeldistance=2.7 labelangle=-7];
     "Your WebFX application" -> "Mobiles\nAndroid & iOS" [label="Gluon"];
 }
 ----
 
-In addition to the web platform, WebFX will help you to compile your application for the desktop & mobiles thanks to the JavaFX & Gluon toolchains. You can do a full cross-platform development from a single source code base.
+In addition to the web platform, WebFX will help you to build your application for the desktop & mobiles thanks to the Java & Gluon toolchains.
+
+Some other JVM technologies allows you to do the same but only for the application logic, they don't offer a cross-platform UI toolkit. With WebFX, you can do a full cross-platform development of your entire application from a single source code base.
 
 ==== Java full-stack
 
@@ -162,8 +164,6 @@ To develop WebFX applications, you will need the following software already inst
  * Maven
  * Git
  * Your preferred Java IDE
-
-IMPORTANT: Be sure that `java`, `mvn` and `git` are referenced in the environment path. The WebFX CLI will invoke these commands without specifying their full path.
 
 === Introducing the WebFX CLI
 
@@ -452,19 +452,21 @@ Some builds require additional pieces of software to work. You can use `webfx bu
 
 NOTE: The CLI can display help at different levels. For example, `webfx bump --help` will display all available bump sub-commands.
 
-For now, let's just build the Web and OpenJFX desktop apps (we will target the other platforms later in this guide):
+For now, let's just build the GWT and fat jar apps (we will target the other platforms later in this guide):
 
- webfx build --gwt --openjfx-desktop
+ webfx build --gwt --openjfx-fatjar
 
 ==== Running your application
 
-You can run the OpenJFX version of your application with the following command:
+You can run the OpenJFX fat jar version of your application with the following command:
 
- webfx run --openjfx-desktop
+ webfx run --openjfx-fatjar
 
 You can run the GWT version of your application with the following command:
 
  webfx run --gwt
+
+TIP: Alternative syntax: `webfx run -m webfx-example-application-gwt`
 
 === Developing in your IDE
 
@@ -515,11 +517,11 @@ If you run this configuration, it will build and run your WebFX application in y
 
 ==== Building the native desktop app
 
- webfx -m webfx-example-application-gluon build --gluon-desktop
+ webfx build --gluon-desktop
 
 ==== Building the native mobile app
 
- webfx -m webfx-example-application-gluon build --gluon-mobile
+ webfx build --gluon-mobile
 
 ifdef::backend-html5[]
 == PDF version
