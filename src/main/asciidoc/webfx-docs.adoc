@@ -260,7 +260,7 @@ To easily invoke the CLI from a terminal, we need to create a permanent _webfx_ 
 [source,shell,indent=0,role="primary"]
 .Linux
 ----
-echo "alias webfx='sh $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/webfx.sh'" >> ~/.bashrc <1>
+echo "alias webfx='sh \"$(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/webfx.sh\"'" >> ~/.bashrc <1>
 
 source ~/.bashrc <2>
 ----
@@ -270,7 +270,7 @@ source ~/.bashrc <2>
 [source,shell,indent=0,role="secondary"]
 .macOS >= Catalina
 ----
-echo "alias webfx='sh $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/webfx.sh'" >> ~/.zshrc <1>
+echo "alias webfx='sh \"$(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/webfx.sh\"'" >> ~/.zshrc <1>
 
 source ~/.zshrc <2>
 ----
@@ -280,7 +280,7 @@ source ~/.zshrc <2>
 [source,shell,indent=0,role="secondary"]
 .macOS < Catalina
 ----
-echo "alias webfx='sh $(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/webfx.sh'" >> ~/.bash_profile <1>
+echo "alias webfx='sh \"$(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")/webfx.sh\"'" >> ~/.bash_profile <1>
 
 source ~/.bash_profile <2>
 ----
