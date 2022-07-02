@@ -292,7 +292,7 @@ source ~/.bash_profile <2>
 ----
 If (!(Test-Path $profile)) { New-Item -Path $profile -Force } <1>
 
-"`r`nfunction webfx([String[]] [Parameter(ValueFromRemainingArguments)] `$params) { $((Get-Item .).fullName)\webfx.bat `$params }`r`n" >> $profile <2>
+"`r`nfunction webfx([String[]] [Parameter(ValueFromRemainingArguments)] `$params) { . '$((Get-Item .).fullName)\webfx.bat' `$params }`r`n" >> $profile <2>
 
 If ($(Get-ExecutionPolicy) -eq "Restricted") { Start-Process powershell -Verb runAs "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned" -Wait } <3>
 
