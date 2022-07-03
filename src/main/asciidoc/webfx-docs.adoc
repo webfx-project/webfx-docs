@@ -306,7 +306,7 @@ If ($(Get-ExecutionPolicy) -eq "Restricted") { Start-Process powershell -Verb ru
 [source,text,role="secondary"]
 .Windows (manual)
 ----
-You can just add the webfx-cli repository to your environment path, so `webfx.bat` will be directly executed when typing the `webfx` command.
+You can just add the webfx-cli repository to your environment path, so webfx.bat will be directly executed when typing the webfx command.
 ----
 
 Then you should be able to invoke the CLI from the terminal:
@@ -382,17 +382,25 @@ public class WebFxExampleApplication extends Application {
 
 ==== Building your application
 
-You can build your application using the `webfx build` command, passing it the following build option(s):
+To do a simple build of your application without generating any executable, just type the following command:
+
+ webfx build
+
+To generate the executables you wish, you need to pass some extra build options. You can discover them in the build help:
+
+ webfx build --help
+
+Some builds require additional third-party software to work. The CLI will help you to install them through the `webfx install` command.
 
 [cols="1,^1,^1,^1,^1"]
 |===
-| Build platform | Build option |Target platform | Install command | Generated file(s)
+| Build platform | Build option |Target platform | Install command | Executable file(s)
 
 | Linux, macOS or Windows
 | --gwt
 | Web
 |
-| html/JS + war
+| html
 
 | Linux, macOS or Windows
 | --openjfx-fatjar
@@ -402,19 +410,19 @@ You can build your application using the `webfx build` command, passing it the f
 
 | Linux
 | --openjfx-desktop
-| Linux (embed JVM)
+| Linux (embed JRE)
 | ubuntu-devtools*
 | executable, .rpm, .deb
 
 | macOS
 | --openjfx-desktop
-| macOS (embed JVM)
+| macOS (embed JRE)
 |
 | executable, .dmg, .pkg
 
 | Windows
 | --openjfx-desktop
-| Windows (embed JVM)
+| Windows (embed JRE)
 | wix*, inno*
 | executable, .msi, .exe
 
@@ -452,25 +460,79 @@ You can build your application using the `webfx build` command, passing it the f
 
 [small]#* these tools are optional, it's only if you want to create installers#
 
-Some builds require additional pieces of software to work. You can use `webfx install graalvm`, `webfx install wix`, etc... to install or upgrade them on your build machine. Also on macOS, for builds other than -gwt and -openjfx-fatjar, Xcode must be installed and configured for a proper code signing (otherwise the executables will refuse to run).
+For now, let's just build the fat jar and html executables (we will target the other platforms later in this guide):
 
-NOTE: The CLI can display help at different levels. For example, `webfx install --help` will display all available bump sub-commands.
+[source,shell,indent=0,role="primary"]
+.Long syntax
+----
+webfx build --openjfx-fatjar --gwt
+----
 
-For now, let's just build the GWT and fat jar apps (we will target the other platforms later in this guide):
+[source,shell,indent=0,role="secondary"]
+.Short syntax
+----
+webfx build -fg
+----
 
- webfx build --gwt --openjfx-fatjar
+To locate the executable files, just add the --locate option to the previous command:
+
+[source,shell,indent=0,role="primary"]
+.Long syntax
+----
+webfx build --openjfx-fatjar --gwt --locate
+----
+
+[source,shell,indent=0,role="secondary"]
+.Short syntax
+----
+webfx build -fgl
+----
+
+If you prefer to reveal them in your file browser, use the `--reveal` option instead:
+
+[source,shell,indent=0,role="primary"]
+.Long syntax
+----
+webfx build --openjfx-fatjar --gwt --reveal
+----
+
+[source,shell,indent=0,role="secondary"]
+.Short syntax
+----
+webfx build -fgr
+----
+
+TIP: As opposed to `--reveal`, `--locate` works even before the build as it prints the expected location, whether the file is present or not.
 
 ==== Running your application
 
-You can run the OpenJFX fat jar version of your application with the following command:
+Once your application is built, you can run the executable file using the `webfx run` command using the same syntax. So to run the fat jar it will be:
 
- webfx run --openjfx-fatjar
+[source,shell,indent=0,role="primary"]
+.Long syntax
+----
+ webfx build --openjfx-fatjar
+----
 
-You can run the GWT version of your application with the following command:
+[source,shell,indent=0,role="secondary"]
+.Short syntax
+----
+ webfx build -f
+----
 
- webfx run --gwt
+And for the html file it will be:
 
-TIP: Alternative syntax: `webfx run -m webfx-example-application-gwt`
+[source,shell,indent=0,role="primary"]
+.Long syntax
+----
+ webfx build --gwt
+----
+
+[source,shell,indent=0,role="secondary"]
+.Short syntax
+----
+ webfx build -g
+----
 
 === Developing in your IDE
 
