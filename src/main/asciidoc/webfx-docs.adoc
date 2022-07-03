@@ -303,11 +303,12 @@ If ($(Get-ExecutionPolicy) -eq "Restricted") { Start-Process powershell -Verb ru
 <3> Lowering the execution policy if necessary to execute the profile
 <4> Applying it to the current session
 
-[source,text,role="secondary"]
+[source,shell,role="secondary"]
 .Windows (manual)
 ----
-You can just add the webfx-cli repository to your environment path, so webfx.bat will be directly executed when typing the webfx command.
 ----
+You can just add the webfx-cli repository to your environment path, so webfx.bat will be directly executed when typing the webfx command.
+
 
 Then you should be able to invoke the CLI from the terminal:
 
@@ -448,13 +449,13 @@ Some builds require additional third-party software to work. The CLI will help y
 | --gluon-mobile
 | Android (native)
 | graalvm, ubuntu-devtools
-| .apk, .aab
+| .apk
 
 | macOS
 | --gluon-mobile
 | iOS (native)
 | graalvm
-| .app, .ipa
+| .ipa
 
 |===
 
@@ -502,7 +503,7 @@ webfx build --openjfx-fatjar --gwt --reveal
 webfx build -fgr
 ----
 
-TIP: As opposed to `--reveal`, `--locate` works even before the build as it prints the expected location, whether the file is present or not.
+TIP: As opposed to `--reveal`, `--locate` works even before the build, as it prints the expected location, whether the executable file is present or not.
 
 ==== Running your application
 
@@ -511,13 +512,13 @@ Once your application is built, you can run the executable file using the `webfx
 [source,shell,indent=0,role="primary"]
 .Long syntax
 ----
- webfx build --openjfx-fatjar
+ webfx run --openjfx-fatjar
 ----
 
 [source,shell,indent=0,role="secondary"]
 .Short syntax
 ----
- webfx build -f
+ webfx run -f
 ----
 
 And for the html file it will be:
@@ -525,18 +526,18 @@ And for the html file it will be:
 [source,shell,indent=0,role="primary"]
 .Long syntax
 ----
- webfx build --gwt
+ webfx run --gwt
 ----
 
 [source,shell,indent=0,role="secondary"]
 .Short syntax
 ----
- webfx build -g
+ webfx run -g
 ----
 
 === Developing in your IDE
 
-NOTE: The screenshots will be taken from IntelliJ IDEA, but you can easily transpose them to other Java IDEs.
+We will give the instructions for IntelliJ IDEA, but you can easily transpose them to other Java IDEs.
 
 ==== Opening the project
 
@@ -568,26 +569,128 @@ If you run this configuration, it will build and run your WebFX application in y
 
  webfx update
 
+=== Building the executables on local machines
 
-=== Building the standard executables (desktop)
+==== OpenJFX desktops (embed JRE)
 
- webfx build --openjfx-desktop
+A Linux machine is required to build the Linux executables, a Mac for the macOS executables, and a Windows machine for the Windows executables.
+
+Pre-requisites: if you want to also generate the installers, you will need to install these optional tools:
+
+[source,shell,indent=0,role="primary"]
+.Linux
+----
+webfx install ubuntu-devtools
+----
+These tools are required to generate the .deb and .rpm installers.
+
+[source,shell,indent=0,role="secondary"]
+.Windows
+----
+webfx install wix <1>
+webfx install inno <2>
+----
+<1> WiX Toolset is used to create a simple .msi installer.
+<1> Inno Setup is used to create a more elaborate .exe installer.
+
+NOTE: The CLI will help you to customize these installers in a next version. For now, we just use the default settings.
+
+[source,shell,indent=0,role="primary"]
+.Long syntax
+----
+webfx build --openjfx-desktop
+----
+
+[source,shell,indent=0,role="secondary"]
+.Short syntax
+----
+webfx build -k
+----
 
  macos: sudo spctl --master-disable
 
-=== Building the native executables (desktop & mobiles)
+==== Native desktops
 
-==== Installing GraalVM
+A Linux machine is required to build the Linux executables, a Mac for the macOS executables, and a Windows machine for the Windows executables.
+
+Pre-requisites: as we use the Gluon toolchain here, GraalVM must be installed on the machine, with eventually other tools:
+
+[source,shell,indent=0,role="primary"]
+.Linux
+----
+webfx install graalvm
+webfx install ubuntu-devtools
+----
+
+[source,shell,indent=0,role="primary"]
+.macOS
+----
+webfx install graalvm
+----
+
+[source,shell,indent=0,role="secondary"]
+.Windows
+----
+webfx install graalvm
+webfx install wix <1>
+----
+<1> Optional. WiX Toolset is used to create a simple .msi installer.
+
+source,shell,indent=0,role="primary"]
+.Long syntax
+----
+ webfx build --gluon-desktop
+----
+
+[source,shell,indent=0,role="secondary"]
+.Short syntax
+----
+ webfx build -t
+----
+
+==== Android
+
+A Linux machine is required to build the Android executables.
+
+Pre-requisites: as we use the Gluon toolchain here, GraalVM must be installed on the machine with some other dev tools:
+
+ webfx install graalvm
+ webfx install ubuntu-devtools
+
+source,shell,indent=0,role="primary"]
+.Long syntax
+----
+ webfx build --gluon-mobile
+----
+
+[source,shell,indent=0,role="secondary"]
+.Short syntax
+----
+ webfx build -b
+----
+
+==== iOS
+
+A Mac is required to build the iOS executables.
+
+Pre-requisites: as we use the Gluon toolchain here, GraalVM must be installed on the machine:
 
  webfx install graalvm
 
-==== Building the native desktop app
-
- webfx build --gluon-desktop
-
-==== Building the native mobile app
-
+[source,shell,indent=0,role="primary"]
+.Long syntax
+----
  webfx build --gluon-mobile
+----
+
+[source,shell,indent=0,role="secondary"]
+.Short syntax
+----
+ webfx build -b
+----
+
+=== Building the executables on GitHub servers
+
 
 ifdef::backend-html5[]
 == PDF version
