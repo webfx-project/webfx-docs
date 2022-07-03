@@ -382,7 +382,7 @@ You can build your application using the `webfx build` command, passing it the f
 
 [cols="1,^1,^1,^1,^1"]
 |===
-| Build platform | Build option |Target platform | Bump command | Generated file(s)
+| Build platform | Build option |Target platform | Install command | Generated file(s)
 
 | Linux, macOS or Windows
 | --gwt
@@ -448,9 +448,9 @@ You can build your application using the `webfx build` command, passing it the f
 
 [small]#* these tools are optional, it's only if you want to create installers#
 
-Some builds require additional pieces of software to work. You can use `webfx bump graalvm`, `webfx bump wix`, etc... to install or upgrade them on your build machine. Also on macOS, for builds other than -gwt and -openjfx-fatjar, Xcode must be installed and configured for a proper code signing (otherwise the executables will refuse to run).
+Some builds require additional pieces of software to work. You can use `webfx install graalvm`, `webfx install wix`, etc... to install or upgrade them on your build machine. Also on macOS, for builds other than -gwt and -openjfx-fatjar, Xcode must be installed and configured for a proper code signing (otherwise the executables will refuse to run).
 
-NOTE: The CLI can display help at different levels. For example, `webfx bump --help` will display all available bump sub-commands.
+NOTE: The CLI can display help at different levels. For example, `webfx install --help` will display all available bump sub-commands.
 
 For now, let's just build the GWT and fat jar apps (we will target the other platforms later in this guide):
 
@@ -513,7 +513,7 @@ If you run this configuration, it will build and run your WebFX application in y
 
 ==== Installing GraalVM
 
- webfx bump graalvm
+ webfx install graalvm
 
 ==== Building the native desktop app
 
