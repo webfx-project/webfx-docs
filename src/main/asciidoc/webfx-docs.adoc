@@ -288,7 +288,7 @@ source ~/.bash_profile <2>
 <2> Applying it to the current session
 
 [source,shell,indent=0,role="secondary"]
-.Windows PowerShell
+.Windows (PowerShell)
 ----
 If (!(Test-Path $profile)) { New-Item -Path $profile -Force } <1>
 
@@ -303,7 +303,11 @@ If ($(Get-ExecutionPolicy) -eq "Restricted") { Start-Process powershell -Verb ru
 <3> Lowering the execution policy if necessary to execute the profile
 <4> Applying it to the current session
 
-A simpler alternative on Windows is to just add the webfx-cli repository to the environment path, so `webfx.bat` will be directly executed when typing the `webfx` command. This is the recommended way if you are using the legacy Command Prompt.
+[source,text,role="secondary"]
+.Windows (manual)
+----
+You can just add the webfx-cli repository to your environment path, so `webfx.bat` will be directly executed when typing the `webfx` command.
+----
 
 Then you should be able to invoke the CLI from the terminal:
 
