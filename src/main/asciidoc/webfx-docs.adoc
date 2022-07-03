@@ -80,6 +80,26 @@ NOTE: Note for the impatient: OpenJFX is a huge library (about 10MB) compared to
 
 There are already great solutions to run Swing or JavaFX applications in the browser without plugins by actually running them on a server. And these solutions don't have the limitations WebFX currently has. However, a standard self-contained JS packaging is a much more simple, scalable and reliable execution model. This is precisely that benefit that WebFX is offering, and probably the main reason why you would prefer it over the other existing solutions.
 
+==== Cross-platform
+
+[.text-center]
+[graphviz, webfx-cross-platform, format=svg]
+----
+digraph {
+    "Your WebFX application" -> "Web\nAll major browsers" [headlabel="WebFX" labeldistance=4.5 labelangle=20];
+    "Your WebFX application" -> "Desktop\nWindows, macOS & Linux" [headlabel="Java or Gluon" labeldistance=2.7 labelangle=-7];
+    "Your WebFX application" -> "Mobiles\nAndroid & iOS" [label="Gluon"];
+}
+----
+
+In addition to the web platform, a WebFX application can also run on desktops & mobiles. WebFX will invoke the standard Java toolchain to produce desktop executables (embedding an optimized JRE), and the Gluon toolchains to produce native executables for the desktop and mobiles.
+
+Some other technologies or JVM language allows you to do the same but only for the application logic, they don't offer a cross-platform UI toolkit. With WebFX, you can do a full cross-platform development of your entire application from a single source code base.
+
+==== Java full-stack
+
+Writing your whole stack in Java is a big advantage, keeping your environment simple and homogenous from a single Java IDE. Not only you don't need to master other complex ecosystems such as JavaScript or TypeScript, but you can also share the common code between your backend and frontends with the Java module system, a great advantage compared to heterogeneous systems.
+
 ==== Performance
 
 Despite the big size of OpenJFX, WebFX can produce lightweight web apps, as demonstrated by the demos and the website:
@@ -121,26 +141,6 @@ The secret? Here are the 3 main ingredients for this magic:
 * GWT produces an amazingly compaq and optimized JS code.
 
 The later point also confers an excellent execution speed to your web app.
-
-==== Cross-platform
-
-[.text-center]
-[graphviz, webfx-cross-platform, format=svg]
-----
-digraph {
-    "Your WebFX application" -> "Web\nAll major browsers" [headlabel="WebFX" labeldistance=4.5 labelangle=20];
-    "Your WebFX application" -> "Desktop\nWindows, macOS & Linux" [headlabel="Java or Gluon" labeldistance=2.7 labelangle=-7];
-    "Your WebFX application" -> "Mobiles\nAndroid & iOS" [label="Gluon"];
-}
-----
-
-In addition to the web platform, WebFX will help you to build your application for the desktop & mobiles thanks to the Java & Gluon toolchains.
-
-Some other JVM technologies allows you to do the same but only for the application logic, they don't offer a cross-platform UI toolkit. With WebFX, you can do a full cross-platform development of your entire application from a single source code base.
-
-==== Java full-stack
-
-Writing your whole stack in Java is a big advantage, keeping your environment simple and homogenous from a single Java IDE. Not only you don't need to master other complex ecosystems such as JavaScript or TypeScript, but you can also share the common code between your backend and frontends with the Java module system, a great advantage compared to heterogeneous systems.
 
 ==== Low learning curve
 
@@ -227,15 +227,15 @@ NOTE: We will distribute the CLI in a better way with the first WebFX official r
 ==== Cloning the webfx-cli repository
 
 [source,shell,indent=0,role="primary"]
-.HTTPS
-----
-git clone https://github.com/webfx-project/webfx-cli.git
-----
-
-[source,shell,indent=0,role="secondary"]
 .SSH
 ----
 git clone git@github.com:webfx-project/webfx-cli.git
+----
+
+[source,shell,indent=0,role="secondary"]
+.HTTPS
+----
+git clone https://github.com/webfx-project/webfx-cli.git
 ----
 
 ==== Building webfx-cli with Maven
