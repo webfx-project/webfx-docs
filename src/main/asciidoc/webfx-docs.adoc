@@ -636,7 +636,7 @@ webfx install wix <1>
 ----
 <1> Optional. WiX Toolset is used to create a simple .msi installer.
 
-source,shell,indent=0,role="primary"]
+[source,shell,indent=0,role="primary"]
 .Long syntax
 ----
  webfx build --gluon-desktop
@@ -657,7 +657,7 @@ Pre-requisites: as we use the Gluon toolchain here, GraalVM must be installed on
  webfx install graalvm
  webfx install ubuntu-devtools
 
-source,shell,indent=0,role="primary"]
+[source,shell,indent=0,role="primary"]
 .Long syntax
 ----
  webfx build --gluon-mobile
