@@ -72,17 +72,13 @@ The WebFX kit coverage is for now limited to the essential features of JavaFX. S
 
 When a JavaFX application meets these 2 requirements, we will call it a _WebFX application_, and it can be transpiled to the web simply by running a GWT compilation of it together with the WebFX kit.
 
-NOTE: Note for the impatient: OpenJFX is a huge library (about 10MB) compared to standard JS frameworks (typically 100KB).
-It may take time to complete its coverage - please feel free to contribute!
+NOTE: Note for the impatient: OpenJFX is a huge library (about 10MB) compared to standard JS frameworks (typically 100KB). It may take time to complete its coverage. Thanks for your understanding.
 
 === Benefits
 
 ==== No server
 
-There are already great solutions to run Swing or JavaFX applications in the browser without plugins by actually running them on a server.
-And these solutions don't have the limitations WebFX currently has. However, a standard self-contained JS packaging is a much more simple,
-scalable and reliable execution model. This is precisely the benefit of WebFX, and probably the main reason why you would prefer
-it over the other existing solutions.
+There are already great solutions to run Swing or JavaFX applications in the browser without plugins by actually running them on a server. And these solutions don't have the limitations WebFX currently has. However, a standard self-contained JS packaging is a much more simple, scalable and reliable execution model. This is precisely the benefit of WebFX, and probably the main reason why you would prefer it over the other existing solutions.
 
 ==== Cross-platform
 
@@ -98,14 +94,11 @@ digraph {
 
 In addition to the web platform, a WebFX application can also run on desktops & mobiles. WebFX will invoke the standard Java toolchain to produce desktop executables (embedding an optimized JRE), and the Gluon toolchains to produce native executables for the desktop and mobiles.
 
-Some alternative technologies or JVM languages allow you to do the same but only for the application logic, because they don't offer a cross-platform
-UI toolkit. With WebFX, you can do a full cross-platform development of your entire application from a single-source codebase.
+Some alternative technologies or JVM languages allow you to do the same but only for the application logic, because they don't offer a cross-platform UI toolkit. With WebFX, you can do a full cross-platform development of your entire application from a single-source codebase.
 
 ==== Java full-stack
 
-Writing your whole stack in Java is a big advantage, keeping your environment simple and homogenous from a single Java IDE.
-This prevents you from having to master other complex ecosystems such as JavaScript or TypeScript, and also allows you to share common code
-between your backend and frontend using the Java module system - a great advantage compared to heterogeneous systems.
+Writing your whole stack in Java is a big advantage, keeping your environment simple and homogenous from a single Java IDE. This prevents you from having to master other complex ecosystems such as JavaScript or TypeScript, and also allows you to share common code between your backend and frontend using the Java module system - a great advantage compared to heterogeneous systems.
 
 ==== Performance
 
@@ -149,8 +142,7 @@ The secret? Three things:
 
 ==== Gradual learning curve
 
-WebFX is not just another UI toolkit to learn - it's an emulation of the well-known and well-documented JavaFX API.
-All the powerful JavaFX features that you know and love are available for your web app. You will feel right at home with WebFX!
+WebFX is not just another UI toolkit to learn - it's an emulation of the well-known and well-documented JavaFX API. All the powerful JavaFX features that you know and love are available for your web app. You will feel right at home with WebFX!
 
 ==== Fast development cycles
 
