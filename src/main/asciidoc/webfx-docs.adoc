@@ -408,13 +408,13 @@ Some builds require the installation of third-party software, as shown in the fo
 
 | Linux
 | Linux (embed JRE)
-| ubuntu-devtools*
+| ubuntu-tools*
 | --openjfx-desktop
 | executable, .rpm, .deb
 
 | macOS
 | macOS (embed JRE)
-|
+| xcode-tools
 | --openjfx-desktop
 | executable, .dmg, .pkg
 
@@ -426,31 +426,31 @@ Some builds require the installation of third-party software, as shown in the fo
 
 | Linux
 | Linux (native)
-| graalvm, ubuntu-devtools
+| graalvm, ubuntu-tools
 | --gluon-desktop
 | executable
 
 | macOS
 | macOS (native)
-| graalvm
+| graalvm, xcode-tools
 | --gluon-desktop
 | executable, .dmg, .pkg
 
 | Windows
 | Windows (native)
-| graalvm, wix*
+| graalvm, vs-tools, wix*
 | --gluon-desktop
 | executable, .msi
 
 | Linux
 | Android (native)
-| graalvm, ubuntu-devtools
+| graalvm, ubuntu-tools
 | --gluon-android (or --gluon-mobile)
 | .apk
 
 | macOS
 | iOS (native)
-| graalvm
+| graalvm, xcode-tools
 | --gluon-ios (or --gluon-mobile)
 | .ipa
 
@@ -525,9 +525,15 @@ As opposed to the JAR, the embed JRE will be specific to the target platform. Th
 [source,shell,indent=0,role="primary"]
 .Linux
 ----
-webfx install ubuntu-devtools <1>
+webfx install ubuntu-tools <1>
 ----
 <1> Optional. These tools are used to generate the .deb and .rpm installers.
+
+.macOS
+----
+webfx install xcode-tools <1>
+----
+<1> Required for code signing.
 
 [source,shell,indent=0,role="secondary"]
 .Windows
@@ -566,7 +572,7 @@ Like for the embed JRE, 3 different machines are required to target the Linux, m
 .Linux
 ----
 webfx install graalvm <1>
-webfx install ubuntu-devtools <1>
+webfx install ubuntu-tools <1>
 ----
 <1> Required for the Gluon toolchain
 
@@ -574,6 +580,7 @@ webfx install ubuntu-devtools <1>
 .macOS
 ----
 webfx install graalvm <1>
+webfx install xcode-tools <2>
 ----
 <1> Required for the Gluon toolchain
 
@@ -581,7 +588,7 @@ webfx install graalvm <1>
 .Windows
 ----
 webfx install graalvm <1>
-webfx install vstools <1>
+webfx install vs-tools <1>
 webfx install wix <2>
 ----
 <1> Required for the Gluon toolchain
@@ -610,7 +617,7 @@ A Linux machine is required to build the Android executable.
 *Prerequisites*: you must install the following software for a successful build:
 
  webfx install graalvm
- webfx install ubuntu-devtools
+ webfx install ubuntu-tools
 
 Then, you can use the following commands to target the Android platform (native):
 
