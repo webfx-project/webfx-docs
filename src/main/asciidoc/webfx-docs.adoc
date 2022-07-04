@@ -140,7 +140,7 @@ The secret? Here are the 3 main ingredients for this magic:
 * GWT runs a dead code elimination, which removes the JavaFX classes not used by the WebFX application.
 * GWT produces an amazingly compaq and optimized JS code.
 
-The later point also confers an excellent execution speed to your web app.
+The later point should also confer an excellent execution speed to your web app.
 
 ==== Low learning curve
 
@@ -386,7 +386,7 @@ The following command will do a simple build of your application (without genera
 
  webfx build
 
-To generate the executables for the different platforms, you need to pass some extra build options. You can discover them in the build help:
+To generate the executables for the different platforms, you need to pass some extra build options. You can have the list in the build help:
 
  webfx build --help
 
@@ -514,7 +514,7 @@ webfx build -f
 webfx run -f
 ----
 
-You can of course still use the `--reveal`, `--locate` options in addition. The `run` command has the same options as the `build` command.
+The `run` command has the same options as the `build` command. So the `--reveal` and `--locate` options work with both commands.
 
 TIP: You can combine the build options. For example `webfx build --gwt --openjfx-fatjar` (short syntax: `webfx build -gf`) will build both the GWT html and OpenJFX fat jar executables.
 
@@ -662,7 +662,7 @@ webfx run -i <1>
 
 Alternatively, you can use the `--gluon-mobile` (short: `-b`) cross-platform option. It will be interpreted as `--gluon-ios` on Macs.
 
-=== GitHub workflow
+=== GitHub workflows
 
 We plan to add the automatic generation of GitHub workflows to the CLI. This will allow you to use the GitHub servers to automatically generate the different executables for the different platforms on each push on the main branch.
 
