@@ -664,9 +664,9 @@ Alternatively, you can use the `--gluon-mobile` (short: `-b`) cross-platform opt
 
 === GitHub workflow
 
-We plan to add the automatic generation of GitHub workflows to the CLI. This will allow you to automatically generate the different executables on each push on the main branch.
+We plan to add the automatic generation of GitHub workflows to the CLI. This will allow you to use the GitHub servers to automatically generate the different executables for the different platforms on each push on the main branch.
 
-For now, you can check out the demos to see how these GitHub workflows look like, and what executables they generate. For example, here is the link:https://github.com/webfx-demos/webfx-demo-fx2048/blob/main/.github/workflows/builds.yml[FX2048 GitHub workflow] and the link:https://github.com/webfx-demos/webfx-demo-fx2048/releases[generated executables] (just expand the release Assets to see them).
+For now, you can check out the demos to see how these GitHub workflows look like, and what executables they generate. For example, here is the link:https://github.com/webfx-demos/webfx-demo-fx2048/blob/main/.github/workflows/builds.yml[FX2048 GitHub workflow] and the link:https://github.com/webfx-demos/webfx-demo-fx2048/releases[generated executable^] (just expand the release Assets to see them).
 
 === Developing in your IDE
 
