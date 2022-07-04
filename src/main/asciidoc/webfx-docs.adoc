@@ -690,7 +690,7 @@ Open the webfx-example directory from your Java IDE. It should recognize the dir
 Create an application configuration as follows:
 
 [.text-center]
-image::idea-config-webfx-example.png[]
+image::webfx-example-idea-openjfx-config.png[]
 <1> select the OpenJFX application module
 <2> enter [red]`dev.webfx.platform.shared.services.boot.ApplicationBooter` for the main class
 
@@ -700,26 +700,40 @@ The way to boot GWT and OpenJFX applications is different, but WebFX offers a cr
 
 [NOTE]
 ====
-GWT normally doesn't support the Java service API, but WebFX does, because the CLI emulates it by generating a GWT super source. You can rely on this feature to declare and implement your own services. Your services can even have platform-dependent implementations. A service can be a cross-platform UI API for example, with an OpenJFX implementation, and a different GWT implementation using the JS library you want for your web app.
+GWT normally doesn't support the Java service API, but WebFX does, because the CLI emulates it by generating a GWT super source. You can rely on this feature to declare and implement your own services. Your services can even have platform-dependent implementations. A service can be a cross-platform UI API for example, with an OpenJFX implementation, and a different GWT implementation using the JS library you want for your web app. We will document this later.
 ====
 
 If you run this configuration, it will build and run your WebFX application in your IDE using the OpenJFX runtime. This is the configuration that you will use to develop and debug your application.
 
 ==== Building and running the GWT application
 
-As opposed to the OpenJFX version where the IDE can use its own build system, the GWT version can only be built through the Maven build system.
+As opposed to the OpenJFX version where the IDE can use its own Java build system, the GWT version can only be built through Maven. One way to build it is to open a terminal window in your IDE, and to type `webfx build --gwt`.
 
-One way to build it is to open a terminal window in your IDE, and to type the `webfx build -gwt`.
+[.text-center]
+image::webfx-example-idea-gwt-build-terminal.png[]
 
-Another way is to trigger the build in the Maven IDE window, but be sure you activated the gwt-compile Maven profile.
+Another way is to trigger the build through the IDE Maven window.
 
-You can also create a configuration that triggers the Maven build.
+image::webfx-example-idea-gwt-build-maven.png[]
+<1> Activate the `gwt-compile` Maven profile
+<2> Run the `package` Maven goal
 
-Once built, you can bookmark the generated html file in your IDE, and ask your IDE to open it in the browser.
+It can be a good idea to create a configuration by selecting `Modify Run Configuration` in the context menu of that `package` goal, and press OK in the window below. You can then easily run this configuration to trigger the GWT build.
+
+[.text-center]
+image::webfx-example-idea-gwt-config.png[]
+
+Once built, you can ask your IDE to open the generated html file in a browser.
+
+[.text-center]
+image::webfx-example-idea-gwt-bookmark.png[]
+<1> Locate the generated html file
+<2> You can drag & drop it in the Bookmarks window for later
+<3> Select the browser to use to open it
 
 ==== Making changes
 
-Let's do a first little change by replacing the Text with a Button. At first sight, it looks an insignificant change, but actually it's not, because this involves a new dependency to the `javafx-controls` module (so far, our application was only using the `javafx-graphics` module). To take advantage of the CLI, let's first enter the fully qualified Button class name like this:
+Let's do a first little change by replacing the Text with a Button. At first sight, it looks an insignificant change, but actually it's not, because this involves a new dependency to the `javafx-controls` module (our application was only using the `javafx-graphics` module so far). To take advantage of the CLI, let's enter the fully qualified Button class name like this:
 
 [source,java]
 ----
@@ -734,11 +748,11 @@ public class ExampleApplication extends Application {
 }
 ----
 
-The IDE doesn't recognize this class yet, but let's ask the CLI to update the build chain:
+The IDE doesn't recognize this class yet, but let's ask the CLI to update the build chain from the terminal window:
 
  webfx update
 
-The CLI should make all necessary changes in the Java, Maven, and GWT build chain. After your IDE detected and considered these changes, it should recognize the Button class, and allow you to import it. Then, let's add a simple code to react to the button:
+The CLI should make all necessary changes in the `pom.xml`, `module-info.java`, and `module.gwt.xml` files. After a few seconds, your IDE should automatically detect and consider these changes. Then it should recognize the Button class, and allow you to import it. Finally, let's add a simple code to react to the button:
 
 [source,java]
 ----
@@ -757,7 +771,7 @@ public class ExampleApplication extends Application {
 
 You can first check the code is working as expected with the OpenJFX runtime by running the OpenJFX configuration.
 
-Then you can check the Web version by running a GWT build.
+Then you can check the Web version by running a GWT build, and then open the html file in the browser.
 
 ifdef::backend-html5[]
 == PDF version
