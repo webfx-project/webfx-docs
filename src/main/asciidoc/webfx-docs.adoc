@@ -712,7 +712,7 @@ As opposed to the OpenJFX version where the IDE can use its own Java build syste
 [.text-center]
 image::webfx-example-idea-gwt-build-terminal.png[]
 
-Another way is to trigger the build through the IDE Maven window.
+Another way is to trigger the build manually through the IDE Maven window.
 
 image::webfx-example-idea-gwt-build-maven.png[]
 <1> Activate the `gwt-compile` Maven profile
@@ -729,7 +729,7 @@ Once built, you can ask your IDE to open the generated html file in a browser.
 image::webfx-example-idea-gwt-bookmark.png[]
 <1> Locate the generated html file
 <2> You can drag & drop it in the Bookmarks window for later
-<3> Select the browser to use to open it
+<3> Select the browser you want to use to open it
 
 ==== Making changes
 
@@ -752,7 +752,9 @@ The IDE doesn't recognize this class yet, but let's ask the CLI to update the bu
 
  webfx update
 
-The CLI should make all necessary changes in the `pom.xml`, `module-info.java`, and `module.gwt.xml` files. After a few seconds, your IDE should automatically detect and consider these changes. Then it should recognize the Button class, and allow you to import it. Finally, let's add a simple code to react to the button:
+The CLI should make all necessary changes in the `pom.xml`, `module-info.java`, and `module.gwt.xml` files. After a few seconds, your IDE should automatically detect and consider these changes. Then it should recognize the Button class, and allow you to import it.
+
+Finally, let's add a simple code to react to the button:
 
 [source,java]
 ----
@@ -771,7 +773,7 @@ public class ExampleApplication extends Application {
 
 You can first check the code is working as expected with the OpenJFX runtime by running the OpenJFX configuration.
 
-Then you can check the Web version by running a GWT build, and then open the html file in the browser.
+Then you can check the Web version by running a GWT build, and then open the html file in the browser, using one of the different methods already explained.
 
 ifdef::backend-html5[]
 == PDF version
