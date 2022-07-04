@@ -72,7 +72,7 @@ The WebFX kit coverage is for now limited to the essential features of JavaFX. S
 
 When a JavaFX application meets these 2 requirements, we will call it a _WebFX application_, and it can be transpiled to the web simply by running a GWT compilation of it together with the WebFX kit.
 
-NOTE: Note for the impatient: OpenJFX is a huge library (about 10MB) compared to standard JS frameworks (typically 100KB). It will take time to complete its coverage (some parts may not be possible). Thanks for your understanding. But compared to some frameworks, you can already do a lot with the current coverage.
+NOTE: Note for the impatient: OpenJFX is a huge library (about 10MB) compared to standard JS frameworks (typically 100KB). It will take time to complete its coverage (some parts may not be possible). Thanks for your understanding.
 
 === Benefits
 
@@ -156,7 +156,7 @@ WebFX is an open source initiative under Apache 2.0 license.
 
 == Getting started
 
-=== Prerequisite
+=== Pre-requisites
 
 To develop WebFX applications, you will need the following software already installed on your development machine:
 
@@ -186,9 +186,9 @@ Your repository
 end legend
 ----
 <1> This module contains the JavaFX code of your application. It is cross-platform (not yet bound to a specific platform) and therefore not executable.
-<2> This module targets the native desktop & mobile platforms. It binds your application with the OpenJFX runtime, and can call the Gluon toolchain to produce the Windows, macOS, Linux, Android & iOS native executables (depending on your OS).
+<2> This module targets the native desktop & mobile platforms. It binds your application with the OpenJFX runtime, and can call the Gluon toolchain to produce the Windows, macOS, Linux, Android & iOS native executables (depending on the OS of your local machine).
 <3> This module targets the web platform. It binds your application with the WebFX kit, and can call GWT to produce the web app.
-<4> This module targets the standard desktop platform. It binds your application with the OpenJFX runtime, and is directly executable in your IDE. It can also call the standard JavaFX toolchain to produce the desktop executables (Windows, macOS or Linux) with an embed JVM.
+<4> This module targets the standard desktop platform. It binds your application with the OpenJFX runtime, and is directly executable in your IDE. It can also call the standard Java toolchain to produce the desktop executables (Windows, macOS or Linux) with an embed JRE.
 
 You can create several WebFX applications in the same repository. If your application code grows, you can split your code into more modules. The CLI will help you to create and maintain all your modules. For each module, it will create and maintain your build chain as follows (when applicable to the module):
 
@@ -288,7 +288,7 @@ source ~/.bash_profile <2>
 <2> Applying it to the current session
 
 [source,shell,indent=0,role="secondary"]
-.Windows (PowerShell)
+.Windows PowerShell
 ----
 If (!(Test-Path $profile)) { New-Item -Path $profile -Force } <1>
 
@@ -321,7 +321,7 @@ You can check for update at anytime by running:
 
 If a new version is available, it will download it and build it for you.
 
-NOTE: This is the only command that uses `git`, and it's just a `git pull` of the webfx-cli repository. The CLI will not call `git` on your own repositories.
+NOTE: This is sp far the only command that uses `git` (a `git pull` of the webfx-cli repository). The CLI will not call `git` on your own repositories.
 
 
 === Creating your first WebFX app
@@ -390,7 +390,77 @@ To generate the executables for the different platforms, you need to pass some e
 
  webfx build --help
 
-NOTE: Some builds require additional third-party software to work. We will cover this in detail in the next sections as well with the different build options.
+Some builds require the installation of third-party software, as shown in the following table:
+
+[cols="1,^1,^1,^1,^1"]
+|===
+| Build platform |Target platform | Install command | | Build option Executable file(s)
+
+| Linux, macOS or Windows
+| Web
+|
+| --gwt
+| html
+
+| Linux, macOS or Windows
+| Any desktop with Java
+|
+| --openjfx-fatjar
+| fat jar
+
+| Linux
+| Linux (embed JRE)
+| ubuntu-devtools*
+| --openjfx-desktop
+| executable, .rpm, .deb
+
+| macOS
+| macOS (embed JRE)
+|
+| --openjfx-desktop
+| executable, .dmg, .pkg
+
+| Windows
+| Windows (embed JRE)
+| wix*, inno*
+| --openjfx-desktop
+| executable, .msi, .exe
+
+| Linux
+| Linux (native)
+| graalvm, ubuntu-devtools
+| --gluon-desktop
+| executable
+
+| macOS
+| macOS (native)
+| graalvm
+| --gluon-desktop
+| executable, .dmg, .pkg
+
+| Windows
+| Windows (native)
+| graalvm, wix*
+| --gluon-desktop
+| executable, .msi
+
+| Linux
+| Android (native)
+| graalvm, ubuntu-devtools
+| --gluon-android (or --gluon-mobile)
+| .apk
+
+| macOS
+| iOS (native)
+| graalvm
+| --gluon-ios (or --gluon-mobile)
+| .ipa
+
+|===
+
+[small]#* these tools are optional, they are used to create installers (.rpm, .deb, .dmg, .pkg, .msi or .exe)#
+
+We will now cover each target platform in detail.
 
 === Web platform
 
@@ -426,33 +496,23 @@ TIP: As opposed to `--reveal`, `--locate` works even before the build, as it pri
 
 === Desktop platform (JAR)
 
-You can use the following commands to target the Desktop platform with a fat JAR (requires Java installed on the target machine):
+This executable requires Java installed on the target machine.
+
+You can use the following commands to target the Desktop platform with a fat JAR (you can still use the `--reveal`, `--locate` options in addition):
 
 [source,shell,indent=0,role="primary"]
 .Long syntax
 ----
-webfx build --openjfx-fatjar <1>
-webfx build --openjfx-fatjar --locate <2>
-webfx build --openjfx-fatjar --reveal <3>
-webfx run --openjfx-fatjar <4>
+webfx build --openjfx-fatjar
+webfx run --openjfx-fatjar
 ----
-<1> Build the fat jar executable file with Maven
-<2> Locate the generated executable file
-<3> Reveal the generated executable file in the file explorer
-<4> Run the generated executable file
 
 [source,shell,indent=0,role="secondary"]
 .Short syntax
 ----
-webfx build -f <1>
-webfx build -fl <2>
-webfx build -fr <3>
-webfx run -f <4>
+webfx build -f
+webfx run -f
 ----
-<1> Build the fat jar executable file with Maven
-<2> Locate the generated executable file
-<3> Reveal the generated executable file in the file explorer
-<4> Run the generated executable file
 
 TIP: You can combine the build options. For example `webfx build --gwt --openjfx-fatjar` (short syntax: `webfx build -gf`) will build both the GWT html and OpenJFX fat jar executables.
 
@@ -460,7 +520,7 @@ TIP: You can combine the build options. For example `webfx build --gwt --openjfx
 
 As opposed to the JAR, the embed JRE will be specific to the target platform. Therefore, a Linux machine will build a Linux executable, a Mac a macOS executable, and a Windows machine a Windows executable.
 
-*Pre-requisite*: you can install the following tools if you wish to also generate the installers:
+*Pre-requisite*: you can install the following software if you wish to also generate the installers:
 
 [source,shell,indent=0,role="primary"]
 .Linux
@@ -486,8 +546,6 @@ Then, you can use the following commands to target the Desktop platform (embed J
 .Long syntax
 ----
 webfx build --openjfx-desktop
-webfx build --openjfx-desktop --locate
-webfx build --openjfx-desktop --reveal
 webfx run --openjfx-desktop
 ----
 
@@ -495,8 +553,6 @@ webfx run --openjfx-desktop
 .Short syntax
 ----
 webfx build -k
-webfx build -kl
-webfx build -kr
 webfx run -k
 ----
 
@@ -506,7 +562,7 @@ webfx run -k
 
 Like for the embed JRE, 3 different machines are required to target the Linux, macOS, and Windows executables.
 
-*Pre-requisite*: you must install the following tools for a successful build:
+*Pre-requisites*: you must install the following software for a successful build:
 
 [source,shell,indent=0,role="primary"]
 .Linux
@@ -539,8 +595,6 @@ Then, you can use the following commands to target the Desktop platform (native)
 .Long syntax
 ----
 webfx build --gluon-desktop
-webfx build --gluon-desktop --locate
-webfx build --gluon-desktop --reveal
 webfx run --gluon-desktop
 ----
 
@@ -548,8 +602,6 @@ webfx run --gluon-desktop
 .Short syntax
 ----
 webfx build -t
-webfx build -tl
-webfx build -tr
 webfx run -t
 ----
 
@@ -557,7 +609,7 @@ webfx run -t
 
 A Linux machine is required to build the Android executable.
 
-*Pre-requisite*: you must install the following tools for a successful build:
+*Pre-requisites*: you must install the following software for a successful build:
 
  webfx install graalvm
  webfx install ubuntu-devtools
@@ -567,129 +619,54 @@ Then, you can use the following commands to target the Android platform (native)
 [source,shell,indent=0,role="primary"]
 .Long syntax
 ----
-webfx build --gluon-mobile
-webfx build --gluon-mobile --locate
-webfx build --gluon-mobile --reveal
-webfx run --gluon-mobile <1>
+webfx build --gluon-android
+webfx run --gluon-android <1>
 ----
 <1> Will invoke the Gluon Maven plugin to install and run the executable on your Android device connected to your Linux machine via USB.
 
 [source,shell,indent=0,role="secondary"]
 .Short syntax
 ----
-webfx build -b
-webfx build -bl
-webfx build -br
-webfx run -b <1>
+webfx build -a
+webfx run -a <1>
 ----
 <1> Will invoke the Gluon Maven plugin to install and run the executable on your Android device connected to your Linux machine via USB.
 
-Alternatively, you can use the more explicit `--gluon-android` or `-a` options.
+Alternatively, you can use the `--gluon-mobile` (short: `-b`) cross-platform option. It will be interpreted as `--gluon-android` on Linux machines.
 
 === iOS platform
 
 A Mac is required to build the iOS executable.
 
-*Pre-requisite*: you must install the following tools for a successful build:
+*Pre-requisite*: you must install the following software for a successful build:
 
  webfx install graalvm
 
-Then, you can use the following commands to target the Android platform (native):
+Then, you can use the following commands to target the iOS platform (native):
 
 [source,shell,indent=0,role="primary"]
 .Long syntax
 ----
-webfx build --gluon-mobile
-webfx build --gluon-mobile --locate
-webfx build --gluon-mobile --reveal
-webfx run --gluon-mobile <1>
+webfx build --gluon-ios
+webfx run --gluon-ios <1>
 ----
 <1> Will invoke the Gluon Maven plugin to install and run the executable on your iOS device connected to your Mac via USB.
 
 [source,shell,indent=0,role="secondary"]
 .Short syntax
 ----
-webfx build -b
-webfx build -bl
-webfx build -br
-webfx run -b <1>
+webfx build -i
+webfx run -i <1>
 ----
 <1> Will invoke the Gluon Maven plugin to install and run the executable on your iOS device connected to your Mac via USB.
 
-Alternatively, you can use the more explicit `--gluon-ios` or `-i` options.
-
-=== Platform summary table
-
-[cols="1,^1,^1,^1,^1"]
-|===
-| Build platform | Build option |Target platform | Install command | Executable file(s)
-
-| Linux, macOS or Windows
-| --gwt
-| Web
-|
-| html
-
-| Linux, macOS or Windows
-| --openjfx-fatjar
-| Any desktop with Java
-|
-| fat jar
-
-| Linux
-| --openjfx-desktop
-| Linux (embed JRE)
-| ubuntu-devtools*
-| executable, .rpm, .deb
-
-| macOS
-| --openjfx-desktop
-| macOS (embed JRE)
-|
-| executable, .dmg, .pkg
-
-| Windows
-| --openjfx-desktop
-| Windows (embed JRE)
-| wix*, inno*
-| executable, .msi, .exe
-
-| Linux
-| --gluon-desktop
-| Linux (native)
-| graalvm, ubuntu-devtools
-| executable
-
-| macOS
-| --gluon-desktop
-| macOS (native)
-| graalvm
-| executable, .dmg, .pkg
-
-| Windows
-| --gluon-desktop
-| Windows (native)
-| graalvm, wix*
-| executable, .msi
-
-| Linux
-| --gluon-mobile
-| Android (native)
-| graalvm, ubuntu-devtools
-| .apk
-
-| macOS
-| --gluon-mobile
-| iOS (native)
-| graalvm
-| .ipa
-
-|===
-
-[small]#* these tools are optional, they are used to create installers (.rpm, .deb, .dmg, .pkg, .msi or .exe)#
+Alternatively, you can use the `--gluon-mobile` (short: `-b`) cross-platform option. It will be interpreted as `--gluon-ios` on Macs.
 
 === GitHub workflow
 
+We plan to add the automatic generation of GitHub workflows to the CLI. This will allow you to automatically generate the different executables on each push on the main branch.
+
+For now, you can check out the demos to see how these GitHub workflows look like, and what executables they generate. For example, here is the link:https://github.com/webfx-demos/webfx-demo-fx2048/blob/main/.github/workflows/builds.yml[FX2048 GitHub workflow] and the link:https://github.com/webfx-demos/webfx-demo-fx2048/releases[generated executables] (just expand the release Assets to see them).
 
 === Developing in your IDE
 
