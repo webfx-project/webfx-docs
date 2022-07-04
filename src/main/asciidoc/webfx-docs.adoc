@@ -142,7 +142,7 @@ The secret? Three things:
 
 ==== Gradual learning curve
 
-WebFX is not just another UI toolkit to learn - it's an emulation of the well-known and well-documented JavaFX API. All the powerful JavaFX features that you know and love are available for your web app. You will feel right at home with WebFX!
+WebFX is not an additional UI toolkit to learn - it's an emulation of the well-known and well-documented JavaFX API. All the powerful JavaFX features that you know and love are available for your web app. You will feel right at home with WebFX!
 
 ==== Fast development cycles
 
