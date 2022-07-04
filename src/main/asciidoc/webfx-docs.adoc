@@ -72,7 +72,7 @@ The WebFX kit coverage is for now limited to the essential features of JavaFX. S
 
 When a JavaFX application meets these 2 requirements, we will call it a _WebFX application_, and it can be transpiled to the web simply by running a GWT compilation of it together with the WebFX kit.
 
-NOTE: Note for the impatient: OpenJFX is a huge library (about 10MB) compared to standard JS frameworks (typically 100KB). It will take time to complete its coverage. Thanks for your understanding.
+NOTE: Note for the impatient: OpenJFX is a huge library (about 10MB) compared to standard JS frameworks (typically 100KB). It may take time to complete its coverage. Thanks for your understanding.
 
 === Benefits
 
@@ -167,7 +167,7 @@ To develop WebFX applications, you will need the following software already inst
 
 === Introducing the WebFX CLI
 
-The WebFX CLI is a Command Line Interface tool that will assist you developing WebFX applications. It will create your application modules as follows:
+The WebFX CLI is an essential Command Line Interface tool that will assist you developing WebFX applications. It will create your application modules as follows:
 
 [plantuml, webfx-app-structure, format=svg]
 ----
@@ -344,7 +344,7 @@ When we create an application, we pass the fully qualified name of the JavaFX cl
 
  webfx create application --prefix webfx-example org.example.webfxexample.WebFxExampleApplication --helloWorld
 
-TIP: we could omit the prefix here, because the CLI takes the parent module name in that case (which is also webfx-example here).
+TIP: we could omit the prefix here, because the CLI takes the parent module name in that case.
 
 This command created the following modules:
 
@@ -498,7 +498,7 @@ TIP: As opposed to `--reveal`, `--locate` works even before the build, as it pri
 
 This executable requires Java installed on the target machine.
 
-You can use the following commands to target the Desktop platform with (JAR):
+You can use the following commands to target the Desktop platform (JAR):
 
 [source,shell,indent=0,role="primary"]
 .Long syntax
@@ -514,7 +514,7 @@ webfx build -f
 webfx run -f
 ----
 
-You can of course still use the `--reveal`, `--locate` options in addition.
+You can of course still use the `--reveal`, `--locate` options in addition. The `run` command has the same options as the `build` command.
 
 TIP: You can combine the build options. For example `webfx build --gwt --openjfx-fatjar` (short syntax: `webfx build -gf`) will build both the GWT html and OpenJFX fat jar executables.
 
