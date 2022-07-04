@@ -612,7 +612,7 @@ webfx build -t
 webfx run -t
 ----
 
-WARNING: There is an issue with the Gluon Maven plugin which may cause the build to fail on some versions of macOS. Details are provided in the GitHub issue https://github.com/gluonhq/gluonfx-maven-plugin/issues/429[here].
+WARNING: There is an issue with the Gluon Maven plugin which may cause the build to fail on some versions of macOS. Details are provided in the GitHub issue https://github.com/gluonhq/gluonfx-maven-plugin/issues/429[here^].
 
 === Android platform
 
@@ -673,7 +673,7 @@ Alternatively, you can use the `--gluon-mobile` (short: `-b`) cross-platform opt
 
 === GitHub workflows
 
-In a future release of the CLI we plan to support automatic generation of GitHub workflows. Each push to the main branch of your project will then trigger the generation of all your executables on the GitHub servers.
+In a future release of the CLI we plan to support automatic generation of GitHub workflows. Each push to the main branch of your GitHub repository will then trigger the generation of all your executables on the Linux, macOS and Windows GitHub servers.
 
 For now, you can check out the demos to see sample GitHub workflow configuration. For example, the link:https://github.com/webfx-demos/webfx-demo-fx2048/blob/main/.github/workflows/builds.yml[FX2048 GitHub workflow] and the link:https://github.com/webfx-demos/webfx-demo-fx2048/releases[generated executables^] (expand the `Assets` link to view them).
 
@@ -707,12 +707,57 @@ If you run this configuration, it will build and run your WebFX application in y
 
 ==== Building and running the GWT application
 
+As opposed to the OpenJFX version where the IDE can use its own build system, the GWT version can only be built through the Maven build system.
+
+One way to build it is to open a terminal window in your IDE, and to type the `webfx build -gwt`.
+
+Another way is to trigger the build in the Maven IDE window, but be sure you activated the gwt-compile Maven profile.
+
+You can also create a configuration that triggers the Maven build.
+
+Once built, you can bookmark the generated html file in your IDE, and ask your IDE to open it in the browser.
+
 ==== Making changes
 
-Use the following command to update the build chain from the webfx.xml files. For example:
+Let's do a first little change by replacing the Text with a Button. At first sight, it looks an insignificant change, but actually it's not, because this involves a new dependency to the `javafx-controls` module (so far, our application was only using the `javafx-graphics` module). To take advantage of the CLI, let's first enter the fully qualified Button class name like this:
+
+[source,java]
+----
+public class ExampleApplication extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setScene(new Scene(new StackPane(new javafx.scene.control.Button("Hello world!")), 800, 600));
+        primaryStage.show();
+    }
+
+}
+----
+
+The IDE doesn't recognize this class yet, but let's ask the CLI to update the build chain:
 
  webfx update
 
+The CLI should make all necessary changes in the Java, Maven, and GWT build chain. After your IDE detected and considered these changes, it should recognize the Button class, and allow you to import it. Then, let's add a simple code to react to the button:
+
+[source,java]
+----
+public class ExampleApplication extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        Button button = new Button("Hello world!");
+        button.setOnAction(event -> button.setText("You clicked me!"));
+        primaryStage.setScene(new Scene(new StackPane(button), 800, 600));
+        primaryStage.show();
+    }
+
+}
+----
+
+You can first check the code is working as expected with the OpenJFX runtime by running the OpenJFX configuration.
+
+Then you can check the Web version by running a GWT build.
 
 ifdef::backend-html5[]
 == PDF version
