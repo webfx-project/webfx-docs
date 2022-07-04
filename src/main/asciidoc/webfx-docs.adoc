@@ -529,11 +529,12 @@ webfx install ubuntu-tools <1>
 ----
 <1> Optional. These tools are used to generate the .deb and .rpm installers.
 
+[source,shell,indent=0,role="secondary"]
 .macOS
 ----
 webfx install xcode-tools <1>
 ----
-<1> Required for code signing.
+<1> Required for code signing
 
 [source,shell,indent=0,role="secondary"]
 .Windows
@@ -583,6 +584,7 @@ webfx install graalvm <1>
 webfx install xcode-tools <2>
 ----
 <1> Required for the Gluon toolchain
+<2> Required for code signing
 
 [source,shell,indent=0,role="secondary"]
 .Windows
@@ -594,7 +596,7 @@ webfx install wix <2>
 <1> Required for the Gluon toolchain
 <2> Optional. WiX Toolset is used to create a simple .msi installer.
 
-Then, you can use the below commands to target the Desktop platform (native). #Note that there is a bug in the `gluonfx-maven-plugin` which causes the `build` command below to fail on macOS Big Sur. Details are provided in the Github issue https://github.com/gluonhq/gluonfx-maven-plugin/issues/429[here].#
+Then, you can use the below commands to target the Desktop platform (native):
 
 [source,shell,indent=0,role="primary"]
 .Long syntax
@@ -609,6 +611,8 @@ webfx run --gluon-desktop
 webfx build -t
 webfx run -t
 ----
+
+WARNING: There is an issue with the Gluon Maven plugin which may cause the build to fail on some versions of macOS. Details are provided in the GitHub issue https://github.com/gluonhq/gluonfx-maven-plugin/issues/429[here].
 
 === Android platform
 
