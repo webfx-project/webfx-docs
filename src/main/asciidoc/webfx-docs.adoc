@@ -608,8 +608,8 @@ webfx run --gluon-desktop
 [source,shell,indent=0,role="secondary"]
 .Short syntax
 ----
-webfx build -t
-webfx run -t
+webfx build -d
+webfx run -d
 ----
 
 WARNING: There is an issue with the Gluon Maven plugin which may cause the build to fail on some versions of macOS. Details are provided in the GitHub issue https://github.com/gluonhq/gluonfx-maven-plugin/issues/429[here^].
@@ -641,7 +641,7 @@ webfx run -a <1>
 ----
 <1> Will invoke the Gluon Maven plugin to install and run the executable on your Android device connected to your Linux machine via USB.
 
-Alternatively, you can use the `--gluon-mobile` (short: `-b`) cross-platform option. It will be interpreted as `--gluon-android` on Linux machines.
+Alternatively, you can use the `--gluon-mobile` (short: `-m`) cross-platform option. It will be interpreted as `--gluon-android` on Linux machines.
 
 === iOS platform
 
@@ -669,7 +669,7 @@ webfx run -i <1>
 ----
 <1> Will invoke the Gluon Maven plugin to install and run the executable on your iOS device connected to your Mac via USB.
 
-Alternatively, you can use the `--gluon-mobile` (short: `-b`) cross-platform option. It will be interpreted as `--gluon-ios` on Macs.
+Alternatively, you can use the `--gluon-mobile` (short: `-m`) cross-platform option. It will be interpreted as `--gluon-ios` on Macs.
 
 === GitHub workflows
 
