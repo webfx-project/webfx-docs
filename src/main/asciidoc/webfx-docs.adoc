@@ -773,7 +773,7 @@ public class ExampleApplication extends Application {
 
 You can first check the code is working as expected with the OpenJFX runtime by running the OpenJFX configuration. And then build and run the GWT version using one of the methods already explained.
 
-Our application looks a bit sad? Maybe you can try link:https://github.com/webfx-project/webfx-example/blob/main/webfx-example-application/src/main/java/org/example/ExampleApplication.java[this little code^] that adds a bit of colors, animation and effect?
+Our application looks a bit sad? Maybe you can try link:https://github.com/webfx-project/webfx-example/blob/main/webfx-example-application/src/main/java/org/example/webfxexample/WebFxExampleApplication.java[this little code^] that adds a bit of colors, animation and effect?
 
 Some more creative ideas pop up in your mind? Now is the time for you to play with WebFX!
 
