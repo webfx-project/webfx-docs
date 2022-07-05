@@ -675,7 +675,7 @@ Alternatively, you can use the `--gluon-mobile` (short: `-b`) cross-platform opt
 
 In a future release of the CLI we plan to support automatic generation of GitHub workflows. Each push to the main branch of your GitHub repository will then trigger the generation of all your executables on the Linux, macOS and Windows GitHub servers.
 
-For now, you can check out the demos to see sample GitHub workflow configuration. For example, the link:https://github.com/webfx-demos/webfx-demo-fx2048/blob/main/.github/workflows/builds.yml[FX2048 GitHub workflow] and the link:https://github.com/webfx-demos/webfx-demo-fx2048/releases[generated executables^] (expand the `Assets` link to view them).
+For now, you can check out the demos to see sample GitHub workflow configuration. For example, the link:https://github.com/webfx-demos/webfx-demo-fx2048/blob/main/.github/workflows/builds.yml[FX2048 GitHub workflow^] and the link:https://github.com/webfx-demos/webfx-demo-fx2048/releases[generated executables^] (expand the `Assets` link to view them).
 
 === Developing in your IDE
 
@@ -771,9 +771,11 @@ public class ExampleApplication extends Application {
 }
 ----
 
-You can first check the code is working as expected with the OpenJFX runtime by running the OpenJFX configuration.
+You can first check the code is working as expected with the OpenJFX runtime by running the OpenJFX configuration. And then build and run the GWT version using one of the methods already explained.
 
-Then you can check the Web version by running a GWT build, and then open the html file in the browser, using one of the different methods already explained.
+Our application looks a bit sad? Maybe you can try link:https://github.com/webfx-project/webfx-example/blob/main/webfx-example-application/src/main/java/org/example/ExampleApplication.java[this little code^] that adds a bit of colors, animation and effect?
+
+More ideas pop up in your mind? Now is the time to play with WebFX!
 
 ifdef::backend-html5[]
 == PDF version
