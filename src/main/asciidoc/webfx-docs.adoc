@@ -285,6 +285,8 @@ source ~/.bash_profile <2>
 <1> Adding the alias to the shell profile
 <2> Applying it to the current session
 
+////
+Commented because of an issue: passing "-d" argument doesn't work
 [source,shell,indent=0,role="secondary"]
 .Windows (PowerShell)
 ----
@@ -300,9 +302,10 @@ If ($(Get-ExecutionPolicy) -eq "Restricted") { Start-Process powershell -Verb ru
 <2> Adding the alias (implemented as a function) to it
 <3> Lowering the execution policy if necessary to execute the profile
 <4> Applying it to the current session
+////
 
 [source,shell,role="secondary"]
-.Windows (manual)
+.Windows
 ----
 You can simply add the webfx-cli repository to your environment path, so webfx.bat will be directly executed when typing the webfx command.
 ----
@@ -775,7 +778,7 @@ You can first check the code is working as expected with the OpenJFX runtime by 
 
 Our application looks a bit sad? Maybe you can try link:https://github.com/webfx-project/webfx-example/blob/main/webfx-example-application/src/main/java/org/example/webfxexample/WebFxExampleApplication.java[this little code^] that adds a bit of colors, animation and effect?
 
-Some more creative ideas pop up in your mind? Now is the time for you to play with WebFX!
+Some more creative ideas pop up in your mind? Now is the time to play with WebFX!
 
 ifdef::backend-html5[]
 == PDF version
