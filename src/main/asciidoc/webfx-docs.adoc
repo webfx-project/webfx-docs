@@ -19,6 +19,10 @@ WebFX is a JavaFX application transpiler powered by link:https://www.gwtproject.
 ----
 skinparam ranksep 5
 skinparam nodesep 5
+skinparam shadowing true
+skinparam rectangleShadowing false
+skinparam nodeBackgroundColor f5dd90
+skinparam usecaseBackgroundColor e0aaff
 
 rectangle "OpenJFX" {
     node "Higher layer" as o1
