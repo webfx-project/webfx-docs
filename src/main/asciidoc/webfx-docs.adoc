@@ -90,9 +90,12 @@ There are already great solutions to run Swing or JavaFX applications in the bro
 [graphviz, webfx-cross-platform, format=svg]
 ----
 digraph {
-    "Your WebFX application" -> "Web\nAll major browsers" [headlabel="WebFX" labeldistance=4.5 labelangle=20];
-    "Your WebFX application" -> "Desktop\nWindows, macOS & Linux" [headlabel="Java or Gluon" labeldistance=2.7 labelangle=-7];
-    "Your WebFX application" -> "Mobiles\nAndroid & iOS" [label="Gluon"];
+    node [ shape=rectangle, fillcolor="#D0E8F2", style="filled"];
+WebFX [label="Your WebFX application", fillcolor="#FDFFBC", shape=ellipse]
+Web [label="Web\nAll major browsers"]
+    WebFX -> Web [headlabel="WebFX" labeldistance=3.2 labelangle=30];
+    WebFX -> "Desktop\nWindows, macOS & Linux" [headlabel="Java or Gluon" labeldistance=2.7 labelangle=-7];
+    WebFX -> "Mobiles\nAndroid & iOS" [label="Gluon"];
 }
 ----
 
@@ -198,15 +201,17 @@ You can create several WebFX applications in the same repository. As your applic
 [graphviz, wbfx-cli, format=svg]
 ----
 digraph {
-    node [ shape=rectangle ];
-    "webfx-cli" [shape=ellipse];
-    "webfx.xml" -> "webfx-cli"
-    "Your module source code" -> "webfx-cli"
-    "webfx-cli" -> "pom.xml"
-    "webfx-cli" -> "module-info.java"
-    "webfx-cli" -> "GWT module.gwt.xml
+    node [ shape=rectangle, fillcolor="#ffdccc", style=filled];
+    WebFXCli [label="webfx-cli", shape=ellipse, fillcolor="#e0aaff"];
+    WebFXXml [label="webfx.xml", fillcolor="#FDFFBC"];
+    Code [label="Your module source code", fillcolor="#FDFFBC"];
+    WebFXXml -> WebFXCli
+    Code -> WebFXCli
+    WebFXCli -> "pom.xml"
+    WebFXCli -> "module-info.java"
+    WebFXCli -> "GWT module.gwt.xml
 super sources, bundles, etc..."
-    "webfx-cli" -> "GraalVM conf"
+    WebFXCli -> "GraalVM conf"
 }
 ----
 
