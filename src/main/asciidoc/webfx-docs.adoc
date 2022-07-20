@@ -424,13 +424,13 @@ Some builds require the installation of third-party software, as shown in the fo
 
 | Linux
 | Linux (embed JRE)
-| ubuntu-tools*
+| ubuntu-tools
 | --openjfx-desktop
 | executable, .AppImage, .rpm, .deb
 
 | macOS
 | macOS (embed JRE)
-| xcode-tools
+| xcode
 | --openjfx-desktop
 | executable, .dmg, .pkg
 
@@ -512,13 +512,13 @@ webfx build -gr <5>
 
 TIP: As opposed to `--show`, `--locate` works even before the build, as it prints the expected location, whether the executable file is present or not.
 
-The `run` command has exactly the same options as the `build` command. The main difference is that with `run` you can run the app without rebuilding it (unless `--build` is specified), and with `build` you can build the app without running it (unless `--run` is specified).
+The `run` command has exactly the same options as the `build` command. The only difference between these 2 commands is that with `run` you can run the app without rebuilding it (unless `--build` is specified), and with `build` you can build the app without running it (unless `--run` is specified).
 
 In the next sections, we won't repeat all the commands, we will use only the last command to build and run the application in one go, but of course you can still choose to separate the build and the run.
 
 === Desktop platform (JAR)
 
-This executable requires Java installed on the target machine.
+NOTE: The desktop JAR executable is usually used for local testing. If you want to distribute your desktop application, the embed JRE or native executables are preferred, as they don't require Java installed on the users machines.
 
 You can use the following command to target the Desktop platform (JAR):
 
@@ -540,21 +540,21 @@ TIP: You can combine the build options. For example `webfx build --gwt --openjfx
 
 As opposed to the JAR, the embed JRE will be specific to the target platform. Therefore, a Linux machine will build a Linux executable, a Mac a macOS executable, and a Windows machine a Windows executable.
 
-*Prerequisite*: you can install the following software if you wish to also generate the installers:
+*Prerequisite*: you must install the following software for a successful build:
 
 [source,shell,indent=0,role="primary"]
 .Linux
 ----
 webfx install ubuntu-tools <1>
 ----
-<1> Optional. These tools are used to generate the .deb and .rpm installers.
+<1> These tools are used to generate the .deb and .rpm installers.
 
 [source,shell,indent=0,role="secondary"]
 .macOS
 ----
-webfx install xcode-tools <1>
+webfx install xcode <1>
 ----
-<1> Required for code signing
+<1> Check if Xcode is correctly installed, otherwise redirect to the Xcode installation page.
 
 [source,shell,indent=0,role="secondary"]
 .Windows
@@ -627,6 +627,8 @@ webfx build --gluon-desktop --run
 ----
 webfx build -dr
 ----
+
+WARNING: On some Linux virtual machines that don't support OpenGL, JavaFX may report: Error initializing QuantumRenderer: no suitable pipeline found.
 
 === Android platform
 
