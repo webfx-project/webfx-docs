@@ -688,7 +688,7 @@ The link:https://github.com/gluonhq/gluonfx-maven-plugin[GluonFX Maven plugin^] 
  webfx install graalvm
  webfx install xcode
 
-IMPORTANT: You also need a provisioning profile for your app that lists your test device, otherwise you won't be able to install the application . We will provide a guide for this later.
+IMPORTANT: You also need a provisioning profile that links the app to your iOS device, otherwise you won't be able to install it on your device. We will provide a guide for this later.
 
 Then, you can use the following command:
 
@@ -727,11 +727,11 @@ Create an application configuration as follows:
 [.text-center]
 image::webfx-example-idea-openjfx-config.png[]
 <1> select the OpenJFX application module
-<2> enter [red]`dev.webfx.platform.shared.services.boot.ApplicationBooter` for the main class
+<2> enter [red]`dev.webfx.platform.boot.ApplicationBooter` for the main class
 
 TIP: You can just type `AB` for the main class, and your IDE should quickly find and suggest the WebFX ApplicationBooter class.
 
-The way to boot GWT and OpenJFX applications is different, but WebFX offers a cross-platform way to do it. For this reason, #the main class of a WebFX application is always [red monospace]+dev.webfx.platform.shared.services.boot.ApplicationBooter+#. It will find your JavaFX application because it has been automatically declared as a Java service by the CLI.
+The way to boot GWT and OpenJFX applications is different, but WebFX offers a cross-platform way to do it. For this reason, #the main class of a WebFX application is always [red monospace]+dev.webfx.platform.boot.ApplicationBooter+#. It will find your JavaFX application because it has been automatically declared as a Java service by the CLI.
 
 [NOTE]
 ====
