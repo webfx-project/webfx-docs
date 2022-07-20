@@ -628,6 +628,8 @@ webfx install wix <2>
 <1> Required for the GluonFX Maven plugin
 <2> Optional. The WiX Toolset is called by the GluonFX Maven plugin to create a simple .msi installer.
 
+IMPORTANT: On macOS, you need to configure at least a Team ID in Xcode in order to make the application runnable on your machine. We will provide a guide for this later.
+
 Then, you can use the below command:
 
 [source,shell,indent=0,role="primary"]
@@ -671,7 +673,7 @@ webfx build -ar
 
 Alternatively, you can use the `--gluon-mobile` (short: `-m`) cross-platform option. It will be interpreted as `--gluon-android` on Linux machines.
 
-In this context, running the application means invoking the Gluon Maven plugin to install and run the generated package on your Android device connected to your Linux machine via USB. For this to succeed, you must first activate the Developer mode and then the USB debugging option on your Android device.
+In this context, running the application means invoking the GluonFX Maven plugin to install and run the generated package on your Android device connected to your Linux machine via USB. For this to succeed, you must first activate the Developer mode and then the USB debugging option on your Android device.
 
 NOTE: Only 64-bit architecture is supported (the installation will fail on 32-bit devices). Please check your Android kernel version specifies `x64`.
 
@@ -686,7 +688,9 @@ The link:https://github.com/gluonhq/gluonfx-maven-plugin[GluonFX Maven plugin^] 
  webfx install graalvm
  webfx install xcode
 
-Then, you can use the following commands to target the iOS platform (native):
+IMPORTANT: You also need a provisioning profile for your app that lists your test device, otherwise you won't be able to install the application . We will provide a guide for this later.
+
+Then, you can use the following command:
 
 [source,shell,indent=0,role="primary"]
 .Long syntax
