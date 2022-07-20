@@ -344,7 +344,9 @@ Let's create our first WebFX application. We need to create the repository direc
  cd webfx-example
  webfx init org.example:webfx-example:1.0.0-SNAPSHOT
 
+////
 TIP: `webfx init org.example:1.0.0-SNAPSHOT` will also work as the CLI takes the repository directory name as the artifactId when omitted in the command.
+////
 
 The init command creates only 2 files: webfx.xml and pom.xml. Note that if this is the first time you have used the CLI, it will download some other files through Maven to retrieve essential information about the available WebFX modules.
 
@@ -354,7 +356,9 @@ When we create an application, we pass the fully qualified name of the JavaFX cl
 
  webfx create application --prefix webfx-example org.example.webfxexample.WebFxExampleApplication --helloWorld
 
+////
 TIP: we could omit the prefix here, because the CLI takes the parent module name in that case.
+////
 
 This command created the following modules:
 
@@ -422,7 +426,7 @@ Some builds require the installation of third-party software, as shown in the fo
 | Linux (embed JRE)
 | ubuntu-tools*
 | --openjfx-desktop
-| executable, .rpm, .deb
+| executable, .AppImage, .rpm, .deb
 
 | macOS
 | macOS (embed JRE)
@@ -481,50 +485,54 @@ You can use the following commands to target the Web platform:
 ----
 webfx build --gwt <1>
 webfx build --gwt --locate <2>
-webfx build --gwt --reveal <3>
+webfx build --gwt --show <3>
 webfx run --gwt <4>
+webfx build --gwt --run <5>
 ----
 <1> Build the html executable file with the GWT Maven plugin
 <2> Locate the generated executable file
-<3> Reveal the generated executable file in the file explorer
+<3> Show the generated executable file in the file explorer
 <4> Execute the generated executable in the browser
+<5> Build the app and execute it in a single command
 
 [source,shell,indent=0,role="secondary"]
 .Short syntax
 ----
 webfx build -g <1>
 webfx build -gl <2>
-webfx build -gr <3>
+webfx build -gs <3>
 webfx run -g <4>
+webfx build -gr <5>
 ----
 <1> Build the html executable file with the GWT Maven plugin
 <2> Locate the generated executable file
-<3> Reveal the generated executable file in the file explorer
+<3> Show the generated executable file in the file explorer
 <4> Execute the generated executable in the browser
+<5> Build the app and execute it in a single command
 
-TIP: As opposed to `--reveal`, `--locate` works even before the build, as it prints the expected location, whether the executable file is present or not.
+TIP: As opposed to `--show`, `--locate` works even before the build, as it prints the expected location, whether the executable file is present or not.
+
+The `run` command has exactly the same options as the `build` command. The main difference is that with `run` you can run the app without rebuilding it (unless `--build` is specified), and with `build` you can build the app without running it (unless `--run` is specified).
+
+In the next sections, we won't repeat all the commands, we will use only the last command to build and run the application in one go, but of course you can still choose to separate the build and the run.
 
 === Desktop platform (JAR)
 
 This executable requires Java installed on the target machine.
 
-You can use the following commands to target the Desktop platform (JAR):
+You can use the following command to target the Desktop platform (JAR):
 
 [source,shell,indent=0,role="primary"]
 .Long syntax
 ----
-webfx build --openjfx-fatjar
-webfx run --openjfx-fatjar
+webfx build --openjfx-fatjar --run
 ----
 
 [source,shell,indent=0,role="secondary"]
 .Short syntax
 ----
-webfx build -f
-webfx run -f
+webfx build -fr
 ----
-
-The `run` command has the same options as the `build` command. So the `--reveal` and `--locate` options work with both commands.
 
 TIP: You can combine the build options. For example `webfx build --gwt --openjfx-fatjar` (short syntax: `webfx build -gf`) will build both the GWT html and OpenJFX fat jar executables.
 
@@ -559,20 +567,18 @@ webfx install inno <2>
 
 NOTE: The CLI will help you to customize these installers in a next version. For now, we just use the default settings.
 
-Then, you can use the following commands to target the Desktop platform (embed JRE):
+Then, you can use the following command to target the Desktop platform (embed JRE):
 
 [source,shell,indent=0,role="primary"]
 .Long syntax
 ----
-webfx build --openjfx-desktop
-webfx run --openjfx-desktop
+webfx build --openjfx-desktop --run
 ----
 
 [source,shell,indent=0,role="secondary"]
 .Short syntax
 ----
-webfx build -k
-webfx run -k
+webfx build -kr
 ----
 
 === Desktop platform (native)
@@ -608,23 +614,19 @@ webfx install wix <2>
 <1> Required for the Gluon toolchain
 <2> Optional. WiX Toolset is used to create a simple .msi installer.
 
-Then, you can use the below commands to target the Desktop platform (native):
+Then, you can use the below command to target the Desktop platform (native):
 
 [source,shell,indent=0,role="primary"]
 .Long syntax
 ----
-webfx build --gluon-desktop
-webfx run --gluon-desktop
+webfx build --gluon-desktop --run
 ----
 
 [source,shell,indent=0,role="secondary"]
 .Short syntax
 ----
-webfx build -d
-webfx run -d
+webfx build -dr
 ----
-
-WARNING: There is an issue with the Gluon Maven plugin which may cause the build to fail on some versions of macOS. Details are provided in the GitHub issue https://github.com/gluonhq/gluonfx-maven-plugin/issues/429[here^].
 
 === Android platform
 
@@ -640,20 +642,20 @@ Then, you can use the following commands to target the Android platform (native)
 [source,shell,indent=0,role="primary"]
 .Long syntax
 ----
-webfx build --gluon-android
-webfx run --gluon-android <1>
+webfx build --gluon-android --run
 ----
-<1> Will invoke the Gluon Maven plugin to install and run the executable on your Android device connected to your Linux machine via USB.
 
 [source,shell,indent=0,role="secondary"]
 .Short syntax
 ----
-webfx build -a
-webfx run -a <1>
+webfx build -ar
 ----
-<1> Will invoke the Gluon Maven plugin to install and run the executable on your Android device connected to your Linux machine via USB.
 
 Alternatively, you can use the `--gluon-mobile` (short: `-m`) cross-platform option. It will be interpreted as `--gluon-android` on Linux machines.
+
+In this context, running the application means invoking the Gluon Maven plugin to install and run the generated package on your Android device connected to your Linux machine via USB. For this to succeed, you must first activate the Developer mode and then the USB debugging option on your Android device.
+
+NOTE: Only 64-bit architecture is supported (the installation will fail on 32-bit devices). Please check your Android kernel version specifies `x64`.
 
 === iOS platform
 
@@ -668,18 +670,14 @@ Then, you can use the following commands to target the iOS platform (native):
 [source,shell,indent=0,role="primary"]
 .Long syntax
 ----
-webfx build --gluon-ios
-webfx run --gluon-ios <1>
+webfx build --gluon-ios --run
 ----
-<1> Will invoke the Gluon Maven plugin to install and run the executable on your iOS device connected to your Mac via USB.
 
 [source,shell,indent=0,role="secondary"]
 .Short syntax
 ----
-webfx build -i
-webfx run -i <1>
+webfx build -ir
 ----
-<1> Will invoke the Gluon Maven plugin to install and run the executable on your iOS device connected to your Mac via USB.
 
 Alternatively, you can use the `--gluon-mobile` (short: `-m`) cross-platform option. It will be interpreted as `--gluon-ios` on Macs.
 
