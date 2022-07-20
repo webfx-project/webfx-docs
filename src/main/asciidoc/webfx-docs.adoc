@@ -536,6 +536,7 @@ webfx build -fr
 
 TIP: You can combine the build options. For example `webfx build --gwt --openjfx-fatjar` (short syntax: `webfx build -gf`) will build both the GWT html and OpenJFX fat jar executables.
 
+
 === Desktop platform (embed JRE)
 
 As opposed to the JAR, the embed JRE will be specific to the target platform. Therefore, a Linux machine will build a Linux executable, a Mac a macOS executable, and a Windows machine a Windows executable.
@@ -554,7 +555,7 @@ webfx install ubuntu-tools <1>
 ----
 webfx install xcode <1>
 ----
-<1> Check if Xcode is correctly installed, otherwise redirect to the Xcode installation page.
+<1> Actually just check if Xcode is installed with a correct path, otherwise suggest solutions.
 
 [source,shell,indent=0,role="secondary"]
 .Windows
@@ -565,7 +566,9 @@ webfx install inno <2>
 <1> Optional. The WiX Toolset is used to create a simple .msi installer.
 <2> Optional. Inno Setup is used to create a more elaborate .exe installer.
 
-NOTE: The CLI will help you to customize these installers in a next version. For now, we just use the default settings.
+NOTE: The CLI will help you to customize the installers (application name, icon, etc...) in a next version. For now, we just use the default settings.
+
+IMPORTANT: On macOS, you need to configure at least a Team ID in Xcode in order to make the application runnable on your machine. We will provide a guide for this later.
 
 Then, you can use the following command to target the Desktop platform (embed JRE):
 
@@ -580,6 +583,8 @@ webfx build --openjfx-desktop --run
 ----
 webfx build -kr
 ----
+
+TIP: If the application fails to run on macOS, you can try `webfx run -k --open` to execute it via the `open` command. This can open a problem report with more information.
 
 === Desktop platform (native)
 
