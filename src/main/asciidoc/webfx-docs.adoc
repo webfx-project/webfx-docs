@@ -198,7 +198,7 @@ end legend
 You can create several WebFX applications in the same repository. As your application code grows, you can split your code into more modules. The CLI will help you to create and maintain all your modules. For each module, it will create and maintain your build chain as follows:
 
 [.text-center]
-[graphviz, wbfx-cli, format=svg]
+[graphviz, webfx-cli, format=svg]
 ----
 digraph {
     node [ shape=rectangle, fillcolor="#ffdccc", style=filled];
