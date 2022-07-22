@@ -91,7 +91,7 @@ There are already great solutions to run Swing or JavaFX applications in the bro
 ----
 digraph {
     node [ shape=rectangle, fillcolor="#D0E8F2", style="filled"];
-WebFX [label="Your WebFX application", fillcolor="#FDFFBC", shape=ellipse]
+WebFX [label="Your WebFX application", fillcolor="#f5dd90", shape=ellipse]
 Web [label="Web\nAll major browsers"]
     WebFX -> Web [headlabel="WebFX" labeldistance=3.2 labelangle=30];
     WebFX -> "Desktop\nWindows, macOS & Linux" [headlabel="Java or Gluon" labeldistance=2.7 labelangle=-7];
@@ -203,8 +203,8 @@ You can create several WebFX applications in the same repository. As your applic
 digraph {
     node [ shape=rectangle, fillcolor="#ffdccc", style=filled];
     WebFXCli [label="webfx-cli", shape=ellipse, fillcolor="#e0aaff"];
-    WebFXXml [label="webfx.xml", fillcolor="#FDFFBC"];
-    Code [label="Your module source code", fillcolor="#FDFFBC"];
+    WebFXXml [label="webfx.xml", fillcolor="#f5dd90"];
+    Code [label="Your module source code", fillcolor="#f5dd90"];
     WebFXXml -> WebFXCli
     Code -> WebFXCli
     WebFXCli -> "pom.xml"
