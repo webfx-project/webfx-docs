@@ -474,9 +474,11 @@ Some builds require the installation of third-party software, as shown in the fo
 
 |===
 
-[small]#* these tools are optional, they are used to create installers (.rpm, .deb, .dmg, .pkg, .msi or .exe)#
+[small]#* these tools are optional, they are used to create installers (.msi or .exe)#
 
 We will now cover each target platform in detail.
+
+NOTE: You can open issues in the https://github.com/webfx-project/webfx-cli[webfx-cli] repository to report any bug you may encounter.
 
 === Web platform
 
