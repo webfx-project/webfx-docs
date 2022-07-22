@@ -116,27 +116,27 @@ Despite the big size of OpenJFX, WebFX can produce lightweight web apps, as demo
 |WebFX application | JS size *
 
 |link:https://colorfulcircles.webfx.dev[Colorful circles demo^]
-|90.3 kB
+|93 kB
 |link:https://particles.webfx.dev[Particles demo^]
-|90 kB
+|93 kB
 |link:https://tallycounter.webfx.dev[Tally counter demo^]
-|101 kB
+|104 kB
 |link:https://moderngauge.webfx.dev[Modern gauge demo^]
-|138 kB
+|141 kB
 |link:https://medusaclock.webfx.dev[Medusa clock demo^]
-|180 kB
+|183 kB
 |link:https://enzoclocks.webfx.dev[Enzo clocks demo^]
-|252 kB
+|260 kB
 |link:https://fx2048.webfx.dev[FX2048 demo^]
-|178 kB
+|181 kB
 |link:https://spacefx.webfx.dev[SpaceFX demo^]
-|139 kB
-|link:https://raytracer.webfx.dev[Ray tracer demo^]
-|134 kB
-|link:https://mandelbrot.webfx.dev[Mandelbrot demo^]
 |142 kB
-|link:https://preview.webfx.dev[Website^]
-|218 kB
+|link:https://raytracer.webfx.dev[Ray tracer demo^]
+|137 kB
+|link:https://mandelbrot.webfx.dev[Mandelbrot demo^]
+|145 kB
+|link:https://webfx.dev[Website^]
+|226 kB
 |===
 
 [small]#* compressed JS size transiting over the network, without eventual images or other resources#
