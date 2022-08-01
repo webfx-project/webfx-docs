@@ -1,0 +1,39 @@
+
+[.text-center]
+[plantuml, webfx-ecosystem, format=svg]
+----
+hide stereotype
+skinparam ranksep 50
+skinparam nodesep 50
+skinparam shadowing true
+skinparam rectangleShadowing false
+skinparam nodeBackgroundColor f5dd90
+skinparam nodeBackgroundColor<<CLIStyle>> e0aaff
+skinparam nodeBackgroundColor<<KitStyle>> ff5050
+
+rectangle Y as "Your WebFX Applications" {
+    node "Enterprise Application" as EA
+    node "Graphical Application" as GA
+}
+
+rectangle Eco as "The WebFX Ecosystem" {
+    node "WebFX Kit" <<KitStyle>> as kit
+    node "WebFX Platform" as plat
+    node "WebFX Extras" as extras
+    node "WebFX Stack" as stack
+    node "WebFX Libs" as libs
+    node "WebFX CLI" <<CLIStyle>> as cli
+}
+
+Y -[hidden]-> Eco
+
+kit -d-> plat
+extras -d-> kit
+stack -d-> kit
+stack -r-> extras
+cli -[hidden]r->kit
+libs -[hidden]l-> kit
+
+EA -[dotted]> stack
+EA -[dotted]> extras
+----
