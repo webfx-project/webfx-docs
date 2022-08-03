@@ -1,0 +1,47 @@
+
+[.text-center]
+[plantuml, webfx-stack, format=svg]
+----
+hide stereotype
+skinparam ranksep 70
+skinparam nodesep 20
+skinparam shadowing true
+skinparam rectangleShadowing false
+skinparam nodeBackgroundColor f5dd90
+skinparam linetype polyline
+
+rectangle Eco as "The WebFX Stack" {
+    rectangle UI {
+        node Routing
+        node I18n
+        node Validation
+        node Action
+    }
+    rectangle NonUI {
+        node Async
+        node Authn
+        node Authz
+        node Com
+        node DB
+        node ORM
+        node Push
+        node QueryPush
+    }
+    rectangle Platform {
+        node Json
+        node WebAssembly
+        node WebWorker
+        node WindowHistory
+        node WindowLocation
+    }
+    node Vertx as "Vert.x"
+
+Routing -> I18n
+
+Authz -> Com
+
+UI -d-> NonUI
+NonUI -d-> Platform
+Vertx -r-> Platform
+}
+----
