@@ -9,62 +9,76 @@ digraph D {
     subgraph cluster_C {
         label = "Client";
 
-        subgraph cluster_UI {
-            label = "UI";
-            style = "dashed";
-            Routing
-            I18n
-            Validation
-            Action
-            {rank=same Action I18n Validation Routing}
-            Action -> Routing -> I18n [style=invis]
-        }
-
-        subgraph cluster_NUI {
+        subgraph cluster_NonUI {
             label = "Non-UI";
             style = "dashed";
+
             Authn
             Authz
             DB
             ORM
             Push
             QueryPush
+
             {rank=same Authn ORM}
             {rank=same Authz QueryPush}
             {rank=same Push DB}
             Authn -> Authz -> ORM [style=invis]
             Push -> DB [style=invis]
+
+            ORM -> DB
+            ORM -> QueryPush
+            QueryPush -> Push
+            QueryPush -> DB
+        }
+
+        subgraph cluster_UI {
+            label = "UI";
+            style = "dashed";
+
+            Routing
+            I18n
+            Validation
+            Action
+
+            {rank=same Action I18n Validation Routing}
+            Action -> Routing -> I18n [style=invis]
         }
 
         subgraph cluster_P {
             style = "dashed";
             label = "              Platform";
+
             WindowHistory
             WindowLocation
             PBR [label="PBRRRRRRR",style=invis]
             WebAssembly
             WebWorker
+
             {rank=same WindowHistory WindowLocation}
             {rank=same PBR WebAssembly WebWorker}
             PBR -> WebAssembly -> WebWorker [style=invis]
+            WindowHistory -> WebAssembly [style=invis]
         }
 
     }
 
     subgraph cluster_SHR {
         label = "Shared      ";
+
         L [label="LLLLLLLL",style=invis]
         Async
         Com
         Json
         R [label="",style=invis]
+
         {rank=same L Async Json Com R}
         L -> Async -> Com -> Json -> R [style=invis]
     }
 
     subgraph cluster_S {
         label = "Server";
-        rank = 3;
+
         DBS [label="DB (server)"]
         PushS [label="Push (server)"]
         QueryPushS [label="QueryPush (server)"]
@@ -72,30 +86,22 @@ digraph D {
         BL [style=invis]
         TR [style=invis]
         BR [style=invis]
+
         TR -> BR [style=invis]
         {rank=same Vertx QueryPushS TR}
         {rank=same DBS PushS}
         PushS -> DBS [style=invis]
         Vertx -> BL [style=invis]
         Vertx -> QueryPushS -> TR [style=invis]
+
+        QueryPushS -> PushS
+        QueryPushS -> DBS
     }
 
     Routing -> WindowLocation
     Routing -> WindowHistory
 
-    WindowHistory -> WebAssembly [style=invis]
-
-    ORM -> DB
-    ORM -> QueryPush
-    QueryPush -> Push
-    QueryPush -> DB
-    WebWorker -> Push [style=invis, constraint=false]
-
-    WebWorker -> Com [ltail=cluster_C,style=dashed,minlen=2]
+    PBR -> Com [ltail=cluster_C,style=dashed,minlen=2]
     Com -> QueryPushS [lhead=cluster_S,style=dashed,minlen=2]
-
-    QueryPushS -> PushS
-    QueryPushS -> DBS
-
 }
 ----
