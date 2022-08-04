@@ -51,13 +51,13 @@ digraph D {
 
             WindowHistory
             WindowLocation
-            PBR [label="PBRRRRRRR",style=invis]
+            PBR [label="PBRRRRRRRRRRRRR",style=invis]
             WebAssembly
             WebWorker
 
             {rank=same WindowHistory WindowLocation}
             {rank=same PBR WebAssembly WebWorker}
-            PBR -> WebAssembly -> WebWorker [style=invis]
+            WebAssembly -> WebWorker -> PBR [style=invis]
             WindowHistory -> WebAssembly [style=invis]
         }
 
@@ -70,7 +70,7 @@ digraph D {
         Async
         Com
         Json
-        R [label="",style=invis]
+        R [label="RRRRRRR",style=invis]
 
         {rank=same L Async Json Com R}
         L -> Async -> Com -> Json -> R [style=invis]
@@ -83,9 +83,9 @@ digraph D {
         PushS [label="Push (server)"]
         QueryPushS [label="QueryPush (server)"]
         Vertx [label="Vert.x"]
-        BL [style=invis]
         TR [style=invis]
-        BR [style=invis]
+        BL [style=invis;label="LLLLLL"]
+        BR [style=invis;label="RRRRRRRRR"]
 
         TR -> BR [style=invis]
         {rank=same Vertx QueryPushS TR}
