@@ -3,8 +3,8 @@
 [graphviz, webfx-stack, format=svg]
 ----
 digraph D {
-    graph [compound=true];
-    node [shape="rectangle", style="rounded,filled", fillcolor="#f5dd90"];
+    graph [compound=true, ranksep=0.3, nodesep=0.2, fontname=monospace, fontsize=10];
+    node [shape="rectangle", style="rounded,filled", fillcolor="#f5dd90", fontname=monospace, fontsize=10];
 
     subgraph cluster_C {
         label = "Client";
@@ -17,7 +17,7 @@ digraph D {
             Validation
             Action
             {rank=same Action I18n Validation Routing}
-            Action -> I18n -> Routing [style=invis]
+            Action -> Routing -> I18n [style=invis]
         }
 
         subgraph cluster_NUI {
@@ -29,7 +29,8 @@ digraph D {
             ORM
             Push
             QueryPush
-            {rank=same ORM Authz Authn}
+            {rank=same Authn ORM}
+            {rank=same Authz QueryPush}
             {rank=same Push DB}
             Authn -> Authz -> ORM [style=invis]
             Push -> DB [style=invis]
@@ -37,24 +38,26 @@ digraph D {
 
         subgraph cluster_P {
             style = "dashed";
-            label = "                 Platform";
-            WebAssembly
-            WebWorker
+            label = "              Platform";
             WindowHistory
             WindowLocation
+            PBR [label="PBRRRRRRR",style=invis]
+            WebAssembly
+            WebWorker
             {rank=same WindowHistory WindowLocation}
-            {rank=same WebAssembly WebWorker}
+            {rank=same PBR WebAssembly WebWorker}
+            PBR -> WebAssembly -> WebWorker [style=invis]
         }
 
     }
 
     subgraph cluster_SHR {
-        label = "Shared           ";
-        L [label="LLLLLL",style=invis]
+        label = "Shared      ";
+        L [label="LLLLLLLL",style=invis]
         Async
         Com
         Json
-        R [style=invis]
+        R [label="",style=invis]
         {rank=same L Async Json Com R}
         L -> Async -> Com -> Json -> R [style=invis]
     }
@@ -87,9 +90,7 @@ digraph D {
     QueryPush -> Push
     QueryPush -> DB
 
-    WebWorker -> Json [style=invis]
-    DB -> Async [style=invis]
-    WebAssembly -> Com [ltail=cluster_C,style=dashed,minlen=2,constraint=true]
+    WebWorker -> Com [ltail=cluster_C,style=dashed,minlen=2,constraint=true]
     Com -> QueryPushS [lhead=cluster_S,style=dashed,minlen=2,constraint=true]
 
     QueryPushS -> PushS
