@@ -1,47 +1,99 @@
 
 [.text-center]
-[plantuml, webfx-stack, format=svg]
+[graphviz, webfx-stack, format=svg]
 ----
-hide stereotype
-skinparam ranksep 70
-skinparam nodesep 20
-skinparam shadowing true
-skinparam rectangleShadowing false
-skinparam nodeBackgroundColor f5dd90
-skinparam linetype polyline
+digraph D {
+    graph [compound=true];
+    node [shape="rectangle", style="rounded,filled", fillcolor="#f5dd90"];
 
-rectangle Eco as "The WebFX Stack" {
-    rectangle UI {
-        node Routing
-        node I18n
-        node Validation
-        node Action
+    subgraph cluster_C {
+        label = "Client";
+
+        subgraph cluster_UI {
+            label = "UI";
+            style = "dashed";
+            Routing
+            I18n
+            Validation
+            Action
+            {rank=same Action I18n Validation Routing}
+            Action -> I18n -> Routing [style=invis]
+        }
+
+        subgraph cluster_NUI {
+            label = "Non-UI";
+            style = "dashed";
+            Authn
+            Authz
+            DB
+            ORM
+            Push
+            QueryPush
+            {rank=same ORM Authz Authn}
+            {rank=same Push DB}
+            Authn -> Authz -> ORM [style=invis]
+            Push -> DB [style=invis]
+        }
+
+        subgraph cluster_P {
+            style = "dashed";
+            label = "                 Platform";
+            WebAssembly
+            WebWorker
+            WindowHistory
+            WindowLocation
+            {rank=same WindowHistory WindowLocation}
+            {rank=same WebAssembly WebWorker}
+        }
+
     }
-    rectangle NonUI {
-        node Async
-        node Authn
-        node Authz
-        node Com
-        node DB
-        node ORM
-        node Push
-        node QueryPush
+
+    subgraph cluster_SHR {
+        label = "Shared           ";
+        L [label="LLLLLL",style=invis]
+        Async
+        Com
+        Json
+        R [style=invis]
+        {rank=same L Async Json Com R}
+        L -> Async -> Com -> Json -> R [style=invis]
     }
-    rectangle Platform {
-        node Json
-        node WebAssembly
-        node WebWorker
-        node WindowHistory
-        node WindowLocation
+
+    subgraph cluster_S {
+        label = "Server";
+        rank = 3;
+        DBS [label="DB (server)"]
+        PushS [label="Push (server)"]
+        QueryPushS [label="QueryPush (server)"]
+        Vertx [label="Vert.x"]
+        BL [style=invis]
+        TR [style=invis]
+        BR [style=invis]
+        TR -> BR [style=invis]
+        {rank=same Vertx QueryPushS TR}
+        {rank=same DBS PushS}
+        PushS -> DBS [style=invis]
+        Vertx -> BL [style=invis]
+        Vertx -> QueryPushS -> TR [style=invis]
     }
-    node Vertx as "Vert.x"
 
-Routing -> I18n
+    Routing -> WindowLocation
+    Routing -> WindowHistory
 
-Authz -> Com
+    WindowHistory -> WebAssembly [style=invis]
 
-UI -d-> NonUI
-NonUI -d-> Platform
-Vertx -r-> Platform
+    ORM -> DB
+    ORM -> QueryPush
+    QueryPush -> Push
+    QueryPush -> DB
+
+    WebWorker -> Json [style=invis]
+    DB -> Async [style=invis]
+    WebAssembly -> Com [ltail=cluster_C,style=dashed,minlen=2,constraint=true]
+    Com -> QueryPushS [lhead=cluster_S,style=dashed,minlen=2,constraint=true]
+
+    QueryPushS -> PushS
+    QueryPushS -> DBS
+
 }
 ----
