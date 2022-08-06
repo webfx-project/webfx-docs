@@ -6,7 +6,7 @@ digraph D {
     graph [compound=true, ranksep=0.3, nodesep=0.2, fontname=monospace, fontsize=10]
     node [shape="rectangle", style="rounded,filled", fillcolor="#f5dd90", fontname=monospace, fontsize=10]
 
-    subgraph cluster_SHR {
+    subgraph cluster_UI {
         label = "UI"
 
         FlexBox
@@ -15,8 +15,8 @@ digraph D {
         ImageStore
         Gantt
 
-        subgraph cluster_SHRP {
-            label = "Visual"
+        subgraph cluster_V {
+            label = "Visual API"
             style = "dashed"
 
             Charts
