@@ -43,7 +43,7 @@ digraph D {
         }
 
         subgraph cluster_S {
-            label = "       Server"
+            label = "Server            "
             style = "dashed"
 
             SL [label="LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL", style=invis]
@@ -56,6 +56,7 @@ digraph D {
 
         Boot -> Vertx [dir=back,style=dashed]
         Resources -> Vertx [dir=back,style=dashed]
+        Scheduler -> Vertx [dir=back,style=dashed]
         Json -> Vertx [dir=back,style=dashed]
 
     }
