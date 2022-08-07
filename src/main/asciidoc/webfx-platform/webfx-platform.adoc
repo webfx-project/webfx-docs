@@ -8,47 +8,49 @@ digraph D {
 
 
     subgraph cluster_P {
-        label = "Platform  "
+        label = "Platform    "
 
         subgraph cluster_C {
             style = "dashed"
-            label = "Client  "
+            label = "Client    "
 
             UIScheduler [fillcolor="#ff5050"]
             Storage [fillcolor="#ff5050"]
             WindowHistory [fillcolor="#e0aaff"]
-            P [shape=point, style=invis]
+            PC [shape=point, style=invis]
             WindowLocation [fillcolor="#e0aaff"]
             WebAssembly
             WebWorker
 
-            {rank=same UIScheduler Storage WindowHistory P WindowLocation WebAssembly WebWorker}
-            UIScheduler -> Storage -> WindowHistory -> P -> WindowLocation -> WebAssembly -> WebWorker [style=invis]
+            {rank=same UIScheduler Storage WindowHistory PC WindowLocation WebAssembly WebWorker}
+            UIScheduler -> Storage -> WindowHistory -> PC -> WindowLocation -> WebAssembly -> WebWorker [style=invis]
         }
 
         subgraph cluster_SHR {
-            label = "Shared  "
+            label = "Shared   "
             style = "dashed"
 
-            SHRL [label="LLLLLLLLLLLL", style=invis]
+            SHRL [width=0.5,style=invis]
             Boot [fillcolor="#ff5050"]
-            Console [fillcolor="#ff5050"]
             Resources [fillcolor="#ff5050"]
+            Console [fillcolor="#ff5050"]
+            PS [shape=point, style=invis]
+            Shutdown [fillcolor="#ff5050"]
             Scheduler [fillcolor="#ff5050"]
             Json [fillcolor="#e0aaff"]
-            SHRR [label="RRRRRRRRRRRRR", style=invis]
+            SHRR [width=0.65,style=invis]
 
-            {rank=same SHRL Boot Console Resources Scheduler Json SHRR}
-            SHRL -> Boot -> Console -> Resources -> Scheduler -> Json -> SHRR [style=invis]
+            {rank=same SHRL Boot Resources Console PS Shutdown Scheduler Json SHRR}
+            SHRL -> Boot -> Resources -> Console -> PS -> Shutdown -> Scheduler -> Json -> SHRR [style=invis]
         }
 
         subgraph cluster_S {
-            label = "Server            "
+            label = "Server   "
             style = "dashed"
 
-            SL [label="LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL", style=invis]
-            Vertx [label=" Vert.x ", fillcolor="#e0aaff"]
-            SR [label="RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR", style=invis]
+            SL [width=3.35, style=invis]
+            Vertx [label="Vert.x", fillcolor="#e0aaff"]
+            SR [width=3.55, style=invis]
 
             {rank=same SL Vertx SR}
             SL -> Vertx -> SR [style=invis]
@@ -61,10 +63,10 @@ digraph D {
 
     }
 
-    P -> Resources [style=invis]
+    PC -> PS [style=invis]
 
     subgraph cluster_L {
-        label = "    Legend"
+        label = "     Legend"
         style = "dashed"
         peripheries=0
 
