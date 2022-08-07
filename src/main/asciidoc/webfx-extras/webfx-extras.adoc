@@ -12,16 +12,21 @@ digraph D {
         FlexBox
         MaterialDesign
         WebText
-        ImageStore
-        Gantt
 
         subgraph cluster_V {
             label = "Visual API"
             style = "dashed"
 
-            Charts
-            Grid
+            VisualGrid
+            VisualCharts
+            VisualGantt
+
+            {rank=same VisualGrid VisualCharts VisualGantt}
+            VisualGrid -> VisualCharts -> VisualGantt [style=invis]
         }
+
+        {rank=same FlexBox WebText MaterialDesign}
+        FlexBox -> WebText -> MaterialDesign [style=invis]
 
     }
 
