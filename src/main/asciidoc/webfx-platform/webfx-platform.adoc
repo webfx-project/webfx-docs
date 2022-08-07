@@ -1,0 +1,81 @@
+
+[.text-center]
+[graphviz, webfx-platform, format=svg]
+----
+digraph D {
+    graph [compound=true, ranksep=0.3, nodesep=0.2, fontname=monospace, fontsize=10, splines=false]
+    node [shape="rectangle", style="rounded,filled", fillcolor="#f5dd90", fontname=monospace, fontsize=10]
+
+
+    subgraph cluster_P {
+        label = "Platform  "
+
+        subgraph cluster_C {
+            style = "dashed"
+            label = "Client  "
+
+            UIScheduler [fillcolor="#ff5050"]
+            Storage [fillcolor="#ff5050"]
+            WindowHistory [fillcolor="#e0aaff"]
+            P [shape=point, style=invis]
+            WindowLocation [fillcolor="#e0aaff"]
+            WebAssembly
+            WebWorker
+
+            {rank=same UIScheduler Storage WindowHistory P WindowLocation WebAssembly WebWorker}
+            UIScheduler -> Storage -> WindowHistory -> P -> WindowLocation -> WebAssembly -> WebWorker [style=invis]
+        }
+
+        subgraph cluster_SHR {
+            label = "Shared  "
+            style = "dashed"
+
+            SHRL [label="LLLLLLLLLLLL", style=invis]
+            Boot [fillcolor="#ff5050"]
+            Console [fillcolor="#ff5050"]
+            Resources [fillcolor="#ff5050"]
+            Scheduler [fillcolor="#ff5050"]
+            Json [fillcolor="#e0aaff"]
+            SHRR [label="RRRRRRRRRRRRR", style=invis]
+
+            {rank=same SHRL Boot Console Resources Scheduler Json SHRR}
+            SHRL -> Boot -> Console -> Resources -> Scheduler -> Json -> SHRR [style=invis]
+        }
+
+        subgraph cluster_S {
+            label = "       Server"
+            style = "dashed"
+
+            SL [label="LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL", style=invis]
+            Vertx [label=" Vert.x ", fillcolor="#e0aaff"]
+            SR [label="RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR", style=invis]
+
+            {rank=same SL Vertx SR}
+            SL -> Vertx -> SR [style=invis]
+        }
+
+        Boot -> Vertx [dir=back,style=dashed]
+        Resources -> Vertx [dir=back,style=dashed]
+        Json -> Vertx [dir=back,style=dashed]
+
+    }
+
+    P -> Resources [style=invis]
+
+    subgraph cluster_L {
+        label = "    Legend"
+        style = "dashed"
+        peripheries=0
+
+        Kit [label="Used by the WebFX Kit", fillcolor="#ff5050"]
+        Stack [label = "Used by the WebFX Stack", fillcolor="#e0aaff"]
+        Demos [label = "Used be the demos"]
+
+        {rank=same Kit Stack Demos}
+
+        Kit -> Stack -> Demos [style=invis]
+    }
+
+    Vertx -> Stack [style=invis]
+}
+----
