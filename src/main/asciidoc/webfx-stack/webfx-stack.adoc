@@ -3,7 +3,7 @@
 [graphviz, webfx-stack, format=svg]
 ----
 digraph D {
-    graph [compound=true, ranksep=0.3, nodesep=0.2, fontname=monospace, fontsize=10]
+    graph [compound=true, ranksep=0.3, nodesep=0.2, fontname=monospace, fontsize=10, splines=false]
     node [shape="rectangle", style="rounded,filled", fillcolor="#f5dd90", fontname=monospace, fontsize=10]
 
     subgraph cluster_C {
@@ -93,9 +93,21 @@ digraph D {
         QueryPushS -> Vertx [style=invis,len=2]
     }
 
+    subgraph cluster_X {
+        label = "WebFX Extras"
+
+        subgraph cluster_A {
+            label = "Visual API"
+            style = "dashed"
+            Visual [label="Visual component"]
+        }
+    }
+
     Push -> Com [ltail=cluster_C,style=dashed,minlen=2]
     Com -> QueryPushS [lhead=cluster_S,style=dashed,minlen=2]
 
     Action -> Authz [dir=back]
+
+    ORM -> Visual
 }
 ----
