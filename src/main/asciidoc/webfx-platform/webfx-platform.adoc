@@ -30,18 +30,18 @@ digraph D {
             label = "Shared   "
             style = "dashed"
 
-            SHRL [width=0.5,style=invis]
+            SHRL [shape=point, width=0.1, style=invis]
             Boot [fillcolor="#ff5050"]
             Resources [fillcolor="#ff5050"]
             Console [fillcolor="#ff5050"]
-            PS [shape=point, style=invis]
             Shutdown [fillcolor="#ff5050"]
             Scheduler [fillcolor="#ff5050"]
             Json [fillcolor="#e0aaff"]
-            SHRR [width=0.65,style=invis]
+            Async [fillcolor="#e0aaff"]
+            SHRR [shape=point, width=0.41, style=invis]
 
-            {rank=same SHRL Boot Resources Console PS Shutdown Scheduler Json SHRR}
-            SHRL -> Boot -> Resources -> Console -> PS -> Shutdown -> Scheduler -> Json -> SHRR [style=invis]
+            {rank=same SHRL Boot Resources Console Shutdown Scheduler Json Async SHRR}
+            SHRL -> Resources -> Console -> Boot -> Shutdown -> Scheduler -> Json -> Async -> SHRR [style=invis]
         }
 
         subgraph cluster_S {
@@ -62,7 +62,7 @@ digraph D {
 
     }
 
-    PC -> PS [style=invis]
+    PC -> Shutdown [style=invis]
 
     subgraph cluster_L {
         label = "     Legend"

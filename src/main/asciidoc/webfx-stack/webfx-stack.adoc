@@ -58,13 +58,12 @@ digraph D {
     subgraph cluster_SHR {
         label = "Shared       "
 
-        R1 [width=1.12,style=invis]
-        Async
+        R1 [width=2.078,style=invis]
         Com
         R2 [width=1.8,style=invis]
 
-        {rank=same R1 Async Com R2}
-        R1 -> Async -> Com -> R2 [style=invis]
+        {rank=same R1 Com R2}
+        R1 -> Com -> R2 [style=invis]
     }
 
     subgraph cluster_S {
