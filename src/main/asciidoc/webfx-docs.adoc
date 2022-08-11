@@ -125,8 +125,6 @@ Despite the big size of OpenJFX, WebFX can produce lightweight web apps, as demo
 |104 kB
 |link:https://moderngauge.webfx.dev[Modern gauge demo^]
 |141 kB
-|link:https://medusaclock.webfx.dev[Medusa clock demo^]
-|183 kB
 |link:https://enzoclocks.webfx.dev[Enzo clocks demo^]
 |260 kB
 |link:https://fx2048.webfx.dev[FX2048 demo^]
@@ -410,64 +408,64 @@ Some builds require the installation of third-party software, as shown in the fo
 
 [cols="1,^1,^1,^1,^1"]
 |===
-| Build platform |Target platform | Install command | Build option  |Executable file(s)
+|Target platform | Build platform | Install command | Build option  |Executable file(s)
 
-| Linux, macOS or Windows
 | Web
+| Linux, macOS or Windows
 |
 | --gwt
 | html
 
+| Any desktop OS with Java
 | Linux, macOS or Windows
-| Any desktop with Java
 |
 | --openjfx-fatjar
 | fat jar
 
-| Linux
 | Linux (embed JRE)
+| Linux
 | ubuntu-tools
 | --openjfx-desktop
 | executable, .AppImage, .rpm, .deb
 
-| macOS
 | macOS (embed JRE)
+| macOS
 | xcode
 | --openjfx-desktop
 | executable, .dmg, .pkg
 
-| Windows
 | Windows (embed JRE)
+| Windows
 | wix*, inno*
 | --openjfx-desktop
 | executable, .msi, .exe
 
-| Linux
 | Linux (native)
+| Linux
 | graalvm, ubuntu-tools
 | --gluon-desktop
 | executable
 
-| macOS
 | macOS (native)
+| macOS
 | graalvm, xcode-tools
 | --gluon-desktop
 | executable, .dmg, .pkg
 
-| Windows
 | Windows (native)
+| Windows
 | graalvm, vs-tools, wix*
 | --gluon-desktop
 | executable, .msi
 
-| Linux
 | Android (native)
+| Linux
 | graalvm, ubuntu-tools
 | --gluon-android (or --gluon-mobile)
 | .apk
 
-| macOS
 | iOS (native)
+| macOS
 | graalvm, xcode-tools
 | --gluon-ios (or --gluon-mobile)
 | .ipa
