@@ -9,26 +9,19 @@ digraph D {
     subgraph cluster_UI {
         label = "UI"
 
-        FlexBox
-        MaterialDesign
-        WebText
-
         subgraph cluster_V {
             label = "Visual API"
             style = "dashed"
-
-            VisualGrid
-            VisualCharts
-            VisualGantt
 
             {rank=same VisualGrid VisualCharts VisualGantt}
             VisualGrid -> VisualCharts -> VisualGantt [style=invis]
         }
 
-        {rank=same FlexBox WebText MaterialDesign}
-        FlexBox -> WebText -> MaterialDesign [style=invis]
-
+        {rank=same FlexBox WebText Led MaterialDesign}
+        FlexBox -> WebText -> Led -> MaterialDesign [style=invis]
     }
 
+    VisualCharts -> Led [style=invis]
+    VisualCharts -> WebText [style=invis]
 }
 ----
