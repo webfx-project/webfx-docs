@@ -65,13 +65,13 @@ digraph D {
     PC -> Shutdown [style=invis]
 
     subgraph cluster_L {
-        label = "     Legend"
+        label = "Legend  "
         style = "dashed"
         peripheries=0
 
         Kit [label="Used by the WebFX Kit", fillcolor="#ff5050"]
         Stack [label = "Used by the WebFX Stack", fillcolor="#e0aaff"]
-        Demos [label = "Used be the demos"]
+        Demos [label = "Used by the WebFX demos"]
 
         {rank=same Kit Stack Demos}
 
