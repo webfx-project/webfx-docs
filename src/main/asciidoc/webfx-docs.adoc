@@ -67,19 +67,6 @@ gwt -[hidden]> wa
 
 The link:https://github.com/webfx-project/webfx/tree/main/webfx-kit[WebFX kit^] is the heart of WebFX. It's a modified version of OpenJFX that can be transpiled. This is achieved by patching the higher layer of OpenJFX (which contains the main JavaFX features and API) to make it GWT compatible, and by replacing the lower layer (the graphic rendering pipeline) by a scene graph -> DOM mapper (the DOM being finally rendered by the browser).
 
-=== Limitations
-
-The WebFX kit coverage is for now limited to the essential features of JavaFX. So to successfully compile to the web, your JavaFX code needs to meet these 2 requirements:
-
-* use only the features covered by the WebFX kit (you can check out the link:https://javadoc.webfx.dev[JavaDoc^] to get an idea of this coverage)
-* be compatible with GWT (no reflection, no multi-threading, no blocking code, etc...)
-
-When a JavaFX application meets these 2 requirements, we will call it a _WebFX application_, and it can be transpiled to the web simply by running a GWT compilation of it together with the WebFX kit.
-
-The main JavaFX features not yet covered are: JavaFX CSS, FXML, 3D, and most complex controls (ComboBox, TableView, TreeView,...). 3D is not a priority. We will first present alternative solutions to JavaFX CSS and FXML, and provide simpler alternative WebFX controls to ComboBox and TableView, before considering their actual emulation.
-
-NOTE: Note for the impatient: OpenJFX is a huge library (about 10MB) compared to standard JS frameworks (typically 100KB). It may take some time to complete its coverage - thank you for your understanding. In the near future we hope to release a set of contributor guidelines and will endeavour to build an online community of developers around the project.
-
 === Benefits
 
 ==== No server
@@ -158,6 +145,19 @@ You don't need to run regular GWT compilations like you would do with a traditio
 ==== Free and open source
 
 WebFX is an open source initiative released under Apache 2.0 license.
+
+=== Limitations
+
+The WebFX kit coverage is for now limited to the essential features of JavaFX. So to successfully compile to the web, your JavaFX code needs to meet these 2 requirements:
+
+* use only the features covered by the WebFX kit (you can check out the link:https://javadoc.webfx.dev[JavaDoc^] to get an idea of this coverage)
+* be compatible with GWT (no reflection, no multi-threading, no blocking code, etc...)
+
+When a JavaFX application meets these 2 requirements, we will call it a _WebFX application_, and it can be transpiled to the web simply by running a GWT compilation of it together with the WebFX kit.
+
+The main JavaFX features not yet covered are: JavaFX CSS, FXML, 3D, and most complex controls (ComboBox, TableView, TreeView,...). 3D is not a priority. We will first present alternative solutions to JavaFX CSS and FXML, and provide simpler alternative WebFX controls to ComboBox and TableView, before considering their actual emulation.
+
+NOTE: Note for the impatient: OpenJFX is a huge library (about 10MB) compared to standard JS frameworks (typically 100KB). It may take some time to complete its coverage - thank you for your understanding. In the near future we hope to release a set of contributor guidelines and will endeavour to build an online community of developers around the project.
 
 == Getting started
 
