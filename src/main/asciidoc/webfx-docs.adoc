@@ -119,8 +119,6 @@ Despite the big size of OpenJFX, WebFX can produce lightweight web apps, as demo
 
 |link:https://colorfulcircles.webfx.dev[Colorful circles demo^]
 |93 kB
-|link:https://particles.webfx.dev[Particles demo^]
-|93 kB
 |link:https://tallycounter.webfx.dev[Tally counter demo^]
 |104 kB
 |link:https://moderngauge.webfx.dev[Modern gauge demo^]
@@ -131,6 +129,8 @@ Despite the big size of OpenJFX, WebFX can produce lightweight web apps, as demo
 |181 kB
 |link:https://spacefx.webfx.dev[SpaceFX demo^]
 |142 kB
+|link:https://demofx.webfx.dev[DemoFX demo^]
+|128 kB
 |link:https://raytracer.webfx.dev[Ray tracer demo^]
 |137 kB
 |link:https://mandelbrot.webfx.dev[Mandelbrot demo^]
