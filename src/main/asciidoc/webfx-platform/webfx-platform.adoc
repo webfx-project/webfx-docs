@@ -14,6 +14,7 @@ digraph D {
             style = "dashed"
             label = "Client    "
 
+            CL [shape=point, width=0.3, style=invis]
             UIScheduler [fillcolor="#ff5050"]
             Storage [fillcolor="#ff5050"]
             WindowHistory [fillcolor="#e0aaff"]
@@ -21,16 +22,17 @@ digraph D {
             WindowLocation [fillcolor="#e0aaff"]
             WebAssembly
             WebWorker
+            CR [shape=point, width=0.25, style=invis]
 
-            {rank=same UIScheduler Storage WindowHistory PC WindowLocation WebAssembly WebWorker}
-            UIScheduler -> Storage -> WindowHistory -> PC -> WindowLocation -> WebAssembly -> WebWorker [style=invis]
+            {rank=same CL UIScheduler Storage WindowHistory PC WindowLocation WebAssembly WebWorker CR}
+            CL -> UIScheduler -> Storage -> WindowHistory -> PC -> WindowLocation -> WebAssembly -> WebWorker -> CR [style=invis]
         }
 
         subgraph cluster_SHR {
             label = "Shared   "
             style = "dashed"
 
-            SHRL [shape=point, width=0.1, style=invis]
+            SHRL [shape=point, width=0.41, style=invis]
             Boot [fillcolor="#ff5050"]
             Resources [fillcolor="#ff5050"]
             Console [fillcolor="#ff5050"]
@@ -38,19 +40,20 @@ digraph D {
             Scheduler [fillcolor="#ff5050"]
             Json [fillcolor="#e0aaff"]
             Async [fillcolor="#e0aaff"]
-            SHRR [shape=point, width=0.41, style=invis]
+            File [fillcolor="#e0aaff"]
+            SHRR [shape=point, width=0.1, style=invis]
 
-            {rank=same SHRL Boot Resources Console Shutdown Scheduler Json Async SHRR}
-            SHRL -> Resources -> Console -> Boot -> Shutdown -> Scheduler -> Json -> Async -> SHRR [style=invis]
+            {rank=same SHRL Boot Resources Console Shutdown Scheduler Json Async File SHRR}
+            SHRL -> Resources -> Console -> Boot -> Shutdown -> Scheduler -> Json -> Async -> File -> SHRR [style=invis]
         }
 
         subgraph cluster_S {
             label = "Server   "
             style = "dashed"
 
-            SL [width=3.35, style=invis]
+            SL [width=3.85, style=invis]
             Vertx [label="Vert.x", fillcolor="#e0aaff"]
-            SR [width=3.55, style=invis]
+            SR [width=4, style=invis]
 
             {rank=same SL Vertx SR}
             SL -> Vertx -> SR [style=invis]
@@ -70,7 +73,7 @@ digraph D {
         peripheries=0
 
         Kit [label="Used by the WebFX Kit", fillcolor="#ff5050"]
-        Stack [label = "Used by the WebFX Stack", fillcolor="#e0aaff"]
+        Stack [label = "Used by the WebFX Stack or Extras", fillcolor="#e0aaff"]
         Demos [label = "Used by the WebFX demos"]
 
         {rank=same Kit Stack Demos}
