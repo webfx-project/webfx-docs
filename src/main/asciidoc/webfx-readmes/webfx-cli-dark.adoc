@@ -1,5 +1,5 @@
 [.text-center]
-[graphviz, webfx-cli, format=svg]
+[graphviz, webfx-cli-dark, format=svg]
 ----
 digraph { bgcolor="#161B21" edge [color=white]
     node [ shape=rectangle, fillcolor="#ffdccc", style=filled];

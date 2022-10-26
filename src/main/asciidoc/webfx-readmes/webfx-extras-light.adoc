@@ -1,6 +1,6 @@
 
 [.text-center]
-[graphviz, webfx-extras, format=svg]
+[graphviz, webfx-extras-light, format=svg]
 ----
 digraph D {
     graph [compound=true, ranksep=0.3, nodesep=0.2, fontname=monospace, fontsize=10]

@@ -1,6 +1,6 @@
 
 [.text-center]
-[plantuml, webfx-ecosystem, format=svg]
+[plantuml, webfx-project-dark, format=svg]
 ----
 ' Dark mode style addition (BEGIN)
 skinparam backgroundColor 161B21

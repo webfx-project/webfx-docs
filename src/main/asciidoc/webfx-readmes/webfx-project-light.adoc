@@ -1,6 +1,6 @@
 
 [.text-center]
-[plantuml, webfx-ecosystem, format=svg]
+[plantuml, webfx-project-light, format=svg]
 ----
 hide stereotype
 skinparam ranksep 50
