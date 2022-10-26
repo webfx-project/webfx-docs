@@ -1,0 +1,86 @@
+
+[.text-center]
+[graphviz, webfx-platform, format=svg]
+----
+digraph D { bgcolor="#161B21" edge [color=white]
+    graph [compound=true, ranksep=0.3, nodesep=0.2, fontname=monospace, fontsize=10, splines=false, fontcolor=white, color=white]
+    node [shape="rectangle", style="rounded,filled", fillcolor="#f5dd90", fontname=monospace, fontsize=10]
+
+
+    subgraph cluster_P {
+        label = "Platform    "
+
+        subgraph cluster_C {
+            style = "dashed"
+            label = "Client    "
+
+            CL [shape=point, width=0.3, style=invis]
+            UIScheduler [fillcolor="#ff5050"]
+            Storage [fillcolor="#ff5050"]
+            WindowHistory [fillcolor="#e0aaff"]
+            PC [shape=point, style=invis]
+            WindowLocation [fillcolor="#e0aaff"]
+            WebAssembly
+            WebWorker
+            CR [shape=point, width=0.25, style=invis]
+
+            {rank=same CL UIScheduler Storage WindowHistory PC WindowLocation WebAssembly WebWorker CR}
+            CL -> UIScheduler -> Storage -> WindowHistory -> PC -> WindowLocation -> WebAssembly -> WebWorker -> CR [style=invis]
+        }
+
+        subgraph cluster_SHR {
+            label = "Shared   "
+            style = "dashed"
+
+            SHRL [shape=point, width=0.41, style=invis]
+            Boot [fillcolor="#ff5050"]
+            Resources [fillcolor="#ff5050"]
+            Console [fillcolor="#ff5050"]
+            Shutdown [fillcolor="#ff5050"]
+            Scheduler [fillcolor="#ff5050"]
+            Json [fillcolor="#e0aaff"]
+            Async [fillcolor="#e0aaff"]
+            File [fillcolor="#e0aaff"]
+            SHRR [shape=point, width=0.1, style=invis]
+
+            {rank=same SHRL Boot Resources Console Shutdown Scheduler Json Async File SHRR}
+            SHRL -> Resources -> Console -> Boot -> Shutdown -> Scheduler -> Json -> Async -> File -> SHRR [style=invis]
+        }
+
+        subgraph cluster_S {
+            label = "Server   "
+            style = "dashed"
+
+            SL [width=3.85, style=invis]
+            Vertx [label="Vert.x", fillcolor="#e0aaff"]
+            SR [width=4, style=invis]
+
+            {rank=same SL Vertx SR}
+            SL -> Vertx -> SR [style=invis]
+        }
+
+        Boot -> Vertx [dir=back,style=dashed]
+        Scheduler -> Vertx [dir=back,style=dashed]
+        Json -> Vertx [dir=back,style=dashed]
+
+    }
+
+    PC -> Shutdown [style=invis]
+
+    subgraph cluster_L {
+        label = "Legend  "
+        style = "dashed"
+        peripheries=0
+
+        Kit [label="Used by the WebFX Kit", fillcolor="#ff5050"]
+        Stack [label = "Used by the WebFX Stack or Extras", fillcolor="#e0aaff"]
+        Demos [label = "Used by the WebFX demos"]
+
+        {rank=same Kit Stack Demos}
+
+        Kit -> Stack -> Demos [style=invis]
+    }
+
+    Vertx -> Stack [style=invis]
+}
+----

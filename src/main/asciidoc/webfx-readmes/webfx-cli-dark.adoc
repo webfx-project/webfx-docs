@@ -1,0 +1,17 @@
+[.text-center]
+[graphviz, webfx-cli, format=svg]
+----
+digraph { bgcolor="#161B21" edge [color=white]
+    node [ shape=rectangle, fillcolor="#ffdccc", style=filled];
+    WebFXCli [label="webfx-cli", shape=ellipse, fillcolor="#e0aaff"];
+    WebFXXml [label="webfx.xml", fillcolor="#f5dd90"];
+    Code [label="Your module source code", fillcolor="#f5dd90"];
+    WebFXXml -> WebFXCli [color=white]
+    Code -> WebFXCli
+    WebFXCli -> "pom.xml"
+    WebFXCli -> "module-info.java"
+    WebFXCli -> "GWT module.gwt.xml
+super sources, bundles, etc..."
+    WebFXCli -> "GraalVM conf"
+}
+----

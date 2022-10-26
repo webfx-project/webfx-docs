@@ -1,0 +1,27 @@
+
+[.text-center]
+[graphviz, webfx-extras, format=svg]
+----
+digraph D { bgcolor="#161B21" edge [color=white]
+    graph [compound=true, ranksep=0.3, nodesep=0.2, fontname=monospace, fontsize=10, fontcolor=white, color=white]
+    node [shape="rectangle", style="rounded,filled", fillcolor="#f5dd90", fontname=monospace, fontsize=10]
+
+    subgraph cluster_UI {
+        label = "UI"
+
+        subgraph cluster_V {
+            label = "Visual API"
+            style = "dashed"
+
+            {rank=same VisualGrid VisualCharts VisualGantt}
+            VisualGrid -> VisualCharts -> VisualGantt [style=invis]
+        }
+
+        {rank=same FilePicker FlexBox WebText Led MaterialDesign}
+        FilePicker -> FlexBox -> WebText -> Led -> MaterialDesign [style=invis]
+    }
+
+    VisualCharts -> Led [style=invis]
+    VisualCharts -> FlexBox [style=invis]
+}
+----
