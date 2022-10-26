@@ -1,0 +1,12 @@
+[.text-center]
+[graphviz, webfx-cross-platform-dark, format=svg]
+----
+digraph { bgcolor="transparent" edge [color=white]
+    node [ shape=rectangle, fillcolor="#D0E8F2", style="filled"];
+WebFX [label="Your WebFX application", fillcolor="#f5dd90", shape=ellipse]
+Web [label="Web\nAll major browsers"]
+    WebFX -> Web [headlabel=<<font color="white">WebFX</font>> labeldistance=3.2 labelangle=30];
+    WebFX -> "Desktop\nWindows, macOS & Linux" [headlabel=<<font color='white'>Java or Gluon</font>> labeldistance=2.7 labelangle=-7 labelcolor=white];
+    WebFX -> "Mobiles\nAndroid & iOS" [label=<<font color="white">Gluon</font>>];
+}
+----
