@@ -23,6 +23,7 @@ skinparam shadowing true
 skinparam rectangleShadowing false
 skinparam nodeBackgroundColor f5dd90
 skinparam usecaseBackgroundColor e0aaff
+skinparam backgroundColor transparent
 
 rectangle "OpenJFX" {
     node "Higher layer" as o1
@@ -78,7 +79,7 @@ There are already great solutions to run Swing or JavaFX applications in the bro
 [.text-center]
 [graphviz, webfx-cross-platform, format=svg]
 ----
-digraph {
+digraph { bgcolor="transparent"
     node [ shape=rectangle, fillcolor="#D0E8F2", style="filled"];
 WebFX [label="Your WebFX application", fillcolor="#f5dd90", shape=ellipse]
 Web [label="Web\nAll major browsers"]
@@ -200,7 +201,7 @@ You can create several WebFX applications in the same repository. As your applic
 [.text-center]
 [graphviz, webfx-cli, format=svg]
 ----
-digraph {
+digraph { bgcolor="transparent"
     node [ shape=rectangle, fillcolor="#ffdccc", style=filled];
     WebFXCli [label="webfx-cli", shape=ellipse, fillcolor="#e0aaff"];
     WebFXXml [label="webfx.xml", fillcolor="#f5dd90"];
