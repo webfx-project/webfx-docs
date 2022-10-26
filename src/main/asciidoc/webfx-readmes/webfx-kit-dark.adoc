@@ -3,7 +3,7 @@
 [plantuml, webfx-kit-dark, format=svg]
 ----
 ' Dark mode style addition (BEGIN)
-skinparam backgroundColor 161B21
+skinparam backgroundColor transparent
 skinparam defaultFontColor white
 skinparam nodeFontColor black
 skinparam usecaseFontColor black

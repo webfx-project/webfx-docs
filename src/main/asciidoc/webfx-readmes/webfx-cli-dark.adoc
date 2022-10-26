@@ -1,7 +1,7 @@
 [.text-center]
 [graphviz, webfx-cli-dark, format=svg]
 ----
-digraph { bgcolor="#161B21" edge [color=white]
+digraph { bgcolor="transparent" edge [color=white]
     node [ shape=rectangle, fillcolor="#ffdccc", style=filled];
     WebFXCli [label="webfx-cli", shape=ellipse, fillcolor="#e0aaff"];
     WebFXXml [label="webfx.xml", fillcolor="#f5dd90"];
