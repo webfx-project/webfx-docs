@@ -10,7 +10,7 @@ Last updated: {docdate}
 
 === What is WebFX?
 
-WebFX is a JavaFX application transpiler powered by link:https://www.gwtproject.org[GWT^] or link:https://www.teavm.org[TeaVM^]. It can transpile a JavaFX application into a traditional self-contained pure JavaScript or WebAssembly web app (with no plugin or server required for its execution in the browser).
+WebFX is a JavaFX application transpiler powered by link:https://www.gwtproject.org[GWT^] or link:https://www.teavm.org[TeaVM^]. It can transpile a JavaFX application into a standalone, self-contained JavaScript or WebAssembly web app (with no plugin or server required for execution in the browser).
 
 === How it works
 
@@ -66,13 +66,13 @@ app -[hidden]> gwt
 gwt -[hidden]> wa
 ----
 
-The link:https://github.com/webfx-project/webfx/tree/main/webfx-kit[WebFX kit^] is the heart of WebFX. It's a modified version of OpenJFX that can be transpiled. This is achieved by patching the higher layer of OpenJFX (which contains the main JavaFX features and API) to make it GWT and TeaVM compatible, and by replacing the lower layer (the graphic rendering pipeline) by a scene graph -> DOM mapper (the DOM being finally rendered by the browser).
+The link:https://github.com/webfx-project/webfx/tree/main/webfx-kit[WebFX kit^] is the heart of WebFX. It's a modified version of OpenJFX that can be transpiled by GWT and TeaVM. This is achieved by patching the higher layer of OpenJFX (which contains the main JavaFX features and API) to make it GWT and TeaVM compatible, and by replacing the lower layer (the graphic rendering pipeline) with a scene graph -> DOM mapper (rendered by the browser).
 
 === Benefits
 
 ==== No server
 
-There are already great solutions to run Swing or JavaFX applications in the browser without plugins by actually running them on a server. And these solutions don't have the limitations WebFX currently has. However, a standard self-contained web packaging is a much more simple, scalable and reliable execution model. This is precisely the benefit of WebFX, and probably the main reason why you would prefer it over the other existing solutions.
+There are already great solutions to run Swing or JavaFX applications in the browser without plugins by actually running them on a server. Those solutions avoid some current WebFX limitations, but a standard self-contained web packaging is a much simpler, more scalable, and more reliable execution model. This is precisely the benefit of WebFX, and probably the main reason why you would prefer it over the other existing solutions.
 
 ==== Cross-platform
 
@@ -89,17 +89,17 @@ Web [label="Web\nAll major browsers"]
 }
 ----
 
-In addition to the web platform, a WebFX application can also run on desktops & mobiles. WebFX will invoke the standard Java toolchain to produce desktop executables (embedding an optimized JRE), and the Gluon toolchains to produce native executables for the desktop and mobiles.
+In addition to the web platform, a WebFX application can also run on desktop and mobile. WebFX will invoke the standard Java toolchain to produce desktop executables (with an optimized JRE embedded), and the Gluon toolchain to produce native executables for desktop and mobile.
 
-Some alternative technologies or JVM languages allow you to do the same but only for the application logic, because they don't offer a cross-platform UI toolkit. With WebFX, you can do a full cross-platform development of your entire application from a single-source codebase.
+Some alternative technologies or JVM languages allow you to do the same but only for the application logic, because they don't offer a cross-platform UI toolkit. With WebFX, you can do full cross-platform development of your entire application from a single codebase.
 
 ==== Java full-stack
 
-Writing your whole stack in Java is a big advantage, keeping your environment simple and homogeneous from a single Java IDE. This prevents you from having to master other complex ecosystems such as JavaScript or TypeScript, and also allows you to share common code between your backend and frontend using the Java module system - a great advantage compared to heterogeneous systems.
+Writing your whole stack in Java is a big advantage, keeping your environment simple and homogeneous from a single Java IDE. Here, full-stack means you can use Java on both the frontend and backend. This prevents you from having to master other complex ecosystems such as JavaScript or TypeScript, and also allows you to share common code between your backend and frontend using the Java module system - a great advantage compared to heterogeneous systems.
 
 ==== Performance
 
-Despite the big size of OpenJFX, WebFX can produce lightweight web apps, as demonstrated by the demos and the website:
+Despite the large size of OpenJFX, WebFX can produce lightweight web apps, as demonstrated by the demos and the website:
 
 [cols="1,^1"]
 |===
@@ -127,21 +127,21 @@ Despite the big size of OpenJFX, WebFX can produce lightweight web apps, as demo
 |226 kB
 |===
 
-[small]#* compressed JS size transferred over the network, without eventual images or other resources#
+[small]#* compressed JS size transferred over the network, excluding images and other resources#
 
 The secret? Three things:
 
 * The scene graph -> DOM mapper is much thinner than the original OpenJFX lower layer, which has to reimplement many features a browser already has.
 * GWT and TeaVM run a dead code elimination (tree-shaking) process, which removes the JavaFX classes not used by the WebFX application.
-* GWT produces amazingly compact and optimized JS code, leading to highly-performant web apps.
+* GWT produces compact and optimized JS code, leading to highly performant web apps.
 
 ==== Gradual learning curve
 
-WebFX is not an additional UI toolkit to learn - it's an emulation of the well-known and well-documented JavaFX API. All the powerful JavaFX features that you know and love are available for your web app. You will feel right at home with WebFX!
+WebFX is not an additional UI toolkit to learn - it is an emulation of the well-known and well-documented JavaFX API. All the powerful JavaFX features that you know and love are available for your web app. You will feel right at home with WebFX!
 
 ==== Fast development cycles
 
-You don't need to run regular GWT/TeaVM compilations like you would do with a traditional GWT/TeaVM development, because you can already run and debug your WebFX application directly in your Java IDE with the OpenJFX runtime. You typically transpile your app only at the end of a development cycle to check the web version, after you have finished developing a feature using the standard JavaFX development model.
+You don't need to run regular GWT/TeaVM compilations as in traditional GWT/TeaVM development, because you can already run and debug your WebFX application directly in your Java IDE with the OpenJFX runtime. You typically transpile your app only at the end of a development cycle to check the web output, after you have finished developing a feature using the standard JavaFX development model.
 
 ==== Free and open source
 
@@ -149,16 +149,16 @@ WebFX is an open source initiative released under Apache 2.0 license.
 
 === Limitations
 
-The WebFX kit coverage is for now limited to the essential features of JavaFX. So to successfully compile to the web, your JavaFX code needs to meet these 2 requirements:
+The WebFX kit coverage is currently limited to the essential features of JavaFX. So to successfully compile to the web, your JavaFX code needs to meet these two requirements:
 
-* use only the features covered by the WebFX kit (you can check out the link:https://javadoc.webfx.dev[JavaDoc^] to get an idea of this coverage)
-* be compatible with GWT and/or TeaVM (no reflection, no multi-threading, no blocking code, etc...)
+* use only the features covered by the WebFX kit (see the link:https://javadoc.webfx.dev[JavaDoc^] for coverage)
+* be compatible with GWT and/or TeaVM (avoid reflection, multithreading, and blocking code)
 
-When a JavaFX application meets these 2 requirements, we will call it a _WebFX application_, and it can be transpiled to the web simply by running a GWT or TeaVM compilation of it together with the WebFX kit.
+When a JavaFX application meets these two requirements, we call it a _WebFX application_, and it can be transpiled for the web simply by running a GWT or TeaVM compilation of it together with the WebFX kit.
 
-The main JavaFX features not yet covered are: JavaFX CSS, FXML, 3D, and most complex controls (ComboBox, TableView, TreeView,...). But we will soon support CSS (using efficient browser CSS mapping rather than JavaFX CSS emulation) and provide simpler alternative WebFX controls to ComboBox and TableView, before considering their actual emulation.
+The main JavaFX features not currently covered are: JavaFX CSS, FXML, 3D, and most complex controls such as ComboBox, TableView, and TreeView. We plan to support CSS (using efficient browser CSS mapping rather than JavaFX CSS emulation) and provide simpler alternative WebFX controls to ComboBox and TableView before considering their actual emulation.
 
-NOTE: Note for the impatient: OpenJFX is a huge library (about 10MB) compared to standard JS frameworks (typically 100KB). It may take some time to complete its coverage - thank you for your understanding. In the near future we hope to release a set of contributor guidelines and will endeavour to build an online community of developers around the project.
+NOTE: For the impatient: OpenJFX is a huge library (about 10MB) compared to standard JS frameworks (typically 100KB). It may take some time to complete its coverage - thank you for your understanding. In the near future we plan to release a set of contributor guidelines and will work to build an online community of developers around the project.
 
 == Getting started
 
@@ -173,7 +173,7 @@ To develop WebFX applications, you will need the following software already inst
 
 === Introducing the WebFX CLI
 
-The WebFX CLI is an essential Command Line Interface tool that will assist you developing WebFX applications. It will create your application modules as follows:
+The WebFX CLI is an essential Command Line Interface tool that will assist you in developing WebFX applications. It will create your application modules as follows:
 
 [plantuml, webfx-app-structure, format=svg]
 ----
@@ -226,9 +226,9 @@ Your inputs will be centralized in the WebFX module files named webfx.xml (same 
         <used-by-source-modules/>
     </dependencies>
 
-This directive is asking the CLI to identify the list of your dependencies from an analysis of your source code, and automatically populate the dependencies in pom.xml, module-info.java, module.gwt.xml, etc...
+This directive asks the CLI to identify the list of your dependencies from an analysis of your source code, and automatically populate the dependencies in pom.xml, module-info.java, module.gwt.xml, etc...
 
-During that process, the CLI takes care of the cross-platform aspects: when a feature is platform-dependent (a different implementation exists for different platforms), it will pick up the right modules (those whose implementation matches the target platform). It is at this point, for example, that the CLI will replace the OpenJFX modules with the WebFX kit modules in your GWT application module.
+During that process, the CLI takes care of the cross-platform aspects: when a feature is platform-dependent (a different implementation exists for different platforms), it will pick the right modules (those whose implementation matches the target platform). It is at this point, for example, that the CLI will replace the OpenJFX modules with the WebFX kit modules in your GWT application module.
 
 === Installing the WebFX CLI
 
@@ -259,7 +259,7 @@ This is achieved by running the Maven _package_ goal under the webfx-cli directo
 
 IMPORTANT: As previously mentioned, WebFX CLI requires JDK 13 or above to successfully compile.
 
-This generates an executable fat jar in the target folder that we can execute with java:
+This generates an executable fat jar in the target folder that you can execute with java:
 
  java -jar target/webfx-cli-0.1.0-SNAPSHOT-fat.jar
 
@@ -267,7 +267,7 @@ The `webfx.sh` and `webfx.bat` script files (located under the webfx-cli directo
 
 ==== Creating a permanent _webfx_ alias
 
-To easily invoke the CLI from a terminal, we need to create a permanent _webfx_ alias. This is done with the following commands (#to run under the webfx-cli directory#):
+To easily invoke the CLI from a terminal, we need to create a permanent _webfx_ alias. Run these commands in the webfx-cli directory:
 
 [source,shell,indent=0,role="primary"]
 .Linux
@@ -330,7 +330,7 @@ Now you should be able to invoke the CLI from the terminal:
 
 ==== Updating the WebFX CLI to the latest version
 
-You can check for update at any time by running:
+You can check for updates at any time by running:
 
  webfx bump cli
 
@@ -343,7 +343,7 @@ NOTE: This is so far the only command that uses `git` (a `git pull` of the webfx
 
 ==== Creating and initializing your repository
 
-Let's create our first WebFX application. We need to create the repository directory and ask the CLI to initialize it, passing it the groupId, artifactId and version of our application.
+Let's create our first WebFX application. We need to create the repository directory and ask the CLI to initialize it, passing the groupId, artifactId, and version of our application.
 
  mkdir webfx-example
  cd webfx-example
@@ -353,16 +353,16 @@ Let's create our first WebFX application. We need to create the repository direc
 TIP: `webfx init org.example:1.0.0-SNAPSHOT` will also work as the CLI takes the repository directory name as the artifactId when omitted in the command.
 ////
 
-The init command creates only 2 files: webfx.xml and pom.xml. Note that if this is the first time you have used the CLI, it will download some other files through Maven to retrieve essential information about the available WebFX modules.
+The init command creates only two files: webfx.xml and pom.xml. Note that if this is the first time you have used the CLI, it will download some other files through Maven to retrieve essential information about the available WebFX modules.
 
 ==== Creating your application modules
 
-When we create an application, we pass the fully qualified name of the JavaFX class we want to create, and the prefix to use for the application modules:
+When you create an application, you pass the fully qualified name of the JavaFX class you want to create, and the prefix to use for the application modules:
 
  webfx create application --prefix webfx-example org.example.webfxexample.WebFxExampleApplication --helloWorld
 
 ////
-TIP: we could omit the prefix here, because the CLI takes the parent module name in that case.
+TIP: You can omit the prefix here, because the CLI takes the parent module name in that case.
 ////
 
 This command created the following modules:
@@ -407,7 +407,7 @@ The following command will do a simple build of your application (without genera
 
  webfx build
 
-To generate the executables for the different platforms, you need to pass some extra build options. You can have the list in the build help:
+To generate the executables for the different platforms, you need to pass some extra build options. You can find the list in the build help:
 
  webfx build --help
 
@@ -421,13 +421,13 @@ Some builds require the installation of third-party software, as shown in the fo
 | Linux, macOS or Windows
 |
 | --gwt
-| html
+| HTML
 
 | Web
 | Linux, macOS or Windows
 |
 | --teavm
-| html
+| HTML
 
 | Any desktop OS with Java
 | Linux, macOS or Windows
@@ -506,7 +506,7 @@ webfx build --gwt --show <3>
 webfx run --gwt <4>
 webfx build --gwt --run <5>
 ----
-<1> Build the html executable file with the GWT Maven plugin
+<1> Build the HTML executable file with the GWT Maven plugin
 <2> Locate the generated executable file
 <3> Show the generated executable file in the file explorer
 <4> Execute the generated executable in the browser
@@ -521,7 +521,7 @@ webfx build -gs <3>
 webfx run -g <4>
 webfx build -gr <5>
 ----
-<1> Build the html executable file with the GWT Maven plugin
+<1> Build the HTML executable file with the GWT Maven plugin
 <2> Locate the generated executable file
 <3> Show the generated executable file in the file explorer
 <4> Execute the generated executable in the browser
@@ -529,7 +529,7 @@ webfx build -gr <5>
 
 TIP: As opposed to `--show`, `--locate` works even before the build, as it prints the expected location, whether the executable file is present or not.
 
-The `run` command has exactly the same options as the `build` command. The only difference between these 2 commands is that with `run` you can run the app without rebuilding it (unless `--build` is specified), and with `build` you can build the app without running it (unless `--run` is specified).
+The `run` command has exactly the same options as the `build` command. The only difference between these two commands is that with `run` you can run the app without rebuilding it (unless `--build` is specified), and with `build` you can build the app without running it (unless `--run` is specified).
 
 === Web platform via TeaVM
 
@@ -546,7 +546,7 @@ webfx build --teavm --show <3>
 webfx run --teavm --javascript <4>
 webfx build --teavm --javascript --run <5>
 ----
-<1> Build the html executable files (JavaScript and WebAssembly) with the TeaVM Maven plugin
+<1> Build the HTML executable files (JavaScript and WebAssembly) with the TeaVM Maven plugin
 <2> Locate the generated executable files
 <3> Show the generated executable files in the file explorer
 <4> Execute the generated JavaScript executable in the browser
@@ -561,15 +561,15 @@ webfx build -ts <3>
 webfx run -tj <4>
 webfx build -tjr <5>
 ----
-<1> Build the html executable files (JavaScript and WebAssembly) with the TeaVM Maven plugin
+<1> Build the HTML executable files (JavaScript and WebAssembly) with the TeaVM Maven plugin
 <2> Locate the generated executable files
 <3> Show the generated executable files in the file explorer
 <4> Execute the generated JavaScript executable in the browser
 <5> Build the JavaScript app and execute it in a single command
 
-NOTE: `webfx run --teavm --wasm` (short syntax `webfx run -tw`) is not working because http(s) is required for running WebAssembly. But you can use the built-in webserver of your Java IDE to serve the file located by `webfx build -twl`.
+NOTE: `webfx run --teavm --wasm` (short syntax `webfx run -tw`) does not work because http(s) is required for running WebAssembly. But you can use the built-in web server of your Java IDE to serve the file located by `webfx build -twl`.
 
-In the next sections, we won't repeat all these commands, we will use only the last command to build and run the application in one go, but of course you can still choose to separate the build and the run.
+In the next sections, we won't repeat all these commands; we will use only the last command to build and run the application in one go, but you can still choose to separate build and run.
 
 === Desktop platform (JAR)
 
@@ -591,12 +591,12 @@ webfx build --openjfx-fatjar --run
 webfx build -fr
 ----
 
-TIP: You can combine the build options. For example `webfx build --gwt --openjfx-fatjar` (short syntax: `webfx build -gf`) will build both the GWT html and OpenJFX fat jar executables.
+TIP: You can combine the build options. For example `webfx build --gwt --openjfx-fatjar` (short syntax: `webfx build -gf`) will build both the GWT HTML and OpenJFX fat jar executables.
 
 
 === Desktop platform (embedded JRE)
 
-As opposed to the JAR, the embedded JRE will be specific to the target platform. Therefore, a Linux machine will build a Linux executable, a Mac will build a macOS executable, and a Windows machine a Windows executable.
+As opposed to the JAR, the embedded JRE will be specific to the target platform. Therefore, a Linux machine will build a Linux executable, a Mac will build a macOS executable, and a Windows machine will build a Windows executable.
 
 The link:https://github.com/fvarrui/JavaPackager[JavaPackager Maven plugin^] will be invoked to generate the executables and installers for the different platforms.
 
@@ -614,7 +614,7 @@ webfx install ubuntu-tools <1>
 ----
 webfx install xcode <1>
 ----
-<1> Just checks that Xcode is installed with the correct path, otherwise suggest solutions.
+<1> Just checks that Xcode is installed with the correct path, otherwise suggests solutions.
 
 [source,shell,indent=0,role="secondary"]
 .Windows
@@ -625,9 +625,9 @@ webfx install inno <2>
 <1> Optional. The WiX Toolset is used by JavaPackager to create a simple .msi installer.
 <2> Optional. Inno Setup is used by JavaPackager to create a more elaborate .exe installer.
 
-NOTE: The CLI will help you to customize the installers (application name, icon, etc...) in a next version. For now, we just use the default settings.
+NOTE: The CLI will help you to customize the installers (application name, icon, etc...) in a future version. For now, we just use the default settings.
 
-IMPORTANT: On macOS, you need to configure at least a Team ID in Xcode in order to make the application runnable on your machine. We will provide a guide for this later.
+IMPORTANT: On macOS, you need to configure at least a Team ID in Xcode to make the application runnable on your machine. We will provide a guide for this later.
 
 Then, you can use the following command:
 
@@ -647,7 +647,7 @@ TIP: If the application fails to run on macOS, you can try `webfx run -k --open`
 
 === Desktop platform (native)
 
-Like for the embedded JRE, 3 different machines are required to target the Linux, macOS, and Windows executables.
+As with the embedded JRE, three different machines are required to target the Linux, macOS, and Windows executables.
 
 The link:https://github.com/gluonhq/gluonfx-maven-plugin[GluonFX Maven plugin^] will be invoked to generate the native desktops.
 
@@ -668,7 +668,7 @@ webfx install graalvm <1>
 webfx install xcode <2>
 ----
 <1> Required for the GluonFX Maven plugin
-<2> Just checks that Xcode is installed with the correct path, otherwise suggest solutions.
+<2> Just checks that Xcode is installed with the correct path, otherwise suggests solutions.
 
 
 [source,shell,indent=0,role="secondary"]
@@ -683,7 +683,7 @@ webfx install wix <2>
 
 IMPORTANT: On macOS, you need to configure at least a Team ID in Xcode in order to make the application runnable on your machine. We will provide a guide for this later.
 
-Then, you can use the below command:
+Then, you can use the following command:
 
 [source,shell,indent=0,role="primary"]
 .Long syntax
@@ -697,7 +697,7 @@ webfx build --gluon-desktop --run
 webfx build -dr
 ----
 
-WARNING: On machines that don't support OpenGL (such as some Linux virtual machines), JavaFX may report: Error initializing QuantumRenderer: no suitable pipeline found. We will provide later an option to include the JavaFX software pipeline as a backup, but this will increase the size of the executable.
+WARNING: On machines that don't support OpenGL (such as some Linux virtual machines), JavaFX may report: Error initializing QuantumRenderer: no suitable pipeline found. We plan to provide an option later to include the JavaFX software pipeline as a backup, but this will increase the size of the executable.
 
 === Android platform
 
@@ -728,11 +728,11 @@ Alternatively, you can use the `--gluon-mobile` (short: `-m`) cross-platform opt
 
 In this context, running the application means invoking the GluonFX Maven plugin to install and run the generated package on your Android device connected to your Linux machine via USB. For this to succeed, you must first activate the Developer mode and then the USB debugging option on your Android device.
 
-NOTE: Only 64-bit architecture is supported (the installation will fail on 32-bit devices). Please check your Android kernel version specifies `x64`.
+NOTE: Only 64-bit architecture is supported (the installation will fail on 32-bit devices). Please check that your Android kernel version specifies `x64`.
 
 === iOS platform
 
-A Mac is required to build the iOS executable.
+A macOS machine is required to build the iOS executable.
 
 The link:https://github.com/gluonhq/gluonfx-maven-plugin[GluonFX Maven plugin^] will be invoked to generate the native iOS application.
 
@@ -767,7 +767,7 @@ For now, you can check out the demos to see sample GitHub workflow configuration
 
 === Developing in your IDE
 
-Instructions for IntelliJ IDEA are provided below, which can be quite easily transposed into other Java IDEs.
+Instructions for IntelliJ IDEA are provided below, which can be easily adapted to other Java IDEs.
 
 ==== Opening the project
 
@@ -779,8 +779,8 @@ Create an application configuration as follows:
 
 [.text-center]
 image::webfx-example-idea-openjfx-config.png[]
-<1> select the OpenJFX application module
-<2> enter [red]`dev.webfx.platform.boot.ApplicationBooter` for the main class
+<1> Select the OpenJFX application module
+<2> Enter [red]`dev.webfx.platform.boot.ApplicationBooter` for the main class
 
 TIP: You can just type `AB` for the main class, and your IDE should quickly find and suggest the WebFX ApplicationBooter class.
 
@@ -788,14 +788,14 @@ The way to boot GWT and OpenJFX applications is different, but WebFX offers a cr
 
 [NOTE]
 ====
-GWT normally doesn't support the Java service API, but WebFX does, because the CLI emulates it by generating a GWT super source. You can rely on this feature to declare and implement your own services. Your services can even have platform-dependent implementations. A service can be a cross-platform UI API for example, with an OpenJFX implementation, and a different GWT implementation using the JS library you want for your web app. We will document this later.
+GWT normally doesn't support the Java service API, but WebFX does, because the CLI emulates it by generating a GWT super source. You can rely on this feature to declare and implement your own services. Your services can even have platform-dependent implementations. For example, a service can be a cross-platform UI API, with an OpenJFX implementation and a different GWT implementation using the JS library you want for your web app. We will document this later.
 ====
 
 If you run this configuration, it will build and run your WebFX application in your IDE using the OpenJFX runtime. This is the configuration that you will use to develop and debug your application.
 
 ==== Building and running the GWT application
 
-As opposed to the OpenJFX version where the IDE can use its own Java build system, the GWT version can only be built through Maven. One way to build it is to open a terminal window in your IDE, and to type `webfx build --gwt`.
+Unlike the OpenJFX version where the IDE can use its own Java build system, the GWT version can only be built through Maven. One way to build it is to open a terminal window in your IDE, and to type `webfx build --gwt`.
 
 [.text-center]
 image::webfx-example-idea-gwt-build-terminal.png[]
@@ -806,22 +806,22 @@ image::webfx-example-idea-gwt-build-maven.png[]
 <1> Activate the `gwt-compile` Maven profile
 <2> Run the `package` Maven goal
 
-It can be a good idea to create a configuration by selecting `Modify Run Configuration` in the context menu of that `package` goal, and press OK in the window below. You can then easily run this configuration to trigger the GWT build.
+It can be a good idea to create a configuration by selecting `Modify Run Configuration` in the context menu of that `package` goal, and press OK in the dialog. You can then easily run this configuration to trigger the GWT build.
 
 [.text-center]
 image::webfx-example-idea-gwt-config.png[]
 
-Once built, you can ask your IDE to open the generated html file in a browser.
+Once built, you can ask your IDE to open the generated HTML file in a browser.
 
 [.text-center]
 image::webfx-example-idea-gwt-bookmark.png[]
-<1> Locate the generated html file
+<1> Locate the generated HTML file
 <2> You can drag & drop it in the Bookmarks window for later
 <3> Select the browser you want to use to open it
 
 ==== Making changes
 
-Let's do a first little change by replacing the Text with a Button. At first sight, it looks an insignificant change, but actually it's not, because this involves a new dependency to the `javafx-controls` module (our application was only using the `javafx-graphics` module so far). To take advantage of the CLI, let's enter the fully qualified Button class name like this:
+Let's do a first small change by replacing the Text with a Button. At first sight, it looks like an insignificant change, but actually it's not, because this involves a new dependency on the `javafx-controls` module (our application was only using the `javafx-graphics` module so far). To take advantage of the CLI, let's enter the fully qualified Button class name like this:
 
 [source,java]
 ----
@@ -840,7 +840,7 @@ The IDE doesn't recognize this class yet, but let's ask the CLI to update the bu
 
  webfx update
 
-The CLI should make all necessary changes in the `pom.xml`, `module-info.java`, and `module.gwt.xml` files. After a few seconds, your IDE should automatically detect and consider these changes. Then it should recognize the Button class, and allow you to import it.
+The CLI should make all necessary changes in the `pom.xml`, `module-info.java`, and `module.gwt.xml` files. After a few seconds, your IDE should automatically detect and apply these changes. Then it should recognize the Button class, and allow you to import it.
 
 Finally, let's add a simple code to react to the button:
 
@@ -859,11 +859,11 @@ public class ExampleApplication extends Application {
 }
 ----
 
-You can first check the code is working as expected with the OpenJFX runtime by running the OpenJFX configuration. And then build and run the GWT version using one of the methods already explained.
+First, check that the code works as expected with the OpenJFX runtime by running the OpenJFX configuration. Then build and run the GWT version using one of the methods already explained.
 
-Our application looks a bit sad? Maybe you can try link:https://github.com/webfx-project/webfx-example/blob/main/webfx-example-application/src/main/java/org/example/webfxexample/WebFxExampleApplication.java[this little code^] that adds a bit of colors, animation and effect?
+Our application looks a bit sad? Maybe you can try link:https://github.com/webfx-project/webfx-example/blob/main/webfx-example-application/src/main/java/org/example/webfxexample/WebFxExampleApplication.java[this little code^] that adds a bit of color, animation, and effects?
 
-Some more creative ideas pop up in your mind? Now is the time to play with WebFX!
+Got more creative ideas? Now is the time to play with WebFX!
 
 ifdef::backend-html5[]
 == PDF version
