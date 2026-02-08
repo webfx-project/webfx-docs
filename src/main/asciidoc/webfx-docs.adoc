@@ -103,37 +103,37 @@ Despite the large size of OpenJFX, WebFX can produce lightweight web apps, as de
 
 [cols="1,^1,^1,^1"]
 |===
-|WebFX application | GWT JS size * | TeaVM JS size * | TeaVM Wasm size *
+|WebFX demo | GWT JS size * | TeaVM JS size * | TeaVM Wasm size *
 
-|link:https://colorfulcircles.webfx.dev[Colorful circles demo^]
+|link:https://colorfulcircles.webfx.dev[Colorful circles^]
 |97 kB
 |176 kB
 |220 kB
-|link:https://tallycounter.webfx.dev[Tally counter demo^]
+|link:https://tallycounter.webfx.dev[Tally counter^]
 |113 kB
 |200 kB
 |253 kB
-|link:https://demofx.webfx.dev[DemoFX demo^]
+|link:https://demofx.webfx.dev[DemoFX^]
 |147 kB
 |241 kB
 |303 kB
-|link:https://moderngauge.webfx.dev[Modern gauge demo^]
+|link:https://moderngauge.webfx.dev[Modern gauge^]
 |157 kB
 |225 kB
 |278 kB
-|link:https://mandelbrot.webfx.dev[Mandelbrot demo^]
+|link:https://mandelbrot.webfx.dev[Mandelbrot^]
 |159 kB
 |247 kB
 |310 kB
-|link:https://spacefx.webfx.dev[SpaceFX demo^]
+|link:https://spacefx.webfx.dev[SpaceFX^]
 |171 kB
 |259 kB
 |331 kB
-|link:https://fx2048.webfx.dev[FX2048 demo^]
+|link:https://fx2048.webfx.dev[FX2048^]
 |206 kB
 |341 kB
 |428 kB
-|link:https://enzoclocks.webfx.dev[Enzo clocks demo^]
+|link:https://enzoclocks.webfx.dev[Enzo clocks^]
 |296 kB
 |371 kB
 |484 kB
