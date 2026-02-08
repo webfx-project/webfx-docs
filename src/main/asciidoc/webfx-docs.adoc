@@ -158,7 +158,7 @@ When a JavaFX application meets these two requirements, we call it a _WebFX appl
 
 The main JavaFX features not currently covered are: JavaFX CSS, FXML, 3D, and most complex controls such as ComboBox, TableView, and TreeView. We plan to support CSS (using efficient browser CSS mapping rather than JavaFX CSS emulation) and provide simpler alternative WebFX controls to ComboBox and TableView before considering their actual emulation.
 
-NOTE: For the impatient: OpenJFX is a huge library (about 10MB) compared to standard JS frameworks (typically 100KB). It may take some time to complete its coverage - thank you for your understanding. In the near future we plan to release a set of contributor guidelines and will work to build an online community of developers around the project.
+NOTE: OpenJFX is a huge library (about 10MB) compared to standard JS frameworks (typically 100KB). Completing its coverage will take time, but you can already do most of what you can do with other standard frameworks.
 
 == Getting started
 
@@ -228,7 +228,7 @@ Your inputs will be centralized in the WebFX module files named webfx.xml (same 
 
 This directive asks the CLI to identify the list of your dependencies from an analysis of your source code, and automatically populate the dependencies in pom.xml, module-info.java, module.gwt.xml, etc...
 
-During that process, the CLI takes care of the cross-platform aspects: when a feature is platform-dependent (a different implementation exists for different platforms), it will pick the right modules (those whose implementation matches the target platform). It is at this point, for example, that the CLI will replace the OpenJFX modules with the WebFX kit modules in your GWT application module.
+During that process, the CLI takes care of the cross-platform aspects: when a feature is platform-dependent (a different implementation exists for different platforms), it will pick the right modules (those whose implementation matches the target platform). It is at this point, for example, that the CLI will replace the OpenJFX modules with the WebFX kit modules in your GWT and TeaVM application modules.
 
 === Installing the WebFX CLI
 
@@ -784,11 +784,11 @@ image::webfx-example-idea-openjfx-config.png[]
 
 TIP: You can just type `AB` for the main class, and your IDE should quickly find and suggest the WebFX ApplicationBooter class.
 
-The way to boot GWT and OpenJFX applications is different, but WebFX offers a cross-platform way to do it. For this reason, #the main class of a WebFX application is always [red monospace]+dev.webfx.platform.boot.ApplicationBooter+#. It will find your JavaFX application because it has been automatically declared as a Java service by the CLI.
+The way to boot GWT, TeaVM and OpenJFX applications is different, but WebFX offers a cross-platform way to do it. For this reason, #the main class of a WebFX application is always [red monospace]+dev.webfx.platform.boot.ApplicationBooter+#. It will find your JavaFX application because it has been automatically declared as a Java service by the CLI.
 
 [NOTE]
 ====
-GWT normally doesn't support the Java service API, but WebFX does, because the CLI emulates it by generating a GWT super source. You can rely on this feature to declare and implement your own services. Your services can even have platform-dependent implementations. For example, a service can be a cross-platform UI API, with an OpenJFX implementation and a different GWT implementation using the JS library you want for your web app. We will document this later.
+GWT normally doesn't support the Java service API, but WebFX does, because the CLI emulates it by generating a GWT super source. You can rely on this feature to declare and implement your own services. Your services can even have platform-dependent implementations. For example, a service can be a cross-platform UI API, with an OpenJFX implementation and a different GWT/TeaVM implementation using the JS library you want for your web app. We will document this later.
 ====
 
 If you run this configuration, it will build and run your WebFX application in your IDE using the OpenJFX runtime. This is the configuration that you will use to develop and debug your application.
@@ -859,7 +859,7 @@ public class ExampleApplication extends Application {
 }
 ----
 
-First, check that the code works as expected with the OpenJFX runtime by running the OpenJFX configuration. Then build and run the GWT version using one of the methods already explained.
+First, check that the code works as expected with the OpenJFX runtime by running the OpenJFX configuration. Then build and run the GWT/TeaVM version using one of the methods already explained.
 
 Our application looks a bit sad? Maybe you can try link:https://github.com/webfx-project/webfx-example/blob/main/webfx-example-application/src/main/java/org/example/webfxexample/WebFxExampleApplication.java[this little code^] that adds a bit of color, animation, and effects?
 
