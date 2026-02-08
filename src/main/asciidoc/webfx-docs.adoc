@@ -99,41 +99,53 @@ Writing your whole stack in Java is a big advantage, keeping your environment si
 
 ==== Performance
 
-Despite the large size of OpenJFX, WebFX can produce lightweight web apps, as demonstrated by the demos and the website:
+Despite the large size of OpenJFX, WebFX can produce lightweight web apps, as demonstrated by the demos:
 
 [cols="1,^1"]
 |===
-|WebFX application | JS size *
+|WebFX application | GWT JS size * | TeaVM JS size * | TeaVM Wasm size *
 
 |link:https://colorfulcircles.webfx.dev[Colorful circles demo^]
-|93 kB
+|97 kB
+|176 kB
+|220 kB
 |link:https://tallycounter.webfx.dev[Tally counter demo^]
-|104 kB
-|link:https://moderngauge.webfx.dev[Modern gauge demo^]
-|141 kB
-|link:https://enzoclocks.webfx.dev[Enzo clocks demo^]
-|260 kB
-|link:https://fx2048.webfx.dev[FX2048 demo^]
-|181 kB
-|link:https://spacefx.webfx.dev[SpaceFX demo^]
-|142 kB
+|113 kB
+|200 kB
+|253 kB
 |link:https://demofx.webfx.dev[DemoFX demo^]
-|128 kB
-|link:https://raytracer.webfx.dev[Ray tracer demo^]
-|137 kB
+|147 kB
+|241 kB
+|303 kB
+|link:https://moderngauge.webfx.dev[Modern gauge demo^]
+|157 kB
+|225 kB
+|278 kB
 |link:https://mandelbrot.webfx.dev[Mandelbrot demo^]
-|145 kB
-|link:https://webfx.dev[Website^]
-|226 kB
+|159 kB
+|247 kB
+|310 kB
+|link:https://spacefx.webfx.dev[SpaceFX demo^]
+|171 kB
+|259 kB
+|331 kB
+|link:https://fx2048.webfx.dev[FX2048 demo^]
+|206 kB
+|341 kB
+|428 kB
+|link:https://enzoclocks.webfx.dev[Enzo clocks demo^]
+|296 kB
+|371 kB
+|484 kB
 |===
 
-[small]#* compressed JS size transferred over the network, excluding images and other resources#
+[small]#* compressed JS/Wasm size transferred over the network, excluding images and other resources#
 
 The secret? Three things:
 
 * The scene graph -> DOM mapper is much thinner than the original OpenJFX lower layer, which has to reimplement many features a browser already has.
 * GWT and TeaVM run a dead code elimination (tree-shaking) process, which removes the JavaFX classes not used by the WebFX application.
-* GWT produces compact and optimized JS code, leading to highly performant web apps.
+* GWT produces very compact and optimized JS code, leading to highly performant web apps.
 
 ==== Gradual learning curve
 
