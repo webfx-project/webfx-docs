@@ -105,38 +105,38 @@ Despite the large size of OpenJFX, WebFX can produce lightweight web apps, as de
 |===
 |WebFX demo | GWT JS size * | TeaVM JS size * | TeaVM Wasm size *
 
-|link:https://colorfulcircles.webfx.dev[Colorful circles^]
-|97 kB
-|176 kB
-|220 kB
-|link:https://tallycounter.webfx.dev[Tally counter^]
-|113 kB
-|200 kB
-|253 kB
-|link:https://demofx.webfx.dev[DemoFX^]
-|147 kB
-|241 kB
-|303 kB
-|link:https://moderngauge.webfx.dev[Modern gauge^]
-|157 kB
-|225 kB
-|278 kB
-|link:https://mandelbrot.webfx.dev[Mandelbrot^]
-|159 kB
-|247 kB
-|310 kB
-|link:https://spacefx.webfx.dev[SpaceFX^]
-|171 kB
-|259 kB
-|331 kB
-|link:https://fx2048.webfx.dev[FX2048^]
-|206 kB
-|341 kB
-|428 kB
-|link:https://enzoclocks.webfx.dev[Enzo clocks^]
-|296 kB
-|371 kB
-|484 kB
+|Colorful circles
+|link:https://colorfulcircles.webfx.dev[97 kB^]
+|link:https://colorfulcircles-teavm.webfx.dev[176 kB^]
+|link:https://colorfulcircles-wasm.webfx.dev[220 kB^]
+|Tally counter
+|link:https://tallycounter.webfx.dev[113 kB^]
+|link:https://tallycounter-teavm.webfx.dev[200 kB^]
+|link:https://tallycounter-wasm.webfx.dev[253 kB^]
+|DemoFX
+|link:https://demofx.webfx.dev[147 kB^]
+|link:https://demofx-teavm.webfx.dev[241 kB^]
+|link:https://demofx-wasm.webfx.dev[303 kB^]
+|Modern gauge
+|link:https://moderngauge.webfx.dev[157 kB^]
+|link:https://moderngauge-teavm.webfx.dev[225 kB^]
+|link:https://moderngauge-wasm.webfx.dev[278 kB^]
+|Mandelbrot
+|link:https://mandelbrot.webfx.dev[159 kB^]
+|link:https://mandelbrot-teavm.webfx.dev[247 kB^]
+|link:https://mandelbrot-wasm.webfx.dev[310 kB^]
+|SpaceFX
+|link:https://spacefx.webfx.dev[171 kB^]
+|link:https://spacefx-teavm.webfx.dev[259 kB^]
+|link:https://spacefx-wasm.webfx.dev[331 kB^]
+|FX2048
+|link:https://fx2048.webfx.dev[206 kB^]
+|link:https://fx2048-teavm.webfx.dev[341 kB^]
+|link:https://fx2048-wasm.webfx.dev[428 kB^]
+|Enzo clocks
+|link:https://enzoclocks.webfx.dev[296 kB^]
+|link:https://enzoclocks-teavm.webfx.dev[371 kB^]
+|link:https://enzoclocks-wasm.webfx.dev[484 kB^]
 |===
 
 [small]#* compressed JS/Wasm size transferred over the network, excluding images and other resources#
