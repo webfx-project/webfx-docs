@@ -10,7 +10,7 @@ Last updated: {docdate}
 
 === What is WebFX?
 
-WebFX is a JavaFX application transpiler powered by link:https://www.gwtproject.org[GWT^]. It can transpile a JavaFX application into a traditional self-contained pure JavaScript web app (with no plugin or server required for its execution in the browser).
+WebFX is a JavaFX application transpiler powered by link:https://www.gwtproject.org[GWT^] or link:https://www.teavm.org[TeaVM^]. It can transpile a JavaFX application into a traditional self-contained pure JavaScript or WebAssembly web app (with no plugin or server required for its execution in the browser).
 
 === How it works
 
@@ -189,12 +189,16 @@ Your repository
 |_ xxx-application-gluon (2)
 |_ xxx-application-gwt (3)
 |_ xxx-application-openjfx (4)
+|_ xxx-application-teavm-js (5)
+|_ xxx-application-teavm-wasm (6)
 end legend
 ----
 <1> This module contains the JavaFX code of your application. It is cross-platform (not yet bound to a specific platform) and therefore not executable.
 <2> This module targets the native desktop & mobile platforms. It binds your application with the OpenJFX runtime, and can call the Gluon toolchain to produce the Windows, macOS, Linux, Android & iOS native executables (depending on the OS of your local machine).
-<3> This module targets the web platform. It binds your application with the WebFX kit, and can call GWT to produce the web app.
+<3> This module targets the web platform (JavaScript) via GWT. It binds your application with the WebFX kit and the GWT JavaScript compiler.
 <4> This module targets the standard desktop platform. It binds your application with the OpenJFX runtime, and is directly executable in your IDE. It can also call the standard Java toolchain to produce the desktop executables (Windows, macOS or Linux) with an embed JRE.
+<5> This module targets the web platform (JavaScript) via TeaVM. It binds your application with the WebFX kit and the TeaVM JavaScript compiler.
+<5> This module targets the web platform (WebAssembly) via TeaVM. It binds your application with the WebFX kit and the TeaVM WebAssembly compiler.
 
 You can create several WebFX applications in the same repository. As your application code grows, you can split your code into more modules. The CLI will help you to create and maintain all your modules. For each module, it will create and maintain your build chain as follows:
 
@@ -377,6 +381,8 @@ webfx-example
 |_ webfx-example-application-gluon
 |_ webfx-example-application-gwt
 |_ webfx-example-application-openjfx
+|_ webfx-example-application-teavm-js
+|_ webfx-example-application-teavm-wasm
 end legend
 ----
 
@@ -415,6 +421,12 @@ Some builds require the installation of third-party software, as shown in the fo
 | Linux, macOS or Windows
 |
 | --gwt
+| html
+
+| Web
+| Linux, macOS or Windows
+|
+| --teavm
 | html
 
 | Any desktop OS with Java
@@ -479,7 +491,7 @@ We will now cover each target platform in detail.
 
 NOTE: You can open issues in the https://github.com/webfx-project/webfx-cli[webfx-cli] repository to report any bug you may encounter.
 
-=== Web platform
+=== Web platform via GWT
 
 The link:https://github.com/tbroyer/gwt-maven-plugin[GWT Maven plugin^] will be invoked to generate the web application.
 
@@ -518,6 +530,44 @@ webfx build -gr <5>
 TIP: As opposed to `--show`, `--locate` works even before the build, as it prints the expected location, whether the executable file is present or not.
 
 The `run` command has exactly the same options as the `build` command. The only difference between these 2 commands is that with `run` you can run the app without rebuilding it (unless `--build` is specified), and with `build` you can build the app without running it (unless `--run` is specified).
+
+=== Web platform via TeaVM
+
+The link:https://teavm.org/docs/tooling/maven.html[TeaVM Maven plugin^] will be invoked to generate the web application.
+
+You can use the following commands:
+
+[source,shell,indent=0,role="primary"]
+.Long syntax
+----
+webfx build --teavm <1>
+webfx build --teavm --locate <2>
+webfx build --teavm --show <3>
+webfx run --teavm --javascript <4>
+webfx build --teavm --javascript --run <5>
+----
+<1> Build the html executable files (JavaScript and WebAssembly) with the TeaVM Maven plugin
+<2> Locate the generated executable files
+<3> Show the generated executable files in the file explorer
+<4> Execute the generated JavaScript executable in the browser
+<5> Build the JavaScript app and execute it in a single command
+
+[source,shell,indent=0,role="secondary"]
+.Short syntax
+----
+webfx build -t <1>
+webfx build -tl <2>
+webfx build -ts <3>
+webfx run -tj <4>
+webfx build -tjr <5>
+----
+<1> Build the html executable files (JavaScript and WebAssembly) with the TeaVM Maven plugin
+<2> Locate the generated executable files
+<3> Show the generated executable files in the file explorer
+<4> Execute the generated JavaScript executable in the browser
+<5> Build the JavaScript app and execute it in a single command
+
+NOTE: `webfx run --teavm --wasm` (short syntax `webfx run -tw`) is not working because http(s) is required for running WebAssembly. But you can use the built-in webserver of your Java IDE to serve the file located by `webfx build -twl`.
 
 In the next sections, we won't repeat all these commands, we will use only the last command to build and run the application in one go, but of course you can still choose to separate the build and the run.
 
