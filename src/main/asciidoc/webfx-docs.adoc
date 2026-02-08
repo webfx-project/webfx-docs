@@ -36,14 +36,14 @@ usecase "Replaced\nby" as rb
 pp --[hidden]> rb
 
 rectangle "WebFX kit" {
-    node "GWT compatible\n        version" as w1
+    node "Elemental2 compatible\n           version" as w1
     node "  Scene graph -> DOM\n            mapper" as w2
 }
 w1 --[hidden]> w2
 
 rectangle "Your repository" {
     node "Your JavaFX app" as app
-    usecase "GWT" as gwt
+    usecase "GWT or TeaVM" as gwt
     node "Web app" as wa
 }
 
@@ -60,19 +60,19 @@ w1 -r-> gwt
 w2 -r-> gwt
 gwt -d-> wa
 
-' Adding more hidden arrows to force vartical alignment of elements in the "Your repository" rectangle
+' Adding more hidden arrows to force vertical alignment of elements in the "Your repository" rectangle
 app -[hidden]> gwt
 app -[hidden]> gwt
 gwt -[hidden]> wa
 ----
 
-The link:https://github.com/webfx-project/webfx/tree/main/webfx-kit[WebFX kit^] is the heart of WebFX. It's a modified version of OpenJFX that can be transpiled. This is achieved by patching the higher layer of OpenJFX (which contains the main JavaFX features and API) to make it GWT compatible, and by replacing the lower layer (the graphic rendering pipeline) by a scene graph -> DOM mapper (the DOM being finally rendered by the browser).
+The link:https://github.com/webfx-project/webfx/tree/main/webfx-kit[WebFX kit^] is the heart of WebFX. It's a modified version of OpenJFX that can be transpiled. This is achieved by patching the higher layer of OpenJFX (which contains the main JavaFX features and API) to make it GWT and TeaVM compatible, and by replacing the lower layer (the graphic rendering pipeline) by a scene graph -> DOM mapper (the DOM being finally rendered by the browser).
 
 === Benefits
 
 ==== No server
 
-There are already great solutions to run Swing or JavaFX applications in the browser without plugins by actually running them on a server. And these solutions don't have the limitations WebFX currently has. However, a standard self-contained JS packaging is a much more simple, scalable and reliable execution model. This is precisely the benefit of WebFX, and probably the main reason why you would prefer it over the other existing solutions.
+There are already great solutions to run Swing or JavaFX applications in the browser without plugins by actually running them on a server. And these solutions don't have the limitations WebFX currently has. However, a standard self-contained web packaging is a much more simple, scalable and reliable execution model. This is precisely the benefit of WebFX, and probably the main reason why you would prefer it over the other existing solutions.
 
 ==== Cross-platform
 
@@ -132,7 +132,7 @@ Despite the big size of OpenJFX, WebFX can produce lightweight web apps, as demo
 The secret? Three things:
 
 * The scene graph -> DOM mapper is much thinner than the original OpenJFX lower layer, which has to reimplement many features a browser already has.
-* GWT runs a dead code elimination (tree-shaking) process, which removes the JavaFX classes not used by the WebFX application.
+* GWT and TeaVM run a dead code elimination (tree-shaking) process, which removes the JavaFX classes not used by the WebFX application.
 * GWT produces amazingly compact and optimized JS code, leading to highly-performant web apps.
 
 ==== Gradual learning curve
@@ -141,7 +141,7 @@ WebFX is not an additional UI toolkit to learn - it's an emulation of the well-k
 
 ==== Fast development cycles
 
-You don't need to run regular GWT compilations like you would do with a traditional GWT development, because you can already run and debug your WebFX application directly in your Java IDE with the OpenJFX runtime. You typically transpile your app only at the end of a development cycle to check the web version, after you have finished developing a feature using the standard JavaFX development model.
+You don't need to run regular GWT/TeaVM compilations like you would do with a traditional GWT/TeaVM development, because you can already run and debug your WebFX application directly in your Java IDE with the OpenJFX runtime. You typically transpile your app only at the end of a development cycle to check the web version, after you have finished developing a feature using the standard JavaFX development model.
 
 ==== Free and open source
 
@@ -152,11 +152,11 @@ WebFX is an open source initiative released under Apache 2.0 license.
 The WebFX kit coverage is for now limited to the essential features of JavaFX. So to successfully compile to the web, your JavaFX code needs to meet these 2 requirements:
 
 * use only the features covered by the WebFX kit (you can check out the link:https://javadoc.webfx.dev[JavaDoc^] to get an idea of this coverage)
-* be compatible with GWT (no reflection, no multi-threading, no blocking code, etc...)
+* be compatible with GWT and/or TeaVM (no reflection, no multi-threading, no blocking code, etc...)
 
-When a JavaFX application meets these 2 requirements, we will call it a _WebFX application_, and it can be transpiled to the web simply by running a GWT compilation of it together with the WebFX kit.
+When a JavaFX application meets these 2 requirements, we will call it a _WebFX application_, and it can be transpiled to the web simply by running a GWT or TeaVM compilation of it together with the WebFX kit.
 
-The main JavaFX features not yet covered are: JavaFX CSS, FXML, 3D, and most complex controls (ComboBox, TableView, TreeView,...). 3D is not a priority. We will first present alternative solutions to JavaFX CSS and FXML, and provide simpler alternative WebFX controls to ComboBox and TableView, before considering their actual emulation.
+The main JavaFX features not yet covered are: JavaFX CSS, FXML, 3D, and most complex controls (ComboBox, TableView, TreeView,...). But we will soon support CSS (using efficient browser CSS mapping rather than JavaFX CSS emulation) and provide simpler alternative WebFX controls to ComboBox and TableView, before considering their actual emulation.
 
 NOTE: Note for the impatient: OpenJFX is a huge library (about 10MB) compared to standard JS frameworks (typically 100KB). It may take some time to complete its coverage - thank you for your understanding. In the near future we hope to release a set of contributor guidelines and will endeavour to build an online community of developers around the project.
 
