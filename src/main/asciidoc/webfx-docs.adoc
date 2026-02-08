@@ -95,7 +95,7 @@ Some alternative technologies or JVM languages allow you to do the same but only
 
 ==== Java full-stack
 
-Writing your whole stack in Java is a big advantage, keeping your environment simple and homogenous from a single Java IDE. This prevents you from having to master other complex ecosystems such as JavaScript or TypeScript, and also allows you to share common code between your backend and frontend using the Java module system - a great advantage compared to heterogeneous systems.
+Writing your whole stack in Java is a big advantage, keeping your environment simple and homogeneous from a single Java IDE. This prevents you from having to master other complex ecosystems such as JavaScript or TypeScript, and also allows you to share common code between your backend and frontend using the Java module system - a great advantage compared to heterogeneous systems.
 
 ==== Performance
 
@@ -127,7 +127,7 @@ Despite the big size of OpenJFX, WebFX can produce lightweight web apps, as demo
 |226 kB
 |===
 
-[small]#* compressed JS size transiting over the network, without eventual images or other resources#
+[small]#* compressed JS size transferred over the network, without eventual images or other resources#
 
 The secret? Three things:
 
@@ -196,9 +196,9 @@ end legend
 <1> This module contains the JavaFX code of your application. It is cross-platform (not yet bound to a specific platform) and therefore not executable.
 <2> This module targets the native desktop & mobile platforms. It binds your application with the OpenJFX runtime, and can call the Gluon toolchain to produce the Windows, macOS, Linux, Android & iOS native executables (depending on the OS of your local machine).
 <3> This module targets the web platform (JavaScript) via GWT. It binds your application with the WebFX kit and the GWT JavaScript compiler.
-<4> This module targets the standard desktop platform. It binds your application with the OpenJFX runtime, and is directly executable in your IDE. It can also call the standard Java toolchain to produce the desktop executables (Windows, macOS or Linux) with an embed JRE.
+<4> This module targets the standard desktop platform. It binds your application with the OpenJFX runtime, and is directly executable in your IDE. It can also call the standard Java toolchain to produce the desktop executables (Windows, macOS or Linux) with an embedded JRE.
 <5> This module targets the web platform (JavaScript) via TeaVM. It binds your application with the WebFX kit and the TeaVM JavaScript compiler.
-<5> This module targets the web platform (WebAssembly) via TeaVM. It binds your application with the WebFX kit and the TeaVM WebAssembly compiler.
+<6> This module targets the web platform (WebAssembly) via TeaVM. It binds your application with the WebFX kit and the TeaVM WebAssembly compiler.
 
 You can create several WebFX applications in the same repository. As your application code grows, you can split your code into more modules. The CLI will help you to create and maintain all your modules. For each module, it will create and maintain your build chain as follows:
 
@@ -330,7 +330,7 @@ Now you should be able to invoke the CLI from the terminal:
 
 ==== Updating the WebFX CLI to the latest version
 
-You can check for update at anytime by running:
+You can check for update at any time by running:
 
  webfx bump cli
 
@@ -435,19 +435,19 @@ Some builds require the installation of third-party software, as shown in the fo
 | --openjfx-fatjar
 | fat jar
 
-| Linux (embed JRE)
+| Linux (embedded JRE)
 | Linux
 | ubuntu-tools
 | --openjfx-desktop
 | executable, .AppImage, .rpm, .deb
 
-| macOS (embed JRE)
+| macOS (embedded JRE)
 | macOS
 | xcode
 | --openjfx-desktop
 | executable, .dmg, .pkg
 
-| Windows (embed JRE)
+| Windows (embedded JRE)
 | Windows
 | wix*, inno*
 | --openjfx-desktop
@@ -573,7 +573,7 @@ In the next sections, we won't repeat all these commands, we will use only the l
 
 === Desktop platform (JAR)
 
-NOTE: The desktop JAR executable is usually used for local testing. If you want to distribute your desktop application, the embed JRE or native executables are preferred, as they don't require Java installed on the users machines.
+NOTE: The desktop JAR executable is usually used for local testing. If you want to distribute your desktop application, the embedded JRE or native executables are preferred, as they don't require Java installed on the users' machines.
 
 The link:https://github.com/apache/maven-shade-plugin[Maven Shade plugin^] will be invoked to generate an executable fat jar.
 
@@ -594,9 +594,9 @@ webfx build -fr
 TIP: You can combine the build options. For example `webfx build --gwt --openjfx-fatjar` (short syntax: `webfx build -gf`) will build both the GWT html and OpenJFX fat jar executables.
 
 
-=== Desktop platform (embed JRE)
+=== Desktop platform (embedded JRE)
 
-As opposed to the JAR, the embed JRE will be specific to the target platform. Therefore, a Linux machine will build a Linux executable, a Mac a macOS executable, and a Windows machine a Windows executable.
+As opposed to the JAR, the embedded JRE will be specific to the target platform. Therefore, a Linux machine will build a Linux executable, a Mac will build a macOS executable, and a Windows machine a Windows executable.
 
 The link:https://github.com/fvarrui/JavaPackager[JavaPackager Maven plugin^] will be invoked to generate the executables and installers for the different platforms.
 
@@ -647,7 +647,7 @@ TIP: If the application fails to run on macOS, you can try `webfx run -k --open`
 
 === Desktop platform (native)
 
-Like for the embed JRE, 3 different machines are required to target the Linux, macOS, and Windows executables.
+Like for the embedded JRE, 3 different machines are required to target the Linux, macOS, and Windows executables.
 
 The link:https://github.com/gluonhq/gluonfx-maven-plugin[GluonFX Maven plugin^] will be invoked to generate the native desktops.
 
