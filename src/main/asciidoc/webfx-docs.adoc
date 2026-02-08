@@ -101,7 +101,7 @@ Writing your whole stack in Java is a big advantage, keeping your environment si
 
 Despite the large size of OpenJFX, WebFX can produce lightweight web apps, as demonstrated by the demos:
 
-[cols="1,^1"]
+[cols="1,^1,^1,^1"]
 |===
 |WebFX application | GWT JS size * | TeaVM JS size * | TeaVM Wasm size *
 
