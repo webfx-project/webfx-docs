@@ -91,7 +91,7 @@ Web [label="Web\nAll major browsers"]
 
 In addition to the web platform, a WebFX application can also run on desktop and mobile. WebFX will invoke the standard Java toolchain to produce desktop executables (with an optimized JRE embedded), and the Gluon toolchain to produce native executables for desktop and mobile.
 
-Some alternative technologies or JVM languages allow you to do the same but only for the application logic, because they don't offer a cross-platform UI toolkit. With WebFX, you can do full cross-platform development of your entire application from a single codebase.
+Some alternative technologies or JVM languages also support cross-platform development, but rely on platform-specific UI implementations rather than compiling from a single UI API.
 
 ==== Java full-stack
 
