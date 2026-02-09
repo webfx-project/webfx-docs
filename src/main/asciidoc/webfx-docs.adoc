@@ -91,8 +91,6 @@ Web [label="Web\nAll major browsers"]
 
 In addition to the web platform, a WebFX application can also run on desktop and mobile. WebFX will invoke the standard Java toolchain to produce desktop executables (with an optimized JRE embedded), and the Gluon toolchain to produce native executables for desktop and mobile.
 
-Some alternative technologies or JVM languages also support cross-platform development, but rely on platform-specific UI implementations rather than compiling from a single UI API.
-
 ==== Java full-stack
 
 Writing your whole stack in Java is a big advantage, keeping your environment simple and homogeneous from a single Java IDE. Here, full-stack means you can use Java on both the frontend and backend. This prevents you from having to master other complex ecosystems such as JavaScript or TypeScript, and also allows you to share common code between your backend and frontend using the Java module system - a great advantage compared to heterogeneous systems.
