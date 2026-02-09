@@ -109,6 +109,10 @@ Despite the large size of OpenJFX, WebFX can produce lightweight web apps, as de
 |link:https://colorfulcircles.webfx.dev[97 kB^]
 |link:https://colorfulcircles-teavm.webfx.dev[176 kB^]
 |link:https://colorfulcircles-wasm.webfx.dev[220 kB^]
+|Particles
+|link:https://particles.webfx.dev[97 kB^]
+|link:https://particles-teavm.webfx.dev[181 kB^]
+|link:https://particles-wasm.webfx.dev[226 kB^]
 |Tally counter
 |link:https://tallycounter.webfx.dev[113 kB^]
 |link:https://tallycounter-teavm.webfx.dev[200 kB^]
@@ -125,6 +129,10 @@ Despite the large size of OpenJFX, WebFX can produce lightweight web apps, as de
 |link:https://mandelbrot.webfx.dev[159 kB^]
 |link:https://mandelbrot-teavm.webfx.dev[247 kB^]
 |link:https://mandelbrot-wasm.webfx.dev[310 kB^]
+|Cube
+|link:https://cube.webfx.dev[160 kB^]
+|link:https://cube-teavm.webfx.dev[264 kB^]
+|link:https://cube-wasm.webfx.dev[317 kB^]
 |SpaceFX
 |link:https://spacefx.webfx.dev[171 kB^]
 |link:https://spacefx-teavm.webfx.dev[259 kB^]
