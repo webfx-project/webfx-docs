@@ -252,7 +252,7 @@ During that process, the CLI takes care of the cross-platform aspects: when a fe
 
 Since we haven't published an official WebFX release yet, the way to install the CLI for now is to clone the https://github.com/webfx-project/webfx-cli[webfx-cli] repository, and build it with Maven.
 
-NOTE: We will distribute the CLI in a better way with the first WebFX official release.
+NOTE: We will distribute the CLI in a better way in a couple of months.
 
 ==== Cloning the webfx-cli repository
 
@@ -561,13 +561,13 @@ You can use the following commands:
 webfx build --teavm <1>
 webfx build --teavm --locate <2>
 webfx build --teavm --show <3>
-webfx run --teavm --javascript <4>
-webfx build --teavm --javascript --run <5>
+webfx run --wasm <4>
+webfx build --javascript --run <5>
 ----
 <1> Build the HTML executable files (JavaScript and WebAssembly) with the TeaVM Maven plugin
 <2> Locate the generated executable files
 <3> Show the generated executable files in the file explorer
-<4> Execute the generated JavaScript executable in the browser
+<4> Execute the generated WebAssembly executable in the browser
 <5> Build the JavaScript app and execute it in a single command
 
 [source,shell,indent=0,role="secondary"]
@@ -576,16 +576,14 @@ webfx build --teavm --javascript --run <5>
 webfx build -t <1>
 webfx build -tl <2>
 webfx build -ts <3>
-webfx run -tj <4>
-webfx build -tjr <5>
+webfx run -w <4>
+webfx build -jr <5>
 ----
-<1> Build the HTML executable files (JavaScript and WebAssembly) with the TeaVM Maven plugin
+<1> Build the HTML executable files (both JavaScript and WebAssembly) with the TeaVM Maven plugin
 <2> Locate the generated executable files
 <3> Show the generated executable files in the file explorer
-<4> Execute the generated JavaScript executable in the browser
+<4> Execute the generated WebAssembly executable in the browser
 <5> Build the JavaScript app and execute it in a single command
-
-NOTE: `webfx run --teavm --wasm` (short syntax `webfx run -tw`) does not work because http(s) is required for running WebAssembly. But you can use the built-in web server of your Java IDE to serve the file located by `webfx build -twl`.
 
 In the next sections, we won't repeat all these commands; we will use only the last command to build and run the application in one go, but you can still choose to separate build and run.
 
@@ -660,8 +658,6 @@ webfx build --openjfx-desktop --run
 ----
 webfx build -kr
 ----
-
-TIP: If the application fails to run on macOS, you can try `webfx run -k --open` to execute it via the `open` command. This can open a problem report with more information.
 
 === Desktop platform (native)
 
