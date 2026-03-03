@@ -203,12 +203,12 @@ skinparam Legend {
 }
 legend
 Your repository
-|_ xxx-application (1)
-|_ xxx-application-gluon (2)
-|_ xxx-application-gwt (3)
-|_ xxx-application-openjfx (4)
-|_ xxx-application-teavm-js (5)
-|_ xxx-application-teavm-wasm (6)
+|_ your-app (1)
+|_ your-app-gluon (2)
+|_ your-app-gwt (3)
+|_ your-app-openjfx (4)
+|_ your-app-teavm-js (5)
+|_ your-app-teavm-wasm (6)
 end legend
 ----
 <1> This module contains the JavaFX code of your application. It is cross-platform (not yet bound to a specific platform) and therefore not executable.
@@ -377,7 +377,7 @@ The init command creates only two files: webfx.xml and pom.xml. Note that if thi
 
 When you create an application, you pass the fully qualified name of the JavaFX class you want to create, and the prefix to use for the application modules:
 
- webfx create application --prefix webfx-example org.example.webfxexample.WebFxExampleApplication --helloWorld
+ webfx create application my-app
 
 ////
 TIP: You can omit the prefix here, because the CLI takes the parent module name in that case.
@@ -395,20 +395,20 @@ skinparam Legend {
 }
 legend
 webfx-example
-|_ webfx-example-application
-|_ webfx-example-application-gluon
-|_ webfx-example-application-gwt
-|_ webfx-example-application-openjfx
-|_ webfx-example-application-teavm-js
-|_ webfx-example-application-teavm-wasm
+|_ my-app
+|_ my-app-gluon
+|_ my-app-gwt
+|_ my-app-openjfx
+|_ my-app-teavm-js
+|_ my-app-teavm-wasm
 end legend
 ----
 
-The JavaFX class is located in the first module. Normally its `start()` method is empty at this stage, but because we specified the `--helloWorld` option, it has been populated with this simple template:
+The JavaFX application class is located in the first module. Its fully qualified name is automatically derived from the previous information entered; in this example it will be org.example.my.app.MyApp with this Hello world template:
 
 [source,java]
 ----
-public class WebFxExampleApplication extends Application {
+public class MyApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
@@ -418,6 +418,8 @@ public class WebFxExampleApplication extends Application {
 
 }
 ----
+
+Relocating / renaming that class can be done in any Java IDE.
 
 ==== Building your application
 
